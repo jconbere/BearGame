@@ -19,6 +19,7 @@ namespace BearGame
             : base(settings)
         {
             this.Health = settings.Bear_HealthDefault;
+            FacingDirection = Direction.Down;
         }
 
         double _lastMoveTime = 0;
@@ -45,20 +46,29 @@ namespace BearGame
                 if (keyState.IsKeyDown(Keys.Left) || keyState.IsKeyDown(Keys.A))
                 {
                     MoveCell(new CellPosition(-1, 0));
+                    FacingDirection = Direction.Left;
                 }
                 else if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W))
                 {
                     MoveCell(new CellPosition(0, -1));
+                    FacingDirection = Direction.Up;
                 }
                 else if (keyState.IsKeyDown(Keys.Right) || keyState.IsKeyDown(Keys.D))
                 {
                     MoveCell(new CellPosition(1, 0));
+                    FacingDirection = Direction.Right;
                 }
                 else if (keyState.IsKeyDown(Keys.Down) || keyState.IsKeyDown(Keys.S))
                 {
                     MoveCell(new CellPosition(0, 1));
+                    FacingDirection = Direction.Down;
                 }                
             }
+        }
+
+        protected override void  UpdateSpriteIndex()
+        {
+            spriteIndex = 16 * (int)FacingDirection;
         }
     }
 }

@@ -32,5 +32,13 @@ namespace BearGame
             return new CellPosition(a.Col - b.Col, a.Row - b.Row);
         }
     }
+
+    public enum Direction
+    {
+        Down = 0,
+        Up = 1,
+        Right = 2,
+        Left = 3,
+    }
 }
 

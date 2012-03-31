@@ -9,23 +9,32 @@ namespace BearGame
 {
     class Actor
     {
-        int spriteIndex = 0;
-        private Texture2D SpriteTexture;
-        private Vector2 position;
+        Texture2D SpriteTexture;
+        int NumColumnsInSpriteTexture;       
+
+        protected int spriteIndex = 0;        
+
+        Vector2 position;
         public CellPosition c_position;
         public CellPosition spawn_position;
 
-        private int[] spriteSize = new int[2];
-        private int animationDelay = 0;
-
         public GameSetting Settings { get; private set; }
+
+        Direction _facingDirection;
+        public Direction FacingDirection
+        {
+            get { return _facingDirection; }
+            set
+            {
+                _facingDirection = value;
+                UpdateSpriteIndex();
+            }
+        }
 
         public Actor(GameSetting settings)
         {
             Settings = settings;
             spriteIndex = 0;
-            spriteSize[0] = World.TileSize;
-            spriteSize[1] = World.TileSize;
         }
 
         public Vector2 Position
@@ -45,7 +54,9 @@ namespace BearGame
             spawn_position = cellPosition;
             c_position = cellPosition;
             position = pixelPosition;
-            SpriteTexture = texture_IN;            
+
+            SpriteTexture = texture_IN;
+            NumColumnsInSpriteTexture = SpriteTexture.Width / World.TileSize;
         }
 
         public virtual void Update(GameTime time, World world)
@@ -55,13 +66,21 @@ namespace BearGame
         public void Draw(SpriteBatch spriteBatch_IN)
         {
             Rectangle sourceRec;
-            sourceRec = new Rectangle(spriteIndex * spriteSize[0], 0, spriteSize[0], spriteSize[1]);
+
+            var row = spriteIndex / NumColumnsInSpriteTexture;
+            var col = spriteIndex - row * NumColumnsInSpriteTexture;
+
+            sourceRec = new Rectangle(col * World.TileSize, row * World.TileSize, World.TileSize, World.TileSize);
             spriteBatch_IN.Draw(SpriteTexture, position, sourceRec, Color.White);
         }
 
         protected int Distance(Actor Actor1, Actor Actor2)
         {
             return Math.Max(Math.Abs(Actor1.c_position.Row - Actor2.c_position.Row), Math.Abs(Actor1.c_position.Col - Actor2.c_position.Col));
+        }
+
+        protected virtual void UpdateSpriteIndex()
+        {
         }
     }
 }
