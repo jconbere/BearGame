@@ -20,29 +20,31 @@ namespace BearGame
     public class GameSetting
     {
         // Map Stuff
-        public int Map_MaxWidth;
-        public int Map_MaxHeight;
+        
+        public int Map_MaxWidth =64;
+        public int Map_MaxHeight= 64;
 
         //People Stuff
-        public int Person_HealthMin;
-        public int Person_HealthMax;
-        public int Person_HealthDefault;
+        public int Person_HealthMin=1;
+        public int Person_HealthMax=7;
+        public int Person_HealthDefault=3;
 
-        public int Person_HealthPerHug;
-        public int Person_HealthRegen;
-        public int Person_HoneyWantedMin;
-        public int Person_HoneyWantedMax;
+        public int Person_HealthPerHug=1;
+        public int Person_HealthRegen=0;
+        public int Person_HoneyWantedMin=1;
+        public int Person_HoneyWantedMax=7;
 
-        public int Person_LoveMin;
-        public int Person_LoveMax;
-
+        public int Person_LoveMin=0;
+        public int Person_LoveMax=7;
+        public int Person_Love = 3;
+        
+        public int Person_TricycleLove = 1;
         // Bear Stuff
-        public int Bear_HealthMax;
-        public int Bear_HealthMin;
-        public int Bear_HealthPerHoney;
-        public int Bear_HealthDefault;
-        public int Bear_HealthPerHoney;
-
+        public int Bear_HealthMax=255;
+        public int Bear_HealthMin=0;
+        public int Bear_HealthPerHoney=50;
+        public int Bear_HealthDefault=255;
+        
 
         public GameSetting()
         {

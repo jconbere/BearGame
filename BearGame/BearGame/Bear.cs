@@ -8,7 +8,11 @@ namespace BearGame
     class Bear
     {
         public int Health;
-        
+        public bool HasRibbon = false;
+        public bool HasTricycle = false;
+        public bool HasHoney = false;
+
+
         Bear()
         {
             this.Health = 255;
