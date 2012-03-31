@@ -91,7 +91,7 @@ namespace BearGame
             // Load actors
             //
             var bearTexture = content.Load<Texture2D>("Sprites\\spritesheet_bear");
-            var villagerTexture = content.Load<Texture2D>("Sprites\\spritesheet_bear");
+            var villagerTexture = content.Load<Texture2D>("Sprites\\spritesheet_people");
             _actorsLayer.LoadTiles("Content\\Maps\\Actors" + worldNumber + ".txt");
             for (var c = 0; c < _actorsLayer.NumColumns; c++)
             {

@@ -10,10 +10,9 @@ namespace BearGame
 {
     public class Bear : Actor
     {
-        public int Health;
-        public bool HasRibbon = false;
-        public bool HasTricycle = false;
-        public bool HasHoney = false;
+        public float Health { get; set; }
+
+        public Prop Inventory { get; set; }
 
         public Bear(World world)
             : base(world)
@@ -22,48 +21,119 @@ namespace BearGame
             FacingDirection = Direction.Down;
         }
 
-        double _lastMoveTime = 0;
-
         public override void Update(GameTime time)
         {
             var now = time.TotalGameTime.TotalSeconds;
 
-            Action<CellPosition> MoveCell = delegate(CellPosition diff)
-            {
-                var newPos = c_position + diff;
-                if (World.IsPassable(newPos))
-                {
-                    c_position = newPos;
-                    Position = newPos.ToPixelPosition();
-                    _lastMoveTime = now;
-                }
-            };
-
             var keyState = Keyboard.GetState();            
 
-            if ((now - _lastMoveTime) > Settings.Bear_MoveInterval)
+            if ((now - LastMoveTime) > Settings.Bear_MoveInterval)
             {
                 if (keyState.IsKeyDown(Keys.Left) || keyState.IsKeyDown(Keys.A))
                 {
-                    MoveCell(new CellPosition(-1, 0));
+                    MoveCell(time, new CellPosition(-1, 0));
                     FacingDirection = Direction.Left;
                 }
                 else if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W))
                 {
-                    MoveCell(new CellPosition(0, -1));
+                    MoveCell(time, new CellPosition(0, -1));
                     FacingDirection = Direction.Up;
                 }
                 else if (keyState.IsKeyDown(Keys.Right) || keyState.IsKeyDown(Keys.D))
                 {
-                    MoveCell(new CellPosition(1, 0));
+                    MoveCell(time, new CellPosition(1, 0));
                     FacingDirection = Direction.Right;
                 }
                 else if (keyState.IsKeyDown(Keys.Down) || keyState.IsKeyDown(Keys.S))
                 {
-                    MoveCell(new CellPosition(0, 1));
+                    MoveCell(time, new CellPosition(0, 1));
                     FacingDirection = Direction.Down;
                 }                
             }
+
+            Health -= (float)(time.ElapsedGameTime.TotalSeconds * Settings.Bear_HealthDecreaseRate);
+
+            if (Health < 0)
+            {
+                Health = 0;
+            }
+        }
+
+        public static Interaction GetAvailableBearInteration(Bear bear, Entity obj)
+        {
+            if (obj is Honey)
+            {
+                if (bear.Inventory == null)
+                {
+                    return new TakeHoney((Honey)obj);
+                }
+                else if (bear.Inventory is Honey)
+                {
+                    return new EatHoney();
+                }
+                else if (bear.Inventory is Tricycle)
+                {
+                    return new AchievementUnlockedDaredevil();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else if (obj is Tricycle)
+            {
+                if (bear.Inventory == null)
+                {
+                    return new RideTricycle((Tricycle)obj);
+                }
+                else if (bear.Inventory is Honey)
+                {
+                    return new EatHoney();
+                }
+                else if (bear.Inventory is Tricycle)
+                {
+                    return new GetOffTricycle();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else if (obj is Villager)
+            {
+                if (bear.Inventory == null)
+                {
+                    return new Grab((Villager)obj);
+                }
+                else if (bear.Inventory is Honey)
+                {
+                    return new GiveHoney((Villager)obj);
+                }
+                else if (bear.Inventory is Tricycle)
+                {
+                    return new RunOver();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                if (bear.Inventory == null)
+                {
+                    return null;
+                }
+                else if (bear.Inventory is Honey)
+                {
+                    return new EatHoney();
+                }
+                else if (bear.Inventory is Tricycle)
+                {
+                    return new GetOffTricycle();
+                }
+            }
+            throw new NotImplementedException();
         }
 
         protected override void  UpdateSpriteIndex()

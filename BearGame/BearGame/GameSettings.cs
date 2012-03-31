@@ -41,14 +41,17 @@ namespace BearGame
         
 
         public int Person_TricycleLove = 1;
+        
         // Bear Stuff
-        public int Bear_HealthMax=255;
-        public int Bear_HealthMin=0;
-        public int Bear_HealthPerHoney=50;
-        public int Bear_HealthDefault=255;
+        public float Bear_HealthMax = 100;
+        public float Bear_HealthMin = 0;
+        public float Bear_HealthPerHoney = 5;
+        public float Bear_HealthDefault = 100;
+        public float Bear_HealthDecreaseRate = 1; // healths / second
 
         public double Bear_MoveInterval = 1.0/3; // Seconds
-        
+        public double People_MoveInterval = 1.0/4; // Seconds
+       
         public GameSetting()
         {
         }
