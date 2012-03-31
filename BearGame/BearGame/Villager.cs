@@ -54,7 +54,7 @@ namespace BearGame
             this.TricycleLove = Settings.Person_TricycleLove;
             this.HealthRegen = Settings.Person_HealthRegen;
             this.Speed = Settings.Person_Speed;
-            //this.Name = world.villagerCount;
+            //this.Name = world.AllVillagers
 
         }
 

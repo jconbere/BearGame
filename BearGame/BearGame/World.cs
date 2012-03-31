@@ -12,7 +12,7 @@ namespace BearGame
     public class World
     {
         public const int TileSize = 64;
-
+        
         SpriteBatch spriteBatch;
 
         Texture2D _tilesTexture;
@@ -29,6 +29,7 @@ namespace BearGame
         public Bear Bear { get; private set; }
         public List<Actor> AllActors { get; private set; }
         public List<Prop> AllProps { get; private set; }
+        public List<Villager> AllVillagers { get; private set; }
 
         public IEnumerable<Entity> AllEntities
         {
@@ -51,6 +52,7 @@ namespace BearGame
             AllActors = new List<Actor>();
             AllActors.Add(Bear);
 
+            AllVillagers = new List<Villager>();
             AllProps = new List<Prop>();
         }
 
@@ -112,6 +114,7 @@ namespace BearGame
                                 var v = new Villager(this);
                                 v.LoadContent(villagerTexture, new CellPosition(c, r), GetTilePosition(c, r));
                                 AllActors.Add(v);
+                                AllVillagers.Add(v);
                             }
                             break;
                         case 'R':

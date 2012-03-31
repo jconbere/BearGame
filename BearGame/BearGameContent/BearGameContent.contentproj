@@ -129,6 +129,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UI\background.png">
+      <Name>background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="UI\health_meter.png">
       <Name>health_meter</Name>
       <Importer>TextureImporter</Importer>
