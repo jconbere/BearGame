@@ -47,7 +47,7 @@ namespace BearGame
         public int Bear_HealthPerHoney=50;
         public int Bear_HealthDefault=255;
 
-        public double Bear_MoveInterval = 2.0/3; // Seconds
+        public double Bear_MoveInterval = 1.0/3; // Seconds
         
         public GameSetting()
         {
