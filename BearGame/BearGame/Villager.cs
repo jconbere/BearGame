@@ -46,14 +46,14 @@ namespace BearGame
 
             // if no bear closeby.. mill aimlessly
 
-            if (Distance(Myworld.Bear,this) <= ActivityThreshold)
+            if (Distance(World.Bear,this) <= ActivityThreshold)
             { 
                 //do on screen stuff
                 int DeltaRow = 0;
                 int DeltaCol = 0;
 
-                DeltaRow = this.c_position.Row -Myworld.Bear.c_position.Row ;
-                DeltaCol = this.c_position.Col - Myworld.Bear.c_position.Col;
+                DeltaRow = this.c_position.Row -World.Bear.c_position.Row ;
+                DeltaCol = this.c_position.Col - World.Bear.c_position.Col;
                 
                 // simple stupid state machine.  run in the farthest direction
 
@@ -83,9 +83,9 @@ namespace BearGame
 
         
             }
-            else if ((Distance(Myworld.Bear,this) >= RespawnThreshold) && 
-                Math.Abs(Myworld.Bear.c_position.Row - this.spawn_position.Row)>6 &&
-                Math.Abs(Myworld.Bear.c_position.Col - this.spawn_position.Col)>6) // assuming 6 visual radius
+            else if ((Distance(World.Bear,this) >= RespawnThreshold) && 
+                Math.Abs(World.Bear.c_position.Row - this.spawn_position.Row)>6 &&
+                Math.Abs(World.Bear.c_position.Col - this.spawn_position.Col)>6) // assuming 6 visual radius
                 
             { 
                 // force respawn

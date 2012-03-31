@@ -42,6 +42,8 @@ namespace BearGame
 
             AllActors = new List<Actor>();
             AllActors.Add(Bear);
+            AllProps = new List<Prop>();
+
         }
 
         public void LoadContent(GraphicsDevice device, ContentManager content, int worldNumber)
