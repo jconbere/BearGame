@@ -18,11 +18,13 @@ namespace BearGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Texture2D spriteTexture;
+        Actor firstSprite;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            Content.RootDirectory = "Content\\Sprites";
         }
 
         /// <summary>
@@ -34,7 +36,7 @@ namespace BearGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            firstSprite = new Actor();
             base.Initialize();
         }
 
@@ -46,7 +48,9 @@ namespace BearGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            
+            spriteTexture = Content.Load<Texture2D>("firstsprite");
+            firstSprite.initialize(spriteTexture, new Vector2(0,0), 0);
             // TODO: use this.Content to load your game content here
         }
 
@@ -83,6 +87,13 @@ namespace BearGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            spriteBatch.Begin();
+
+            firstSprite.draw(spriteBatch);
+
+
+
+            spriteBatch.End();
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);

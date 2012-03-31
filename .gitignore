@@ -4,3 +4,4 @@ BearGame/BearGame/bin/
 BearGame/BearGame/obj/
 BearGame/BearGameContent/bin/
 BearGame/BearGameContent/obj/
+*.cachefile
