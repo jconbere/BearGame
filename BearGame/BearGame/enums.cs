@@ -22,6 +22,35 @@ namespace BearGame
             return new Vector2(Col * World.TileSize, Row * World.TileSize);
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            if (obj is CellPosition)
+            {
+                var b = (CellPosition)obj;
+                return Col == b.Col && Row == b.Row;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return Col.GetHashCode() + Row.GetHashCode();
+        }
+
+        public static bool operator ==(CellPosition a, CellPosition b)
+        {
+            return a.Col == b.Col && a.Row == b.Row;
+        }
+
+        public static bool operator !=(CellPosition a, CellPosition b)
+        {
+            return a.Col != b.Col || a.Row != b.Row;
+        }
+
         public static CellPosition operator + (CellPosition a, CellPosition b)
         {
             return new CellPosition(a.Col + b.Col, a.Row + b.Row);

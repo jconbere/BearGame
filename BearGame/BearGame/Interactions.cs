@@ -10,7 +10,7 @@ namespace BearGame
     {
         public bool IsActive { get; protected set; }
 
-        public virtual void Activate(Actor doer, GameTime time)
+        public virtual void Begin(Actor doer, GameTime time)
         {
             IsActive = true;
         }
@@ -51,10 +51,16 @@ namespace BearGame
 
     public class Grab : Interaction
     {
+        public Grab(Villager villager)
+        {
+        }
     }
 
     public class GiveHoney : Interaction
     {
+        public GiveHoney(Villager villager)
+        {
+        }
     }
 
     public class RunOver : Interaction

@@ -21,9 +21,12 @@ namespace BearGame
         public World World { get; private set; }
         public GameSetting Settings { get { return World.Settings; } }
 
+        public bool IsVisible { get; set; }
+
         public Entity(World world)
         {
             World = world;
+            IsVisible = true;
             spriteIndex = 0;
         }
 

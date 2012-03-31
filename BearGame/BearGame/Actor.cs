@@ -25,6 +25,30 @@ namespace BearGame
         {
         }
 
+        public Interaction ActiveInteraction { get; private set; }
+
+        public void BeginInteraction(GameTime time, Interaction inter)
+        {
+            ActiveInteraction = inter;
+            inter.Begin(this, time);
+        }
+
+        public override void Update(GameTime time)
+        {
+            base.Update(time);
+            if (ActiveInteraction != null)
+            {
+                if (ActiveInteraction.IsActive)
+                {
+                    ActiveInteraction.Update(this, time);
+                }
+                else
+                {
+                    ActiveInteraction = null;
+                }
+            }
+        }
+
         double _lastMoveTime = 0;
         protected double LastMoveTime { get { return _lastMoveTime; } }
 
