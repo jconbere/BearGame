@@ -29,13 +29,16 @@ namespace BearGame
 
         public void update()
         {
-
+            spriteIndex++;
+            spriteIndex = spriteIndex % 10;
 
         }
 
         public void draw(SpriteBatch spriteBatch_IN)
         {
-            spriteBatch_IN.Draw(SpriteTexture, position, Color.White);
+            Rectangle sourceRec;
+            sourceRec = new Rectangle(spriteIndex * 10, 0, 10, 64);
+            spriteBatch_IN.Draw(SpriteTexture, position, sourceRec, Color.White);
 
 
         }

@@ -75,6 +75,7 @@ namespace BearGame
                 this.Exit();
 
             // TODO: Add your update logic here
+            firstSprite.update();
 
             base.Update(gameTime);
         }
