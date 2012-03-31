@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace BearGame
 {
-    class Bear : Actor
+    public class Bear : Actor
     {
         public int Health;
         public bool HasRibbon = false;

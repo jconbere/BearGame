@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BearGame
 {
-    class World
+    public class World
     {
         public const int TileSize = 64;
 
