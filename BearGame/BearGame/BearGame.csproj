@@ -117,6 +117,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="SettingsManager.cs" />
+    <Compile Include="Villager.cs" />
     <Compile Include="World.cs" />
   </ItemGroup>
   <ItemGroup>

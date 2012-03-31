@@ -7,10 +7,7 @@ namespace BearGame
 {
     public class CollisionLayer : Layer
     {
-        public bool IsPassable(int column, int row)
-        {
-            return GetTile(column, row) != '0';
-        }
+        
     }
 }
 
