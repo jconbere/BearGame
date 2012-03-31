@@ -10,15 +10,22 @@ namespace BearGame
 {
     class GameView
     {
+        SpriteBatch _uiBatch;
         World _world;
 
-        public GameView(World world, GameSetting settings)
+        Texture2D _meterTexture;
+
+        public GameView(World world)
         {
+            
             _world = world;
         }
 
-        public void LoadContent(ContentManager content)
+        public void LoadContent(GraphicsDevice device, ContentManager content)
         {
+            _uiBatch = new SpriteBatch(device);
+
+            _meterTexture = content.Load<Texture2D>("UI\\Meter");
         }
 
         public void Update(GameTime time)
@@ -30,7 +37,15 @@ namespace BearGame
             var vw = 800;
             var vh = 600;
             var ws = 400;
-            _world.Draw(new Rectangle((vw-ws)/2, (vh-ws)/2, ws, ws));
+
+            var gameViewLeft = (vw-ws)/2;
+            var gameViewTop = (vh-ws)/2;
+
+            _uiBatch.Begin();
+            _uiBatch.Draw(_meterTexture, new Rectangle(gameViewLeft, gameViewTop - 90, _meterTexture.Width, _meterTexture.Height), Color.White);
+            _uiBatch.End();
+
+            _world.Draw(new Rectangle(gameViewLeft, gameViewTop, ws, ws));
         }
     }
 }

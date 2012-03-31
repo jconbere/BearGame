@@ -10,7 +10,7 @@ namespace BearGame
     {
         public const int VisibleSize = 9;
 
-        public Vector2 Position
+        public Vector2 CenterPosition
         {
             get;
             set;

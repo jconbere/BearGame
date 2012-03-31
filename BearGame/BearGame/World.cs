@@ -5,10 +5,11 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Input;
 
 namespace BearGame
 {
-    class World
+    public class World
     {
         public const int TileSize = 64;
 
@@ -19,35 +20,111 @@ namespace BearGame
 
         Layer _collisionLayer = new Layer();
 
+        Layer _propsLayer = new Layer();
+
+        Layer _actorsLayer = new Layer();
+
         public Camera Camera { get; private set; }
+        
         public Bear Bear { get; private set; }
         public List<Actor> AllActors { get; private set; }
+        public List<Prop> AllProps { get; private set; }
+
+        public GameSetting Settings { get; private set; }
 
         public World(GameSetting settings)
         {
+            Settings = settings;
+
             Camera = new BearGame.Camera();
 
-            Bear = new Bear(settings);
+            Bear = new Bear(this);
 
             AllActors = new List<Actor>();
             AllActors.Add(Bear);
+            AllProps = new List<Prop>();
+
         }
 
         public void LoadContent(GraphicsDevice device, ContentManager content, int worldNumber)
         {
             spriteBatch = new SpriteBatch(device);
 
-            Bear.LoadContent(content.Load<Texture2D>("Sprites\\firstsprite"), new Vector2(100,100));
-
+            //
+            // Map tiles
+            //
             _tilesTexture = content.Load<Texture2D>("Sprites\\WorldTiles");
-
             _tilesLayer.LoadTiles("Content\\Maps\\Tiles" + worldNumber + ".txt");
             _collisionLayer.LoadTiles("Content\\Maps\\Collisions" + worldNumber + ".txt");
+
+            //
+            // Load props
+            //
+            var honeyTexture = content.Load<Texture2D>("Sprites\\spritesheet_bear");
+            var tricycleTexture = content.Load<Texture2D>("Sprites\\spritesheet_bear");
+            _propsLayer.LoadTiles("Content\\Maps\\Props" + worldNumber + ".txt");
+            for (var c = 0; c < _propsLayer.NumColumns; c++)
+            {
+                for (var r = 0; r < _propsLayer.NumColumns; r++)
+                {
+                    switch (_propsLayer.GetTile(c, r))
+                    {
+                        case 'H':
+                            {
+                                var v = new Honey(this);
+                                v.LoadContent(honeyTexture, new CellPosition(c, r), GetTilePosition(c, r));
+                                AllProps.Add(v);
+                            }
+                            break;
+                        case 'X':
+                            {
+                                var v = new Tricycle(this);
+                                v.LoadContent(tricycleTexture, new CellPosition(c, r), GetTilePosition(c, r));
+                                AllProps.Add(v);
+                            }
+                            break;
+                    }
+                }
+            }
+
+            //
+            // Load actors
+            //
+            var bearTexture = content.Load<Texture2D>("Sprites\\spritesheet_bear");
+            var villagerTexture = content.Load<Texture2D>("Sprites\\spritesheet_bear");
+            _actorsLayer.LoadTiles("Content\\Maps\\Actors" + worldNumber + ".txt");
+            for (var c = 0; c < _actorsLayer.NumColumns; c++)
+            {
+                for (var r = 0; r < _actorsLayer.NumColumns; r++)
+                {
+                    switch (_actorsLayer.GetTile(c, r))
+                    {
+                        case 'V':
+                            {
+                                var v = new Villager(this);
+                                v.LoadContent(villagerTexture, new CellPosition(c, r), GetTilePosition(c, r));
+                                AllActors.Add(v);
+                            }
+                            break;
+                        case 'R':
+                            {
+                                Bear.LoadContent(bearTexture, new CellPosition(c, r), GetTilePosition(c, r));
+                            }
+                            break;
+                    }
+                }
+            }
+            
+        }
+
+        public bool IsPassable(CellPosition cpos)
+        {
+            return IsPassable(cpos.Col, cpos.Row);
         }
 
         public bool IsPassable(int column, int row)
         {
-            return _collisionLayer.GetTile(column, row) != '0';
+            return _collisionLayer.GetTile(column, row) == '0';
         }
 
         public Rectangle GetTileRectangle(int c, int r)
@@ -55,12 +132,24 @@ namespace BearGame
             return new Rectangle(c * TileSize, r * TileSize, TileSize, TileSize);
         }
 
+        public Vector2 GetTilePosition(int c, int r)
+        {
+            return new Vector2(c * TileSize, r * TileSize);
+        }
+
         public void Update(GameTime time)
         {
+            foreach (var p in AllProps)
+            {
+                p.Update(time);
+            }
+
             foreach (var a in AllActors)
             {
                 a.Update(time);
             }
+
+            Camera.CenterPosition = Bear.Position + new Vector2(TileSize / 2, TileSize / 2);
         }
 
         Rectangle GetWorldTileRectangle(char tileType)
@@ -80,15 +169,16 @@ namespace BearGame
 
         public void Draw(Rectangle frame)
         {
-            var scale = Matrix.CreateScale((float)frame.Width / (float)(9 * 64));
-            var translate = Matrix.CreateTranslation(frame.X, frame.Y, 0);
+            var ctranslate = Matrix.CreateTranslation(-(Camera.CenterPosition.X - 4.5f*TileSize), -(Camera.CenterPosition.Y - 4.5f*TileSize), 0);
+            var fscale = Matrix.CreateScale((float)frame.Width / (float)(9 * 64));
+            var ftranslate = Matrix.CreateTranslation(frame.X, frame.Y, 0);
 
-            var tx = Matrix.Multiply(scale, translate);
+            var tx = Matrix.Multiply(ctranslate, Matrix.Multiply(fscale, ftranslate));
 
             var raster = new RasterizerState();
             raster.ScissorTestEnable = true;
 
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.Default, raster, null, tx);
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default, raster, null, tx);
 
             spriteBatch.GraphicsDevice.ScissorRectangle = frame;
 

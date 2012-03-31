@@ -22,6 +22,8 @@ namespace BearGame
         World world;
         GameView view;
 
+        SoundEffect backgroundMusic;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -44,7 +46,7 @@ namespace BearGame
 
             camera = new Camera();
             world = new World(settings);
-            view = new GameView(world, settings);
+            view = new GameView(world);
 
             base.Initialize();
         }
@@ -55,6 +57,13 @@ namespace BearGame
         /// </summary>
         protected override void LoadContent()
         {
+            backgroundMusic = Content.Load<SoundEffect>("Audio\\BackgroundMusic");
+            var instance = backgroundMusic.CreateInstance();
+            instance.IsLooped = true;
+            backgroundMusic.Play();
+
+            view.LoadContent(GraphicsDevice, Content);
+
             var worldTiles = Content.Load<Texture2D>("Sprites\\WorldTiles");
             world.LoadContent(GraphicsDevice, Content, 1);
         }
