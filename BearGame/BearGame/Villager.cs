@@ -46,51 +46,73 @@ namespace BearGame
 
             // if no bear closeby.. mill aimlessly
 
-            if (Distance(World.Bear,this) <= ActivityThreshold)
-            { 
-                //do on screen stuff
-                int DeltaRow = 0;
-                int DeltaCol = 0;
+            if (!IsDead)
+            {
 
-                DeltaRow = this.c_position.Row -World.Bear.c_position.Row ;
-                DeltaCol = this.c_position.Col - World.Bear.c_position.Col;
-                
-                // simple stupid state machine.  run in the farthest direction
+                if (Distance(World.Bear, this) <= ActivityThreshold)
+                {
+                    //do on screen stuff
+                    int DeltaRow = 0;
+                    int DeltaCol = 0;
 
-                if (Math.Abs(DeltaRow) > Math.Abs(DeltaCol))
-                {
-                    if (DeltaRow > 0)
-                    { 
-                            //MoveCell
-                    }
-                    else 
+                    DeltaRow = this.c_position.Row - World.Bear.c_position.Row;
+                    DeltaCol = this.c_position.Col - World.Bear.c_position.Col;
+
+                    // simple stupid state machine.  run in the farthest direction
+
+                    if (Math.Abs(DeltaRow) > Math.Abs(DeltaCol))
                     {
-                    
-                    }
-                }
-                else
-                {
-                    if (DeltaCol > 0)
-                    {
+                        if (DeltaRow > 0)
+                        {
+                            if (World.IsPassable(this.c_position.Col, this.c_position.Col + 1))
+                            {
+                                FacingDirection = Direction.Right;
+                            }
+                        }
+                        else
+                        {
+                            if (World.IsPassable(this.c_position.Col, this.c_position.Col - 1))
+                            {
+                                FacingDirection = Direction.Left;
+                            }
+                        }
                     }
                     else
                     {
+                        if (DeltaCol > 0)
+                        {
+                            if (World.IsPassable(this.c_position.Row, this.c_position.Col - 1))
+                            {
+                                FacingDirection = Direction.Down;
+                            }
+
+                        }
+                        else
+                        {
+                            if (World.IsPassable(this.c_position.Row, this.c_position.Col - 1))
+                            {
+                                FacingDirection = Direction.Up;
+                            }
+
+                        }
                     }
-                }
                     //Myworld.IsPassable(this.c_position.Row)
 
-                FacingDirection = Direction.Down;
+                    FacingDirection = Direction.Down;
 
-        
-            }
-            else if ((Distance(World.Bear,this) >= RespawnThreshold) && 
-                Math.Abs(World.Bear.c_position.Row - this.spawn_position.Row)>6 &&
-                Math.Abs(World.Bear.c_position.Col - this.spawn_position.Col)>6) // assuming 6 visual radius
-                
-            { 
-                // force respawn
-                if (!IsDead) this.c_position = spawn_position; // Leave bodies alone!
+
+                }
+                else if ((Distance(World.Bear, this) >= RespawnThreshold) &&
+                    Math.Abs(World.Bear.c_position.Row - this.spawn_position.Row) > 6 &&
+                    Math.Abs(World.Bear.c_position.Col - this.spawn_position.Col) > 6) // assuming 6 visual radius
+                {
+                    // force respawn
+                    if (!IsDead) this.c_position = spawn_position; // Leave bodies alone!
+                }
             }
         }
+
+
+
     }
 }
