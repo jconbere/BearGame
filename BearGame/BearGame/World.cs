@@ -157,7 +157,7 @@ namespace BearGame
             var raster = new RasterizerState();
             raster.ScissorTestEnable = true;
 
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.Default, raster, null, tx);
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default, raster, null, tx);
 
             spriteBatch.GraphicsDevice.ScissorRectangle = frame;
 
