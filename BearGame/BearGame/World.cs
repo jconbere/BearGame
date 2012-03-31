@@ -25,10 +25,10 @@ namespace BearGame
         Layer _actorsLayer = new Layer();
 
         public Camera Camera { get; private set; }
+        
         public Bear Bear { get; private set; }
         public List<Actor> AllActors { get; private set; }
-
-        //public List<Prop> AllProps { get; private set; }
+        public List<Prop> AllProps { get; private set; }
 
         public GameSetting Settings { get; private set; }
 
@@ -38,7 +38,7 @@ namespace BearGame
 
             Camera = new BearGame.Camera();
 
-            Bear = new Bear(settings);
+            Bear = new Bear(this);
 
             AllActors = new List<Actor>();
             AllActors.Add(Bear);
@@ -58,7 +58,9 @@ namespace BearGame
             //
             // Load props
             //
-            /*_propsLayer.LoadTiles("Content\\Maps\\Props" + worldNumber + ".txt");
+            var honeyTexture = content.Load<Texture2D>("Sprites\\spritesheet_bear");
+            var tricycleTexture = content.Load<Texture2D>("Sprites\\spritesheet_bear");
+            _propsLayer.LoadTiles("Content\\Maps\\Props" + worldNumber + ".txt");
             for (var c = 0; c < _propsLayer.NumColumns; c++)
             {
                 for (var r = 0; r < _propsLayer.NumColumns; r++)
@@ -66,10 +68,22 @@ namespace BearGame
                     switch (_propsLayer.GetTile(c, r))
                     {
                         case 'H':
-
+                            {
+                                var v = new Honey(this);
+                                v.LoadContent(honeyTexture, new CellPosition(c, r), GetTilePosition(c, r));
+                                AllProps.Add(v);
+                            }
+                            break;
+                        case 'X':
+                            {
+                                var v = new Tricycle(this);
+                                v.LoadContent(tricycleTexture, new CellPosition(c, r), GetTilePosition(c, r));
+                                AllProps.Add(v);
+                            }
+                            break;
                     }
                 }
-            }*/
+            }
 
             //
             // Load actors
@@ -85,7 +99,7 @@ namespace BearGame
                     {
                         case 'V':
                             {
-                                var v = new Villager(Settings);
+                                var v = new Villager(this);
                                 v.LoadContent(villagerTexture, new CellPosition(c, r), GetTilePosition(c, r));
                                 AllActors.Add(v);
                             }
@@ -123,9 +137,14 @@ namespace BearGame
 
         public void Update(GameTime time)
         {
+            foreach (var p in AllProps)
+            {
+                p.Update(time);
+            }
+
             foreach (var a in AllActors)
             {
-                a.Update(time, this);
+                a.Update(time);
             }
 
             Camera.CenterPosition = Bear.Position + new Vector2(TileSize / 2, TileSize / 2);
@@ -157,7 +176,7 @@ namespace BearGame
             var raster = new RasterizerState();
             raster.ScissorTestEnable = true;
 
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.Default, raster, null, tx);
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default, raster, null, tx);
 
             spriteBatch.GraphicsDevice.ScissorRectangle = frame;
 

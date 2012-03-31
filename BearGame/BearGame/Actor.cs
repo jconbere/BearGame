@@ -20,8 +20,8 @@ namespace BearGame
             }
         }
 
-        public Actor(GameSetting settings)
-            : base(settings)
+        public Actor(World world)
+            : base(world)
         {
         }
     }
