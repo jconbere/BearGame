@@ -113,6 +113,7 @@
     <Compile Include="CollisionLayer.cs" />
     <Compile Include="enums.cs" />
     <Compile Include="GameSettings.cs" />
+    <Compile Include="GameView.cs" />
     <Compile Include="Layer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />

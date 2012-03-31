@@ -18,18 +18,26 @@ namespace BearGame
         private int[] spriteSize = new int[2];
         private int animationDelay = 0;
 
-        public Actor()
+        public GameSetting Settings { get; private set; }
+
+        public Actor(GameSetting settings)
         {
+            Settings = settings;
             spriteIndex = 0;
             spriteSize[0] = World.TileSize;
             spriteSize[1] = World.TileSize;
         }
 
-        public Actor(GameSetting settings)
-        {            
-            spriteIndex = 0;
-            spriteSize[0] = World.TileSize;
-            spriteSize[1] = World.TileSize;
+        public Vector2 Position
+        {
+            get
+            {
+                return position;
+            }
+            set
+            {
+                position = value;
+            }
         }
 
         public virtual void LoadContent(Texture2D texture_IN, Vector2 position_IN)

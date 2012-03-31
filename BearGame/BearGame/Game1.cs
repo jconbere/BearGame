@@ -17,14 +17,18 @@ namespace BearGame
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
 
         Camera camera;
         World world;
+        GameView view;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.IsFullScreen = false;
+            graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferHeight = 600;            
+
             Content.RootDirectory = "Content";
         }
 
@@ -37,8 +41,10 @@ namespace BearGame
         protected override void Initialize()
         {
             var settings = new GameSetting();
+
             camera = new Camera();
             world = new World(settings);
+            view = new GameView(world, settings);
 
             base.Initialize();
         }
@@ -49,11 +55,8 @@ namespace BearGame
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            
             var worldTiles = Content.Load<Texture2D>("Sprites\\WorldTiles");
-            world.LoadContent(Content, 1);
+            world.LoadContent(GraphicsDevice, Content, 1);
         }
 
         /// <summary>
@@ -89,11 +92,7 @@ namespace BearGame
         {
             GraphicsDevice.Clear(Color.Black);
 
-            spriteBatch.Begin();
-
-            world.Draw(spriteBatch);
-
-            spriteBatch.End();
+            view.Draw();
 
             base.Draw(gameTime);
         }

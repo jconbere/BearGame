@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace BearGame
 {
@@ -37,8 +38,6 @@ namespace BearGame
             this.Speed = settings.Person_Speed;
             
         }
-
-
 
         public void Update(World Myworld)
         {
