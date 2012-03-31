@@ -48,7 +48,8 @@ namespace BearGame
         public int Bear_HealthDefault=255;
 
         public double Bear_MoveInterval = 1.0/3; // Seconds
-        
+        public double People_MoveInterval = 1.0/4; // Seconds
+       
         public GameSetting()
         {
         }

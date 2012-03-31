@@ -49,69 +49,84 @@ namespace BearGame
             if (!IsDead)
             {
                 if ((Distance(World.Bear, this) >= RespawnThreshold) &&
-                            Math.Abs(World.Bear.c_position.Row - this.spawn_position.Row) > 6 &&
-                            Math.Abs(World.Bear.c_position.Col - this.spawn_position.Col) > 6) // assuming 6 visual radius
+                            (Math.Abs(World.Bear.c_position.Row - this.spawn_position.Row) > 6 ||
+                            Math.Abs(World.Bear.c_position.Col - this.spawn_position.Col) > 6)) // assuming 6 visual radius
                 {
                     // force respawn
                     if (IsDead) this.c_position = spawn_position; // Leave bodies alone!
                 }
 
+            
                 else if (Distance(World.Bear, this) <= ActivityThreshold)
                 {
                     //do on screen stuff
-                    int DeltaRow = 0;
-                    int DeltaCol = 0;
-
-                    DeltaRow = this.c_position.Row - World.Bear.c_position.Row;
-                    DeltaCol = this.c_position.Col - World.Bear.c_position.Col;
-
-                    switch (Love)
+                    var now = time.TotalGameTime.TotalSeconds;
+                    if ((now - LastMoveTime) > Settings.People_MoveInterval)
                     {
-                        case 0:
 
-                        default:
-                            // simple stupid state machine.  run in the farthest direction
+                        int DeltaRow = 0;
+                        int DeltaCol = 0;
 
-                            if (Math.Abs(DeltaCol) >= Math.Abs(DeltaRow))
-                            {
-                                if (DeltaCol >= 0)
+                        DeltaRow = this.c_position.Row - World.Bear.c_position.Row;
+                        DeltaCol = this.c_position.Col - World.Bear.c_position.Col;
+
+                        switch (Love)
+                        {
+                            case 0:
+
+                            default:
+                                // simple stupid state machine.  run in the farthest direction
+
+                                if (Math.Abs(DeltaCol) >= Math.Abs(DeltaRow))
                                 {
-                                    if (World.IsPassable(this.c_position.Col+1, this.c_position.Row))
+                                    if (DeltaCol >= 0)
                                     {
-                                        FacingDirection = Direction.Right;
-                                        UpdateSpriteIndex();
+                                        if (World.IsPassable(this.c_position.Col + 1, this.c_position.Row))
+                                        {
+                                            FacingDirection = Direction.Right;
+                                            MoveCell(time, new CellPosition(0, 1));
+                                            UpdateSpriteIndex();
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (World.IsPassable(this.c_position.Col - 1, this.c_position.Row))
+                                        {
+                                            FacingDirection = Direction.Left;
+                                            MoveCell(time, new CellPosition(0, -1));
+                                            UpdateSpriteIndex();
+                                        }
                                     }
                                 }
                                 else
                                 {
-                                    if (World.IsPassable(this.c_position.Col-1, this.c_position.Row))
+                                    if (DeltaRow >= 0)
                                     {
-                                        FacingDirection = Direction.Left;
-                                        UpdateSpriteIndex();
+                                        if (World.IsPassable(this.c_position.Col, this.c_position.Row + 1))
+                                        {
+                                            FacingDirection = Direction.Down;
+                                            MoveCell(time, new CellPosition(-1, 0));
+                                            UpdateSpriteIndex();
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (World.IsPassable(this.c_position.Col, this.c_position.Row - 1))
+                                        {
+                                            FacingDirection = Direction.Up;
+                                            MoveCell(time, new CellPosition(1, 0));
+                                            UpdateSpriteIndex();
+                                        }
                                     }
                                 }
-                            }
-                            else
-                            {
-                                if (DeltaRow >= 0)
-                                {
-                                    if (World.IsPassable(this.c_position.Col, this.c_position.Row + 1))
-                                    {
-                                        FacingDirection = Direction.Down;
-                                        UpdateSpriteIndex();
-                                    }
-                                }
-                                else
-                                {
-                                    if (World.IsPassable(this.c_position.Col, this.c_position.Row - 1))
-                                    {
-                                        FacingDirection = Direction.Up;
-                                        UpdateSpriteIndex();
-                                    }
-                                }
-                            }
-                         break;
+                                break;
+                        }
+
+                    
+
                     }
+
+                    
                 }
             }
         }
