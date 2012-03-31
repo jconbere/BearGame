@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace BearGame
 {
-    class Villager : Actor
+    public class Villager : Actor
     {
         public int Health;
         public int Love;
@@ -53,7 +53,7 @@ namespace BearGame
                             Math.Abs(World.Bear.c_position.Col - this.spawn_position.Col) > 6)) // assuming 6 visual radius
                 {
                     // force respawn
-                    if (IsDead) this.c_position = spawn_position; // Leave bodies alone!
+                    if (!IsDead) this.c_position = spawn_position; // Leave bodies alone!
                 }
 
             
@@ -69,9 +69,19 @@ namespace BearGame
 
                         DeltaRow = this.c_position.Row - World.Bear.c_position.Row;
                         DeltaCol = this.c_position.Col - World.Bear.c_position.Col;
+                        
+                        Random rnd = new Random();
+                        int WannaMove = rnd.Next(100);
+                        int WannaTurn = rnd.Next(100); 
 
                         switch (Love)
                         {
+                            
+                            case 3:
+                                                      
+                            case 2:
+                            case 1:
+
                             case 0:
 
                             default:
@@ -129,6 +139,7 @@ namespace BearGame
                     
                 }
             }
+        // base update
         }
 
         protected override void UpdateSpriteIndex()
