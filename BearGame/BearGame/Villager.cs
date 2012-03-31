@@ -20,7 +20,8 @@ namespace BearGame
         // ONLY respawn them if both the villager and the respawn location are offscreen
         public bool IsDead = false;
 
-
+        public GameSetting.VillagerNames Name;
+        
         public Villager(World world)
             : base(world)
         {
@@ -29,6 +30,7 @@ namespace BearGame
             this.TricycleLove = Settings.Person_TricycleLove;
             this.HealthRegen = Settings.Person_HealthRegen;
             this.Speed = Settings.Person_Speed;
+            //this.Name = world.villagerCount;
 
         }
 
