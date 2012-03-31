@@ -16,6 +16,7 @@ namespace BearGame
 
         World _world;
 
+        Texture2D _backgroundTexture;
         Texture2D _meterTexture;
         Texture2D _skullTexture;
         Texture2D _happyTexture;
@@ -36,6 +37,7 @@ namespace BearGame
             _healthbarTexture = content.Load<Texture2D>("UI\\healthbar");
             _skullTexture = content.Load<Texture2D>("UI\\skull");
             _happyTexture = content.Load<Texture2D>("UI\\happy");
+            _backgroundTexture = content.Load<Texture2D>("UI\\background");
 
             //Load Fonts
             _uiFont = content.Load<SpriteFont>("UI\\UIFont");
@@ -55,18 +57,24 @@ namespace BearGame
             var gameViewLeft = (vw-ws)/2;
             var gameViewTop = (vh-ws)/2;
             float healthPercentage = (_world.Bear.Health / _world.Settings.Bear_HealthMax);
+            Color barColor = Color.Red;
+            if (_world.Bear.IsHugging)
+            {
+                barColor = Color.Green;
+            }
             
             _uiBatch.Begin();
-            
+
+            _uiBatch.Draw(_backgroundTexture, new Vector2(0, 0), Color.Gold);
             //Draw Health Meter
             _uiBatch.Draw(_skullTexture, new Rectangle(gameViewLeft, gameViewTop - 90, _skullTexture.Width, _skullTexture.Height), Color.White);
-            _uiBatch.Draw(_meterTexture, new Rectangle(gameViewLeft + _skullTexture.Width, gameViewTop - 90, (int)(_meterTexture.Width * healthPercentage), _meterTexture.Height), Color.Red);
+            _uiBatch.Draw(_meterTexture, new Rectangle(gameViewLeft + _skullTexture.Width, gameViewTop - 90, (int)(_meterTexture.Width * healthPercentage), _meterTexture.Height), barColor);    
             _uiBatch.Draw(_healthbarTexture, new Rectangle(gameViewLeft + _skullTexture.Width, gameViewTop - 90, _healthbarTexture.Width, _healthbarTexture.Height), Color.White);
             _uiBatch.Draw(_happyTexture, new Rectangle(gameViewLeft + _healthbarTexture.Width + _skullTexture.Width, gameViewTop - 90, _happyTexture.Width, _happyTexture.Height), Color.White);
             
             //Draw People Legend
             _uiBatch.DrawString(_uiFont, "Legend", new Vector2(650, 150), Color.White);
-            foreach (Villager person in _world.AllActors)
+            foreach (Villager person in _world.AllVillagers)
             {
 
             }
