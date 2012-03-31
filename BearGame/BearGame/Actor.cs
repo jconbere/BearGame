@@ -12,8 +12,18 @@ namespace BearGame
         int spriteIndex = 0;
         private Texture2D SpriteTexture;
         private Vector2 position;
+        public CellPosition c_position;
+        public CellPosition spawn_position;
+
         private int[] spriteSize = new int[2];
         private int animationDelay = 0;
+
+        public Actor()
+        {
+            spriteIndex = 0;
+            spriteSize[0] = World.TileSize;
+            spriteSize[1] = World.TileSize;
+        }
 
         public Actor(GameSetting settings)
         {            
@@ -46,6 +56,11 @@ namespace BearGame
             Rectangle sourceRec;
             sourceRec = new Rectangle(spriteIndex * spriteSize[0], 0, spriteSize[0], spriteSize[1]);
             spriteBatch_IN.Draw(SpriteTexture, position, sourceRec, Color.White);
+        }
+
+        protected int Distance(Actor Actor1, Actor Actor2)
+        {
+            return Math.Max(Math.Abs(Actor1.c_position.Row - Actor2.c_position.Row), Math.Abs(Actor1.c_position.Col - Actor2.c_position.Col));
         }
     }
 }

@@ -111,6 +111,7 @@
     <Compile Include="Camera.cs" />
     <Compile Include="Actor.cs" />
     <Compile Include="CollisionLayer.cs" />
+    <Compile Include="enums.cs" />
     <Compile Include="GameSettings.cs" />
     <Compile Include="Layer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
