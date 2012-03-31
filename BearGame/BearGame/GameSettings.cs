@@ -50,7 +50,8 @@ namespace BearGame
         public float Bear_HealthDecreaseRate = 1; // healths / second
 
         public double Bear_MoveInterval = 1.0/3; // Seconds
-        
+        public double People_MoveInterval = 1.0/4; // Seconds
+       
         public GameSetting()
         {
         }
