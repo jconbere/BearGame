@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BearGame
 {
-    class Tricycle : Prop
+    public class Tricycle : Prop
     {
         public Tricycle(World world)
             : base (world)

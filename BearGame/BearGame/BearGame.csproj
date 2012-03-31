@@ -115,6 +115,7 @@
     <Compile Include="enums.cs" />
     <Compile Include="GameSettings.cs" />
     <Compile Include="GameView.cs" />
+    <Compile Include="Interactions.cs" />
     <Compile Include="Layer.cs" />
     <Compile Include="Honey.cs" />
     <Compile Include="Prop.cs" />
