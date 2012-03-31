@@ -8,7 +8,7 @@ namespace BearGame
     class Bear
     {
         public int Health;
-
+        
         Bear()
         {
             this.Health = 255;
@@ -21,6 +21,7 @@ namespace BearGame
 
         public override void Update()
         {
+        
         }
     }
 }
