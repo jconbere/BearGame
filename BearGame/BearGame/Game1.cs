@@ -21,6 +21,10 @@ namespace BearGame
         Texture2D spriteTexture;
         Actor firstSprite;
 
+        Camera camera;
+        World world;
+        CollisionLayer collisions;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -37,6 +41,9 @@ namespace BearGame
         {
             // TODO: Add your initialization logic here
             firstSprite = new Actor();
+            camera = new Camera();
+            world = new World();
+            collisions = new CollisionLayer();
             base.Initialize();
         }
 
@@ -51,6 +58,9 @@ namespace BearGame
             
             spriteTexture = Content.Load<Texture2D>("firstsprite");
             firstSprite.initialize(Content.Load<Texture2D>("firstsprite"), new Vector2(0, 0), 0, 64, 64);
+
+            var worldTiles = Content.Load<Texture2D>("WorldTiles");
+            world.Load(worldTiles, "WorldTiles");
             // TODO: use this.Content to load your game content here
         }
 
