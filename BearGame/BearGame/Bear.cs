@@ -21,10 +21,17 @@ namespace BearGame
             FacingDirection = Direction.Down;
         }
 
+        double _lastInteractionBeginTime = 0;
+
+        public Interaction PossibleInteraction { get; private set; }
+
         public override void Update(GameTime time)
         {
             var now = time.TotalGameTime.TotalSeconds;
 
+            //
+            // Movement input
+            //
             var keyState = Keyboard.GetState();            
 
             if ((now - LastMoveTime) > Settings.Bear_MoveInterval)
@@ -51,6 +58,40 @@ namespace BearGame
                 }                
             }
 
+            //
+            // Find possible interactions
+            //
+            if (ActiveInteraction == null)
+            {
+                var other = World.GetEntityInSameLocation(this);
+                if (other != null && other != this)
+                {
+                    var inter = GetPossibleInteration(other);
+                    if (inter != null)
+                    {
+                        PossibleInteraction = inter;
+                    }
+                }
+            }
+            else
+            {
+                PossibleInteraction = null;
+            }
+
+            //
+            // Interaction input
+            //
+            if (((now - _lastInteractionBeginTime) > Settings.Bear_InteractionInterval) &&
+                (keyState.IsKeyDown(Keys.Space)) &&
+                (PossibleInteraction != null)) {
+
+                BeginInteraction(time, PossibleInteraction);
+                PossibleInteraction = null;
+            }
+
+            //
+            // The ever-decreasing health
+            //
             Health -= (float)(time.ElapsedGameTime.TotalSeconds * Settings.Bear_HealthDecreaseRate);
 
             if (Health < 0)
@@ -59,19 +100,19 @@ namespace BearGame
             }
         }
 
-        public static Interaction GetAvailableBearInteration(Bear bear, Entity obj)
+        public Interaction GetPossibleInteration(Entity obj)
         {
             if (obj is Honey)
             {
-                if (bear.Inventory == null)
+                if (Inventory == null)
                 {
                     return new TakeHoney((Honey)obj);
                 }
-                else if (bear.Inventory is Honey)
+                else if (Inventory is Honey)
                 {
                     return new EatHoney();
                 }
-                else if (bear.Inventory is Tricycle)
+                else if (Inventory is Tricycle)
                 {
                     return new AchievementUnlockedDaredevil();
                 }
@@ -82,15 +123,15 @@ namespace BearGame
             }
             else if (obj is Tricycle)
             {
-                if (bear.Inventory == null)
+                if (Inventory == null)
                 {
                     return new RideTricycle((Tricycle)obj);
                 }
-                else if (bear.Inventory is Honey)
+                else if (Inventory is Honey)
                 {
                     return new EatHoney();
                 }
-                else if (bear.Inventory is Tricycle)
+                else if (Inventory is Tricycle)
                 {
                     return new GetOffTricycle();
                 }
@@ -101,15 +142,15 @@ namespace BearGame
             }
             else if (obj is Villager)
             {
-                if (bear.Inventory == null)
+                if (Inventory == null)
                 {
                     return new Grab((Villager)obj);
                 }
-                else if (bear.Inventory is Honey)
+                else if (Inventory is Honey)
                 {
                     return new GiveHoney((Villager)obj);
                 }
-                else if (bear.Inventory is Tricycle)
+                else if (Inventory is Tricycle)
                 {
                     return new RunOver();
                 }
@@ -120,20 +161,23 @@ namespace BearGame
             }
             else
             {
-                if (bear.Inventory == null)
+                if (Inventory == null)
                 {
                     return null;
                 }
-                else if (bear.Inventory is Honey)
+                else if (Inventory is Honey)
                 {
                     return new EatHoney();
                 }
-                else if (bear.Inventory is Tricycle)
+                else if (Inventory is Tricycle)
                 {
                     return new GetOffTricycle();
                 }
+                else
+                {
+                    return null;
+                }
             }
-            throw new NotImplementedException();
         }
 
         protected override void  UpdateSpriteIndex()

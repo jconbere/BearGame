@@ -23,31 +23,28 @@ namespace BearGame
         public Actor(World world)
             : base(world)
         {
-            IsVisible = true;
         }
 
-        public bool IsVisible { get; set; }
-
-        public Interaction CurrentInteraction { get; private set; }
+        public Interaction ActiveInteraction { get; private set; }
 
         public void BeginInteraction(GameTime time, Interaction inter)
         {
-            CurrentInteraction = inter;
+            ActiveInteraction = inter;
             inter.Begin(this, time);
         }
 
         public override void Update(GameTime time)
         {
             base.Update(time);
-            if (CurrentInteraction != null)
+            if (ActiveInteraction != null)
             {
-                if (CurrentInteraction.IsActive)
+                if (ActiveInteraction.IsActive)
                 {
-                    CurrentInteraction.Update(this, time);
+                    ActiveInteraction.Update(this, time);
                 }
                 else
                 {
-                    CurrentInteraction = null;
+                    ActiveInteraction = null;
                 }
             }
         }

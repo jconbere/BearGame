@@ -23,6 +23,7 @@ namespace BearGame
         GameView view;
 
         SoundEffect backgroundMusic;
+        SoundEffectInstance backgroundMusicInstance;
 
         public Game1()
         {
@@ -58,9 +59,9 @@ namespace BearGame
         protected override void LoadContent()
         {
             backgroundMusic = Content.Load<SoundEffect>("Audio\\BackgroundMusic");
-            var instance = backgroundMusic.CreateInstance();
-            instance.IsLooped = true;
-            backgroundMusic.Play();
+            backgroundMusicInstance = backgroundMusic.CreateInstance();
+            backgroundMusicInstance.IsLooped = true;
+            backgroundMusicInstance.Play();
 
             view.LoadContent(GraphicsDevice, Content);
 
