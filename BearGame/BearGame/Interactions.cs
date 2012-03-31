@@ -6,63 +6,6 @@ using Microsoft.Xna.Framework;
 
 namespace BearGame
 {
-    public static class Interactions
-    {
-        public static Interaction GetAvailableInteration(Bear bear, Entity obj)
-        {
-            if (obj is Honey)
-            {
-                if (bear.Inventory == null)
-                {
-                    return new TakeHoney((Honey)obj);
-                }
-                else if (bear.Inventory is Honey)
-                {
-                    return new EatHoney();
-                }
-                else if (bear.Inventory is Tricycle)
-                {
-                    return new AchievementUnlockedDaredevil();
-                }
-            }
-            else if (obj is Tricycle)
-            {
-                if (bear.Inventory == null)
-                {
-                    return new RideTricycle((Tricycle)obj);
-                }
-                else if (bear.Inventory is Honey)
-                {
-                    return new EatHoney();
-                }
-                else if (bear.Inventory is Tricycle)
-                {
-                    return new GetOffTricycle();
-                }
-            }
-            else if (obj is Villager)
-            {
-                if (bear.Inventory == null)
-                {
-                    return new Grab();
-                }
-                else if (bear.Inventory is Honey)
-                {
-                    return new GiveHoney();
-                }
-                else if (bear.Inventory is Tricycle)
-                {
-                    return new RunOver();
-                }
-            }
-            else
-            {
-                
-            }
-            throw new NotImplementedException();
-        }
-    }
-
     public class Interaction
     {
         public bool IsActive { get; protected set; }
