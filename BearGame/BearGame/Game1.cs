@@ -50,7 +50,7 @@ namespace BearGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
             spriteTexture = Content.Load<Texture2D>("firstsprite");
-            firstSprite.initialize(spriteTexture, new Vector2(0,0), 0);
+            firstSprite.initialize(Content.Load<Texture2D>("firstsprite"), new Vector2(0, 0), 0, 64, 64);
             // TODO: use this.Content to load your game content here
         }
 
