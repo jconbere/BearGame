@@ -69,6 +69,18 @@
       <Name>Collisions1</Name>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Maps\Actors1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>Actors1</Name>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Maps\Props1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>Props1</Name>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

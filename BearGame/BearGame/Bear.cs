@@ -2,26 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace BearGame
 {
-    class Bear
+    class Bear : Actor
     {
         public int Health;
         
-        Bear()
-        {
-            this.Health = 255;
-        }
-
-        Bear(GameSetting settings)
+        public Bear(GameSetting settings)
+            : base(settings)
         {
             this.Health = settings.Bear_HealthDefault;
         }
 
-        public void Update()
+        public override void Update(GameTime time)
         {
-        
         }
     }
 }

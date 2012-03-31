@@ -18,8 +18,6 @@ namespace BearGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D spriteTexture;
-        Actor firstSprite;
 
         Camera camera;
         World world;
@@ -38,9 +36,9 @@ namespace BearGame
         /// </summary>
         protected override void Initialize()
         {
-            firstSprite = new Actor();
+            var settings = new GameSetting();
             camera = new Camera();
-            world = new World();
+            world = new World(settings);
 
             base.Initialize();
         }
@@ -54,12 +52,8 @@ namespace BearGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
-            spriteTexture = Content.Load<Texture2D>("Sprites\\firstsprite");
-            firstSprite.initialize(spriteTexture, new Vector2(0, 0), 0, 64, 64);
-
             var worldTiles = Content.Load<Texture2D>("Sprites\\WorldTiles");
-            world.Load(worldTiles, 1);
-            // TODO: use this.Content to load your game content here
+            world.LoadContent(Content, 1);
         }
 
         /// <summary>
@@ -82,8 +76,7 @@ namespace BearGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here
-            firstSprite.update();
+            world.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -94,16 +87,13 @@ namespace BearGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
 
-            firstSprite.draw(spriteBatch);
-
-
+            world.Draw(spriteBatch);
 
             spriteBatch.End();
-            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }
