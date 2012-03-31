@@ -25,32 +25,39 @@ namespace BearGame
 
         public override void Update(GameTime time, World world)
         {
-            var keyState = Keyboard.GetState();
             var now = time.TotalGameTime.TotalSeconds;
+
+            Action<CellPosition> MoveCell = delegate(CellPosition diff)
+            {
+                var newPos = c_position + diff;
+                if (world.IsPassable(newPos))
+                {
+                    c_position = newPos;
+                    Position = newPos.ToPixelPosition();
+                    _lastMoveTime = now;
+                }
+            };
+
+            var keyState = Keyboard.GetState();            
 
             if ((now - _lastMoveTime) > Settings.Bear_MoveInterval)
             {
                 if (keyState.IsKeyDown(Keys.Left) || keyState.IsKeyDown(Keys.A))
                 {
-                    Position = Position + new Vector2(-World.TileSize, 0);
-                    _lastMoveTime = now;
+                    MoveCell(new CellPosition(-1, 0));
                 }
                 else if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W))
                 {
-                    Position = Position + new Vector2(0, -World.TileSize);
-                    _lastMoveTime = now;
+                    MoveCell(new CellPosition(0, -1));
                 }
                 else if (keyState.IsKeyDown(Keys.Right) || keyState.IsKeyDown(Keys.D))
                 {
-                    Position = Position + new Vector2(World.TileSize, 0);
-                    _lastMoveTime = now;
+                    MoveCell(new CellPosition(1, 0));
                 }
                 else if (keyState.IsKeyDown(Keys.Down) || keyState.IsKeyDown(Keys.S))
                 {
-                    Position = Position + new Vector2(0, World.TileSize);
-                    _lastMoveTime = now;
-                }
-                
+                    MoveCell(new CellPosition(0, 1));
+                }                
             }
         }
     }

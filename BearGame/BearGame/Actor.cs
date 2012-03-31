@@ -40,23 +40,16 @@ namespace BearGame
             }
         }
 
-        public virtual void LoadContent(Texture2D texture_IN, Vector2 position_IN)
+        public virtual void LoadContent(Texture2D texture_IN, CellPosition cellPosition, Vector2 pixelPosition)
         {
-            position = position_IN;
+            spawn_position = cellPosition;
+            c_position = cellPosition;
+            position = pixelPosition;
             SpriteTexture = texture_IN;            
         }
 
         public virtual void Update(GameTime time, World world)
         {
-            animationDelay = animationDelay % 100;
-
-            if (animationDelay == 0)
-            {
-                spriteIndex++;
-                spriteIndex = spriteIndex % 3;
-            }
-
-            animationDelay++;
         }
 
         public void Draw(SpriteBatch spriteBatch_IN)

@@ -86,13 +86,13 @@ namespace BearGame
                         case 'V':
                             {
                                 var v = new Villager(Settings);
-                                v.LoadContent(villagerTexture, GetTilePosition(c, r));
+                                v.LoadContent(villagerTexture, new CellPosition(c, r), GetTilePosition(c, r));
                                 AllActors.Add(v);
                             }
                             break;
                         case 'R':
                             {
-                                Bear.LoadContent(bearTexture, GetTilePosition(c, r));
+                                Bear.LoadContent(bearTexture, new CellPosition(c, r), GetTilePosition(c, r));
                             }
                             break;
                     }
@@ -101,9 +101,14 @@ namespace BearGame
             
         }
 
+        public bool IsPassable(CellPosition cpos)
+        {
+            return IsPassable(cpos.Col, cpos.Row);
+        }
+
         public bool IsPassable(int column, int row)
         {
-            return _collisionLayer.GetTile(column, row) != '0';
+            return _collisionLayer.GetTile(column, row) == '0';
         }
 
         public Rectangle GetTileRectangle(int c, int r)
