@@ -5,11 +5,12 @@ using System.Text;
 
 namespace BearGame
 {
-    public class Prop : Entity
+    class Tricycle : Prop
     {
-        public Prop(World world)
-            : base(world)
+        public Tricycle(World world)
+            : base (world)
         {
+
         }
     }
 }

@@ -7,8 +7,8 @@ namespace BearGame
 {
     public class Honey : Prop
     {
-        public Honey(GameSetting settings)
-            : base(settings)
+        public Honey(World world)
+            : base(world)
         {
         }
     }

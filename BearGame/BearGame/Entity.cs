@@ -18,11 +18,12 @@ namespace BearGame
         public CellPosition c_position;
         public CellPosition spawn_position;
 
-        public GameSetting Settings { get; private set; }
+        public World World { get; private set; }
+        public GameSetting Settings { get { return World.Settings; } }
 
-        public Entity(GameSetting settings)
+        public Entity(World world)
         {
-            Settings = settings;
+            World = world;
             spriteIndex = 0;
         }
 

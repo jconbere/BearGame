@@ -20,14 +20,14 @@ namespace BearGame
         // ONLY respawn them if both the villager and the respawn location are offscreen
 
 
-        public Villager(GameSetting settings)
-            : base (settings)
+        public Villager(World world)
+            : base (world)
         {
-            this.Health = settings.Person_HealthDefault;
-            this.Love = settings.Person_Love;
-            this.TricycleLove = settings.Person_TricycleLove;
-            this.HealthRegen = settings.Person_HealthRegen;
-            this.Speed = settings.Person_Speed;
+            this.Health = Settings.Person_HealthDefault;
+            this.Love = Settings.Person_Love;
+            this.TricycleLove = Settings.Person_TricycleLove;
+            this.HealthRegen = Settings.Person_HealthRegen;
+            this.Speed = Settings.Person_Speed;
             
         }
 

@@ -15,10 +15,10 @@ namespace BearGame
         public bool HasTricycle = false;
         public bool HasHoney = false;
 
-        public Bear(GameSetting settings)
-            : base(settings)
+        public Bear(World world)
+            : base(world)
         {
-            this.Health = settings.Bear_HealthDefault;
+            this.Health = Settings.Bear_HealthDefault;
             FacingDirection = Direction.Down;
         }
 
