@@ -10,7 +10,6 @@ namespace BearGame
     {
         public static Interaction GetAvailableInteration(Bear bear, Entity obj)
         {
-            
             if (obj is Honey)
             {
                 if (bear.Inventory == null)
@@ -43,11 +42,23 @@ namespace BearGame
             }
             else if (obj is Villager)
             {
+                if (bear.Inventory == null)
+                {
+                    return new Grab();
+                }
+                else if (bear.Inventory is Honey)
+                {
+                    return new GiveHoney();
+                }
+                else if (bear.Inventory is Tricycle)
+                {
+                    return new RunOver();
+                }
             }
             else
             {
+                
             }
-
             throw new NotImplementedException();
         }
     }
@@ -56,12 +67,12 @@ namespace BearGame
     {
         public bool IsActive { get; protected set; }
 
-        public virtual void Activate(Bear bear, GameTime time)
+        public virtual void Activate(Actor doer, GameTime time)
         {
             IsActive = true;
         }
 
-        public virtual void Update(Bear bear, GameTime time)
+        public virtual void Update(Actor doer, GameTime time)
         {
         }
     }

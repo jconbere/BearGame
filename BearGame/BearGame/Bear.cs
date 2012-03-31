@@ -21,27 +21,13 @@ namespace BearGame
             FacingDirection = Direction.Down;
         }
 
-        double _lastMoveTime = 0;
-        protected double LastMoveTime { get { return _lastMoveTime; } }
-
-        protected void MoveCell(GameTime time, CellPosition diff)
-        {
-            var newPos = c_position + diff;
-            if (World.IsPassable(newPos))
-            {
-                c_position = newPos;
-                Position = newPos.ToPixelPosition();
-                _lastMoveTime = time.TotalGameTime.TotalSeconds;
-            }
-        }
-
         public override void Update(GameTime time)
         {
             var now = time.TotalGameTime.TotalSeconds;
 
             var keyState = Keyboard.GetState();            
 
-            if ((now - _lastMoveTime) > Settings.Bear_MoveInterval)
+            if ((now - LastMoveTime) > Settings.Bear_MoveInterval)
             {
                 if (keyState.IsKeyDown(Keys.Left) || keyState.IsKeyDown(Keys.A))
                 {
