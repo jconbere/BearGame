@@ -39,6 +39,7 @@ namespace BearGame
         public int Person_Love = 3;
         public int Person_Speed = 1;
         
+        public double People_MoveInterval = 1.0/4; // Seconds
 
         public int Person_TricycleLove = 1;
         
@@ -50,7 +51,10 @@ namespace BearGame
         public float Bear_HealthDecreaseRate = 1; // healths / second
 
         public double Bear_MoveInterval = 1.0/3; // Seconds
-        public double People_MoveInterval = 1.0/4; // Seconds
+
+        public double Bear_InteractionInterval = 1.0 / 3;
+
+        
        
         public GameSetting()
         {

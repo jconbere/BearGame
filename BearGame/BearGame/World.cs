@@ -30,6 +30,14 @@ namespace BearGame
         public List<Actor> AllActors { get; private set; }
         public List<Prop> AllProps { get; private set; }
 
+        public IEnumerable<Entity> AllEntities
+        {
+            get
+            {
+                return AllActors.Cast<Entity>().Concat(AllProps.Cast<Entity>());
+            }
+        }
+
         public GameSetting Settings { get; private set; }
 
         public World(GameSetting settings)
@@ -42,8 +50,8 @@ namespace BearGame
 
             AllActors = new List<Actor>();
             AllActors.Add(Bear);
-            AllProps = new List<Prop>();
 
+            AllProps = new List<Prop>();
         }
 
         public void LoadContent(GraphicsDevice device, ContentManager content, int worldNumber)
@@ -113,8 +121,13 @@ namespace BearGame
                             break;
                     }
                 }
-            }
-            
+            }            
+        }
+
+        public Entity GetEntityInSameLocation(Entity e)
+        {
+            var cpos = e.c_position;
+            return AllEntities.FirstOrDefault(a => a != e && a.IsVisible && a.c_position == cpos);
         }
 
         public bool IsPassable(CellPosition cpos)
