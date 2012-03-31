@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace BearGame
 {
-    class Villager : Actor
+    public class Villager : Actor
     {
         public int Health;
         public int Love;

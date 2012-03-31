@@ -10,7 +10,7 @@ namespace BearGame
 {
     public class Bear : Actor
     {
-        public int Health { get; set; }
+        public float Health { get; set; }
 
         public Prop Inventory { get; set; }
 
@@ -49,6 +49,13 @@ namespace BearGame
                     MoveCell(time, new CellPosition(0, 1));
                     FacingDirection = Direction.Down;
                 }                
+            }
+
+            Health -= (float)(time.ElapsedGameTime.TotalSeconds * Settings.Bear_HealthDecreaseRate);
+
+            if (Health < 0)
+            {
+                Health = 0;
             }
         }
 
@@ -96,11 +103,11 @@ namespace BearGame
             {
                 if (bear.Inventory == null)
                 {
-                    return new Grab();
+                    return new Grab((Villager)obj);
                 }
                 else if (bear.Inventory is Honey)
                 {
-                    return new GiveHoney();
+                    return new GiveHoney((Villager)obj);
                 }
                 else if (bear.Inventory is Tricycle)
                 {
