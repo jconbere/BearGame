@@ -19,7 +19,7 @@ namespace BearGame
             this.Health = settings.Bear_HealthDefault;
         }
 
-        public override void Update()
+        public void Update()
         {
         
         }

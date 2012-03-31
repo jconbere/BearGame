@@ -41,7 +41,6 @@ namespace BearGame
         public int Bear_HealthMin;
         public int Bear_HealthPerHoney;
         public int Bear_HealthDefault;
-        public int Bear_HealthPerHoney;
 
 
         public GameSetting()

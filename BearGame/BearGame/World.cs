@@ -17,11 +17,12 @@ namespace BearGame
         Layer _collisionLayer = new Layer();
 
 
-        public void Load(Texture2D tilesTexture, string path)
+        public void Load(Texture2D tilesTexture, int worldNumber)
         {
             _tilesTexture = tilesTexture;
-            
-            _collisionLayer.LoadTiles(path);
+
+            _tilesLayer.LoadTiles("Content\\Maps\\Tiles" + worldNumber + ".txt");
+            _collisionLayer.LoadTiles("Content\\Maps\\Collisions" + worldNumber + ".txt");
         }
 
         public bool IsPassable(int column, int row)

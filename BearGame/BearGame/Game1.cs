@@ -23,7 +23,6 @@ namespace BearGame
 
         Camera camera;
         World world;
-        CollisionLayer collisions;
 
         public Game1()
         {
@@ -39,11 +38,10 @@ namespace BearGame
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             firstSprite = new Actor();
             camera = new Camera();
             world = new World();
-            collisions = new CollisionLayer();
+
             base.Initialize();
         }
 
@@ -56,11 +54,11 @@ namespace BearGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
-            spriteTexture = Content.Load<Texture2D>("Sprite\\firstsprite");
+            spriteTexture = Content.Load<Texture2D>("Sprites\\firstsprite");
             firstSprite.initialize(spriteTexture, new Vector2(0, 0), 0, 64, 64);
 
-            //var worldTiles = Content.Load<Texture2D>("WorldTiles");
-            //world.Load(worldTiles, "WorldTiles");
+            var worldTiles = Content.Load<Texture2D>("Sprites\\WorldTiles");
+            world.Load(worldTiles, 1);
             // TODO: use this.Content to load your game content here
         }
 
