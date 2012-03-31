@@ -26,9 +26,10 @@ namespace BearGame
         //People Stuff
         public int Person_HealthMin;
         public int Person_HealthMax;
+        public int Person_HealthDefault;
 
         public int Person_HealthPerHug;
-
+        public int Person_HealthRegen;
         public int Person_HoneyWantedMin;
         public int Person_HoneyWantedMax;
 
@@ -39,6 +40,9 @@ namespace BearGame
         public int Bear_HealthMax;
         public int Bear_HealthMin;
         public int Bear_HealthPerHoney;
+        public int Bear_HealthDefault;
+        public int Bear_HealthPerHoney;
+
 
         public GameSetting()
         {
