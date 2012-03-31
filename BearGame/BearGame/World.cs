@@ -22,12 +22,20 @@ namespace BearGame
 
         Layer _propsLayer = new Layer();
 
+        Layer _actorsLayer = new Layer();
+
         public Camera Camera { get; private set; }
         public Bear Bear { get; private set; }
         public List<Actor> AllActors { get; private set; }
 
+        //public List<Prop> AllProps { get; private set; }
+
+        public GameSetting Settings { get; private set; }
+
         public World(GameSetting settings)
         {
+            Settings = settings;
+
             Camera = new BearGame.Camera();
 
             Bear = new Bear(settings);
@@ -41,24 +49,56 @@ namespace BearGame
             spriteBatch = new SpriteBatch(device);
 
             //
+            // Map tiles
+            //
+            _tilesTexture = content.Load<Texture2D>("Sprites\\WorldTiles");
+            _tilesLayer.LoadTiles("Content\\Maps\\Tiles" + worldNumber + ".txt");
+            _collisionLayer.LoadTiles("Content\\Maps\\Collisions" + worldNumber + ".txt");
+
+            //
             // Load props
             //
-            Bear.LoadContent(content.Load<Texture2D>("Sprites\\spritesheet_bear"), new Vector2(0,0));
-
-            _propsLayer.LoadTiles("Content\\Maps\\Tiles" + worldNumber + ".txt");
-
+            /*_propsLayer.LoadTiles("Content\\Maps\\Props" + worldNumber + ".txt");
             for (var c = 0; c < _propsLayer.NumColumns; c++)
             {
                 for (var r = 0; r < _propsLayer.NumColumns; r++)
                 {
+                    switch (_propsLayer.GetTile(c, r))
+                    {
+                        case 'H':
 
+                    }
+                }
+            }*/
+
+            //
+            // Load actors
+            //
+            var bearTexture = content.Load<Texture2D>("Sprites\\spritesheet_bear");
+            var villagerTexture = content.Load<Texture2D>("Sprites\\spritesheet_bear");
+            _actorsLayer.LoadTiles("Content\\Maps\\Actors" + worldNumber + ".txt");
+            for (var c = 0; c < _actorsLayer.NumColumns; c++)
+            {
+                for (var r = 0; r < _actorsLayer.NumColumns; r++)
+                {
+                    switch (_actorsLayer.GetTile(c, r))
+                    {
+                        case 'V':
+                            {
+                                var v = new Villager(Settings);
+                                v.LoadContent(villagerTexture, GetTilePosition(c, r));
+                                AllActors.Add(v);
+                            }
+                            break;
+                        case 'R':
+                            {
+                                Bear.LoadContent(bearTexture, GetTilePosition(c, r));
+                            }
+                            break;
+                    }
                 }
             }
-
-            _tilesTexture = content.Load<Texture2D>("Sprites\\WorldTiles");
-
-            _tilesLayer.LoadTiles("Content\\Maps\\Tiles" + worldNumber + ".txt");
-            _collisionLayer.LoadTiles("Content\\Maps\\Collisions" + worldNumber + ".txt");
+            
         }
 
         public bool IsPassable(int column, int row)
@@ -69,6 +109,11 @@ namespace BearGame
         public Rectangle GetTileRectangle(int c, int r)
         {
             return new Rectangle(c * TileSize, r * TileSize, TileSize, TileSize);
+        }
+
+        public Vector2 GetTilePosition(int c, int r)
+        {
+            return new Vector2(c * TileSize, r * TileSize);
         }
 
         public void Update(GameTime time)
