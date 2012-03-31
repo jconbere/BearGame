@@ -38,7 +38,7 @@ namespace BearGame
         {
             spriteBatch = new SpriteBatch(device);
 
-            Bear.LoadContent(content.Load<Texture2D>("Sprites\\firstsprite"), new Vector2(100,100));
+            Bear.LoadContent(content.Load<Texture2D>("Sprites\\firstsprite"), new Vector2(0,0));
 
             _tilesTexture = content.Load<Texture2D>("Sprites\\WorldTiles");
 
@@ -62,6 +62,8 @@ namespace BearGame
             {
                 a.Update(time);
             }
+
+            Camera.CenterPosition = Bear.Position + new Vector2(TileSize / 2, TileSize / 2);
         }
 
         Rectangle GetWorldTileRectangle(char tileType)
@@ -81,10 +83,11 @@ namespace BearGame
 
         public void Draw(Rectangle frame)
         {
-            var scale = Matrix.CreateScale((float)frame.Width / (float)(9 * 64));
-            var translate = Matrix.CreateTranslation(frame.X, frame.Y, 0);
+            var ctranslate = Matrix.CreateTranslation(-(Camera.CenterPosition.X - 4.5f*TileSize), -(Camera.CenterPosition.Y - 4.5f*TileSize), 0);
+            var fscale = Matrix.CreateScale((float)frame.Width / (float)(9 * 64));
+            var ftranslate = Matrix.CreateTranslation(frame.X, frame.Y, 0);
 
-            var tx = Matrix.Multiply(scale, translate);
+            var tx = Matrix.Multiply(ctranslate, Matrix.Multiply(fscale, ftranslate));
 
             var raster = new RasterizerState();
             raster.ScissorTestEnable = true;
