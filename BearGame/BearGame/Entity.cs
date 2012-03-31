@@ -49,7 +49,7 @@ namespace BearGame
             NumColumnsInSpriteTexture = SpriteTexture.Width / World.TileSize;
         }
 
-        public virtual void Update(GameTime time, World world)
+        public virtual void Update(GameTime time)
         {
         }
 

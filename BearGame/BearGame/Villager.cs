@@ -31,7 +31,7 @@ namespace BearGame
             
         }
 
-        public override void Update(GameTime time, World Myworld)
+        public override void Update(GameTime time)
         {
             
             //what to do?

@@ -74,7 +74,13 @@ namespace BearGame
                                 AllProps.Add(v);
                             }
                             break;
-
+                        case 'X':
+                            {
+                                var v = new Tricycle(this);
+                                v.LoadContent(tricycleTexture, new CellPosition(c, r), GetTilePosition(c, r));
+                                AllProps.Add(v);
+                            }
+                            break;
                     }
                 }
             }
@@ -131,9 +137,14 @@ namespace BearGame
 
         public void Update(GameTime time)
         {
+            foreach (var p in AllProps)
+            {
+                p.Update(time);
+            }
+
             foreach (var a in AllActors)
             {
-                a.Update(time, this);
+                a.Update(time);
             }
 
             Camera.CenterPosition = Bear.Position + new Vector2(TileSize / 2, TileSize / 2);

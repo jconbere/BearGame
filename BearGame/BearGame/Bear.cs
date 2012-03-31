@@ -24,14 +24,14 @@ namespace BearGame
 
         double _lastMoveTime = 0;
 
-        public override void Update(GameTime time, World world)
+        public override void Update(GameTime time)
         {
             var now = time.TotalGameTime.TotalSeconds;
 
             Action<CellPosition> MoveCell = delegate(CellPosition diff)
             {
                 var newPos = c_position + diff;
-                if (world.IsPassable(newPos))
+                if (World.IsPassable(newPos))
                 {
                     c_position = newPos;
                     Position = newPos.ToPixelPosition();
