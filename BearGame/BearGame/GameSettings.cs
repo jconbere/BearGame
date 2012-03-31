@@ -19,8 +19,17 @@ namespace BearGame
 {
     public class GameSetting
     {
+        public enum VillagerNames
+        {
+            Josie,
+            Frank,
+            Tania,
+            Avery,
+            Dave,
+            John
+        }
+
         // Map Stuff
-        
         public int Map_MaxWidth =64;
         public int Map_MaxHeight= 64;
 
