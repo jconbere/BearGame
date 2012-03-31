@@ -20,6 +20,8 @@ namespace BearGame
 
         Layer _collisionLayer = new Layer();
 
+        Layer _propsLayer = new Layer();
+
         public Camera Camera { get; private set; }
         public Bear Bear { get; private set; }
         public List<Actor> AllActors { get; private set; }
@@ -38,7 +40,20 @@ namespace BearGame
         {
             spriteBatch = new SpriteBatch(device);
 
-            Bear.LoadContent(content.Load<Texture2D>("Sprites\\firstsprite"), new Vector2(0,0));
+            //
+            // Load props
+            //
+            Bear.LoadContent(content.Load<Texture2D>("Sprites\\spritesheet_bear"), new Vector2(0,0));
+
+            _propsLayer.LoadTiles("Content\\Maps\\Tiles" + worldNumber + ".txt");
+
+            for (var c = 0; c < _propsLayer.NumColumns; c++)
+            {
+                for (var r = 0; r < _propsLayer.NumColumns; r++)
+                {
+
+                }
+            }
 
             _tilesTexture = content.Load<Texture2D>("Sprites\\WorldTiles");
 
@@ -60,7 +75,7 @@ namespace BearGame
         {
             foreach (var a in AllActors)
             {
-                a.Update(time);
+                a.Update(time, this);
             }
 
             Camera.CenterPosition = Bear.Position + new Vector2(TileSize / 2, TileSize / 2);

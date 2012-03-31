@@ -20,16 +20,8 @@ namespace BearGame
         // ONLY respawn them if both the villager and the respawn location are offscreen
 
 
-        Villager()
-        {
-            this.Health = 3;
-            this.Love = 1;
-            this.TricycleLove = 1;
-            this.HealthRegen = 0;
-            this.Speed = 1;
-        }
-
-        Villager(GameSetting settings)
+        public Villager(GameSetting settings)
+            : base (settings)
         {
             this.Health = settings.Person_HealthDefault;
             this.Love = settings.Person_Love;
@@ -39,7 +31,7 @@ namespace BearGame
             
         }
 
-        public void Update(World Myworld)
+        public override void Update(GameTime time, World Myworld)
         {
             
             //what to do?

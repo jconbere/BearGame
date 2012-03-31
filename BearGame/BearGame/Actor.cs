@@ -46,7 +46,7 @@ namespace BearGame
             SpriteTexture = texture_IN;            
         }
 
-        public virtual void Update(GameTime time)
+        public virtual void Update(GameTime time, World world)
         {
             animationDelay = animationDelay % 100;
 

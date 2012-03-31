@@ -23,7 +23,7 @@ namespace BearGame
 
         double _lastMoveTime = 0;
 
-        public override void Update(GameTime time)
+        public override void Update(GameTime time, World world)
         {
             var keyState = Keyboard.GetState();
             var now = time.TotalGameTime.TotalSeconds;
