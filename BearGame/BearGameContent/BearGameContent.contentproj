@@ -48,7 +48,6 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
-<<<<<<< HEAD
   <ItemGroup>
     <Compile Include="Sprites\WorldTiles.png">
       <Name>WorldTiles</Name>
@@ -56,9 +55,32 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
-=======
-  <ItemGroup />
->>>>>>> fbc262f09ed500a1f3e560fef05b329e2f81eb14
+  <ItemGroup>
+    <None Include="Maps\Tiles1.txt">
+      <Name>Tiles1</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Maps\Collisions1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>Collisions1</Name>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Maps\Actors1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>Actors1</Name>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Maps\Props1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>Props1</Name>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

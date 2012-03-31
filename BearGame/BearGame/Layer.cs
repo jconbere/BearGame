@@ -10,15 +10,15 @@ namespace BearGame
     {
         List<string> _rows;
 
-        public int Width { get { return _rows != null && _rows.Count > 0 ? _rows[0].Length : 0; } }
-        public int Height { get { return _rows.Count; } }
+        public int NumColumns { get { return _rows != null && _rows.Count > 0 ? _rows[0].Length : 0; } }
+        public int NumRows { get { return _rows.Count; } }
 
-        protected char GetTile(int column, int row)
+        public char GetTile(int column, int row)
         {
             return _rows[row][column];
         }
 
-        protected void LoadTiles(string path)
+        public void LoadTiles(string path)
         {
             using (var reader = File.OpenText(path))
             {

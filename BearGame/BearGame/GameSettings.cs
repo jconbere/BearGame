@@ -45,7 +45,6 @@ namespace BearGame
         public int Bear_HealthPerHoney=50;
         public int Bear_HealthDefault=255;
         
-
         public GameSetting()
         {
         }

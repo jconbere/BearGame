@@ -18,17 +18,14 @@ namespace BearGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D spriteTexture;
-        Actor firstSprite;
 
         Camera camera;
         World world;
-        CollisionLayer collisions;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content\\Sprites";
+            Content.RootDirectory = "Content";
         }
 
         /// <summary>
@@ -39,11 +36,10 @@ namespace BearGame
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            firstSprite = new Actor();
+            var settings = new GameSetting();
             camera = new Camera();
-            world = new World();
-            collisions = new CollisionLayer();
+            world = new World(settings);
+
             base.Initialize();
         }
 
@@ -56,12 +52,8 @@ namespace BearGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
-            spriteTexture = Content.Load<Texture2D>("firstsprite");
-            firstSprite.initialize(Content.Load<Texture2D>("firstsprite"), new Vector2(0, 0), 0, 64, 64);
-
-            var worldTiles = Content.Load<Texture2D>("WorldTiles");
-            world.Load(worldTiles, "WorldTiles");
-            // TODO: use this.Content to load your game content here
+            var worldTiles = Content.Load<Texture2D>("Sprites\\WorldTiles");
+            world.LoadContent(Content, 1);
         }
 
         /// <summary>
@@ -84,8 +76,7 @@ namespace BearGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here
-            firstSprite.update();
+            world.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -96,16 +87,13 @@ namespace BearGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
 
-            firstSprite.draw(spriteBatch);
-
-
+            world.Draw(spriteBatch);
 
             spriteBatch.End();
-            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }
