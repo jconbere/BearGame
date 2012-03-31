@@ -8,13 +8,37 @@ namespace BearGame
 {
     public class Villager : Actor
     {
-        public int Health;
-        public int Love;
+        public float Health;
+
+        float _loveValue = 0;
+        public float LoveValue
+        {
+            get
+            {
+                return _loveValue;
+            }
+            set
+            {
+                if (value <= 0)
+                {
+                    _loveValue = 0;
+                }
+                else
+                {
+                    _loveValue = value;
+                }
+            }
+        }
+        public int Love { 
+            get { return (int)(LoveValue + 0.5f); }
+            set { LoveValue = value; }
+        }
+
         public int HoneyTaken;
         public int HoneyMax;
         public int TricycleLove;
-        public int HealthRegen;
-        public int Speed;
+        public float HealthRegen;
+        public float Speed;
         const int ActivityThreshold = 7;  // how far from the bear do we update
         const int RespawnThreshold = 10;  //how far fro the bear do we put them back in their starting place
         // ONLY respawn them if both the villager and the respawn location are offscreen
@@ -25,7 +49,7 @@ namespace BearGame
             : base(world)
         {
             this.Health = Settings.Person_HealthDefault;
-            this.Love = Settings.Person_Love;
+            this.Love = Settings.Person_InitialLove;
             this.TricycleLove = Settings.Person_TricycleLove;
             this.HealthRegen = Settings.Person_HealthRegen;
             this.Speed = Settings.Person_Speed;

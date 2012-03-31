@@ -10,9 +10,14 @@ namespace BearGame
     {
         public bool IsActive { get; protected set; }
 
-        public virtual void Begin(Actor doer, GameTime time)
+        public virtual void OnBegin(Actor doer, GameTime time)
         {
             IsActive = true;
+        }
+
+        public virtual void OnEnd(Actor doer, GameTime time)
+        {
+            IsActive = false;
         }
 
         public virtual void Update(Actor doer, GameTime time)
@@ -51,8 +56,29 @@ namespace BearGame
 
     public class Grab : Interaction
     {
+        Villager _v;
+
         public Grab(Villager villager)
         {
+            _v = villager;
+        }
+
+        public override void OnBegin(Actor doer, GameTime time)
+        {
+            base.OnBegin(doer, time);
+            _v.IsVisible = false;
+        }
+
+        public override void Update(Actor doer, GameTime time)
+        {
+            base.Update(doer, time);
+
+            var dt = time.ElapsedGameTime.TotalSeconds;
+
+            _v.LoveValue -= (float)(dt * _v.Settings.Person_LoveLossDuringHugRate);
+            _v.Health -= (float)(dt * _v.Settings.Person_HealthLossDuringHugRate);
+
+            ((Bear)doer).Health += (float)(dt * _v.Settings.Person_HealthLossDuringHugRate);
         }
     }
 

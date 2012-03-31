@@ -30,7 +30,8 @@ namespace BearGame
         public void BeginInteraction(GameTime time, Interaction inter)
         {
             ActiveInteraction = inter;
-            inter.Begin(this, time);
+            inter.OnBegin(this, time);
+            UpdateSpriteIndex();
         }
 
         public override void Update(GameTime time)

@@ -58,6 +58,8 @@ namespace BearGame
 
         public void Draw(SpriteBatch spriteBatch_IN)
         {
+            if (!IsVisible) return;
+
             Rectangle sourceRec;
 
             var row = spriteIndex / NumColumnsInSpriteTexture;

@@ -25,6 +25,8 @@ namespace BearGame
 
         public Interaction PossibleInteraction { get; private set; }
 
+        public bool IsHugging { get { return ActiveInteraction != null && ActiveInteraction is Grab; } }
+
         public override void Update(GameTime time)
         {
             var now = time.TotalGameTime.TotalSeconds;
@@ -182,7 +184,14 @@ namespace BearGame
 
         protected override void  UpdateSpriteIndex()
         {
-            spriteIndex = 16 * (int)FacingDirection;
+            if (ActiveInteraction != null && ActiveInteraction is Grab)
+            {
+                spriteIndex = 64;
+            }
+            else
+            {
+                spriteIndex = 16 * (int)FacingDirection;
+            }
         }
     }
 }
