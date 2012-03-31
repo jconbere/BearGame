@@ -28,7 +28,7 @@ namespace BearGame
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content\\Sprites";
+            Content.RootDirectory = "Content";
         }
 
         /// <summary>
@@ -56,11 +56,11 @@ namespace BearGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
-            spriteTexture = Content.Load<Texture2D>("firstsprite");
-            firstSprite.initialize(Content.Load<Texture2D>("firstsprite"), new Vector2(0, 0), 0, 64, 64);
+            spriteTexture = Content.Load<Texture2D>("Sprite\\firstsprite");
+            firstSprite.initialize(spriteTexture, new Vector2(0, 0), 0, 64, 64);
 
-            var worldTiles = Content.Load<Texture2D>("WorldTiles");
-            world.Load(worldTiles, "WorldTiles");
+            //var worldTiles = Content.Load<Texture2D>("WorldTiles");
+            //world.Load(worldTiles, "WorldTiles");
             // TODO: use this.Content to load your game content here
         }
 
