@@ -57,7 +57,7 @@ namespace BearGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
             spriteTexture = Content.Load<Texture2D>("firstsprite");
-            firstSprite.initialize(spriteTexture, new Vector2(0,0), 0);
+            firstSprite.initialize(Content.Load<Texture2D>("firstsprite"), new Vector2(0, 0), 0, 64, 64);
 
             var worldTiles = Content.Load<Texture2D>("WorldTiles");
             world.Load(worldTiles, "WorldTiles");
@@ -85,6 +85,7 @@ namespace BearGame
                 this.Exit();
 
             // TODO: Add your update logic here
+            firstSprite.update();
 
             base.Update(gameTime);
         }
