@@ -65,7 +65,7 @@ namespace BearGame
             backgroundMusicInstance = backgroundMusic.CreateInstance();
             backgroundMusicInstance.IsLooped = true;
             backgroundMusicInstance.Volume = 0.125f;
-            //backgroundMusicInstance.Play();
+            backgroundMusicInstance.Play();
 
             current_GameState.LoadContent(GraphicsDevice, Content);
 
@@ -107,7 +107,7 @@ namespace BearGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.Black);
 
             current_GameState.Draw(gameTime);
            

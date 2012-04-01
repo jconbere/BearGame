@@ -127,6 +127,7 @@
     <Compile Include="RandomSound.cs" />
     <Compile Include="SettingsManager.cs" />
     <Compile Include="Tricycle.cs" />
+    <Compile Include="TypingTextScreen.cs" />
     <Compile Include="Villager.cs" />
     <Compile Include="World.cs" />
     <Compile Include="WorldLoveSystem.cs" />
