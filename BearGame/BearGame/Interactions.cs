@@ -73,8 +73,11 @@ namespace BearGame
 
             if (Villager.Health < 1)
             {
-                ((Bear)doer).Health += Villager.Settings.Bear_HealthGainDuringHug;
                 IsActive = false;
+            }
+            else
+            {
+                ((Bear)doer).Health += Villager.Settings.Bear_HealthGainDuringHug;
             }
         }
 
