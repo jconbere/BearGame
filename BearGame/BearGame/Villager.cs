@@ -128,7 +128,7 @@ namespace BearGame
 
                 ApproachDistance = Settings.Person_BaseApproachDistance - (Love - Settings.Person_InitialLove);
 
-                Speed = Speed - (Math.Abs(Settings.Person_InitialLove - Love) * SpeedStep);
+                Speed = Settings.Person_Speed - (Math.Abs(Settings.Person_InitialLove - Love) * SpeedStep);
                 if (Speed < 0.1f)
                 {
                     Speed = 0.1f;
