@@ -125,7 +125,7 @@ namespace BearGame
             base.OnBegin(doer, time);
             Villager.IsVisible = false;
 
-            Villager.Love -= Villager.Settings.Person_LoveLossDuringHug;
+            Villager.ChangeLove(doer.Settings.Person_LoveIncreaseForHoney, time);
             Villager.Health -= Villager.Settings.Person_HealthLossDuringHug;
 
             if (!Villager.IsDead)
@@ -164,7 +164,8 @@ namespace BearGame
             }
             else
             {
-                Villager.Love += doer.Settings.Person_LoveIncreaseForHoney;
+                Villager.ChangeLove(doer.Settings.Person_LoveIncreaseForHoney, time);
+                //Villager.Love += doer.Settings.Person_LoveIncreaseForHoney;
                 Villager.Health += doer.Settings.Person_HealthIncreaseForHoney;
                 honey.IsActive = false;
                 ((Bear)doer).Inventory = null;

@@ -45,6 +45,14 @@ namespace BearGame
             }
         }
 
+        private int prevLove;
+
+        //Emote Display Times
+        public const float prevEmoteTime = 20.0f;
+        public const float nextEmoteTime = 40.0f;
+        public double loveIncreaseTime = 0.0;
+        public float emoteDisplayTime = 0.0f; 
+
         public int HoneyTaken;
         public int HoneyMax;
         public int TricycleLove;
@@ -68,6 +76,7 @@ namespace BearGame
         {
             this.Health = Settings.Person_HealthDefault;
             this.Love = Settings.Person_InitialLove;
+            this.prevLove = this.Love;
             this.TricycleLove = Settings.Person_TricycleLove;
             this.HealthRegen = Settings.Person_HealthRegen;
             this.Speed = Settings.Person_Speed;
@@ -167,6 +176,19 @@ namespace BearGame
             }
             // base update
             UpdateSpriteIndex();
+
+            //Update Emotion Timer
+            /*public const float prevEmoteTime = 0.5f;
+            public const float nextEmoteTime = 2.5f;
+            public double loveIncreaseTime = 0.0;
+            public float emoteDisplayTime = 0.0f; */
+            if (emoteDisplayTime > 0)
+            {
+                emoteDisplayTime -= (float)(time.TotalGameTime.TotalSeconds - loveIncreaseTime);
+            }
+           
+
+
         }
 
         private void Act(GameTime time)
@@ -262,6 +284,17 @@ namespace BearGame
                 return -1;
             } 
         }*/
+
+        public void ChangeLove(int loveValue, GameTime time)
+        {
+            prevLove = Love;
+            Love += loveValue;
+            loveIncreaseTime = time.TotalGameTime.TotalSeconds;
+            emoteDisplayTime = prevEmoteTime + nextEmoteTime;
+            return;
+
+        }
+
         protected override void UpdateSpriteIndex()
         {
             if (!IsDead)
@@ -286,10 +319,22 @@ namespace BearGame
             sourceRec = new Rectangle(col * World.TileSize, row * World.TileSize, World.TileSize, World.TileSize);
             spriteBatch_IN.Draw(SpriteTexture, position, sourceRec, Color.White);
 
-            Vector2 drawPos = this.position;
-            drawPos.Y -= 50;
+            //Draw Emotes
+            if (emoteDisplayTime > 0)
+            {
+                Vector2 drawPos = this.position;
+                drawPos.Y -= 50;
+                if ((emoteDisplayTime) > nextEmoteTime)
+                {
+                    spriteBatch_IN.Draw(emotes, drawPos, new Rectangle(this.prevLove * 64, 0, 64, 64), Color.White);
+                }
+                else
+                {
+                    spriteBatch_IN.Draw(emotes, drawPos, new Rectangle(this.Love * 64, 0, 64, 64), Color.White);
 
-            spriteBatch_IN.Draw(emotes, drawPos, new Rectangle(this.Love * 64, 0, 64, 64), Color.White);
+                }
+                
+            }
             
         }
     }
