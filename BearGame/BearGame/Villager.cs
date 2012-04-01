@@ -49,7 +49,7 @@ namespace BearGame
         public int TricycleLove;
         public int HealthRegen;
         public int Speed;
-        const int ActivityThreshold = 7;  // how far from the bear do we update
+        const int ActivityThreshold = 2;  // how far from the bear do we update
         const int RespawnThreshold = 10;  //how far fro the bear do we put them back in their starting place
 
         // ONLY respawn them if both the villager and the respawn location are offscreen
@@ -114,6 +114,33 @@ namespace BearGame
                     }
                 }*/
                 Vector2 bearDirection = targetDirecton(this, World.Bear);
+                
+                GameSetting.VillagerNames test = this.Name;
+                if (test == GameSetting.VillagerNames.Tania)
+                {
+                    int i = 1;
+                }
+                if (Math.Abs(bearDirection.X) >= ActivityThreshold)
+                {
+                    bearDirection.X = 0;
+                }
+                if (Math.Abs(bearDirection.Y) >= ActivityThreshold)
+                {
+                    bearDirection.Y = 0;
+                }
+                //Move opposite direction of vector
+                if(bearDirection.X != 0){
+                    bearDirection.X = bearDirection.X / Math.Abs(bearDirection.X);
+                }
+                if(bearDirection.Y != 0){
+                    bearDirection.Y = bearDirection.Y / Math.Abs(bearDirection.Y);
+                }
+                //bearDirection.X = bearDirection.X * -1;
+                //bearDirection.Y = bearDirection.Y * -1;
+                if ((time.TotalGameTime.TotalSeconds - LastMoveTime) > (0.5))
+                {
+                    MoveCell(time, new CellPosition((int)bearDirection.X, (int)bearDirection.Y));
+                }
 
             }
             // base update
@@ -122,7 +149,7 @@ namespace BearGame
 
         private void Act(GameTime time)
         {
-
+            /*
             int DeltaRow = 0;
             int DeltaCol = 0;
             int winningindex = 0;
@@ -191,7 +218,7 @@ namespace BearGame
                     UpdateSpriteIndex();
                     break;
 
-            }
+            }*/
         }
 
         private double EvalWeight(int Col, int Row, Bear bear, int DeltaCol, int DeltaRow)
