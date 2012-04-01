@@ -375,8 +375,28 @@ namespace BearGame
             var col = spriteIndex - row * NumColumnsInSpriteTexture;
 
             sourceRec = new Rectangle(col * World.TileSize, row * World.TileSize, World.TileSize, World.TileSize);
-            spriteBatch_IN.Draw(SpriteTexture, position, sourceRec, Color.White);
+            Color villagerColor = Color.White;
+            
+            switch (World.AllVillagers.IndexOf(this))
+            {
+                case 0:
+                    villagerColor = Color.Blue;
+                    break;
+                case 1:
+                    villagerColor = Color.Red;
+                    break;
+                case 2:
+                    villagerColor = Color.Green;
+                    break;
+                case 3:
+                    villagerColor = Color.Yellow;
+                    break;
+                default:
+                    break;
 
+            }
+            spriteBatch_IN.Draw(SpriteTexture, position, sourceRec, villagerColor);
+            
             //Draw Emotes
             if (emoteDisplayTime > 0)
             {
