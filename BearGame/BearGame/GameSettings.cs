@@ -49,12 +49,12 @@ namespace BearGame
         public int Person_HealthIncreaseForHoney = 1;
 
         public int Person_LoveMin = 0;
-        public int Person_LoveMax = 6;
+        public int Person_LoveMax = 7;
         public int Person_InitialLove = 3;
         public float Person_Speed = 1.0f; //How many seconds before moving
         public float Person_SpeedStep = 0.2f; //Decreases this many seconds before moving for each love from initial
         public int Person_ActivityThreshold = 2; // # of tiles person will run away/to bear
-        public int Person_BaseApproachDistance = 3; //How Close a Person will get to the bear initially
+        public int Person_BaseApproachDistance = 4; //How Close a Person will get to the bear initially
 
         public int Person_TricycleLove = 1;
         

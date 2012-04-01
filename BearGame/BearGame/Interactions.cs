@@ -160,7 +160,7 @@ namespace BearGame
 
             if (Villager.IsDead || !Villager.IsActive)
             {
-                IsActive = false;
+                //IsActive = false;
             }
             else
             {
@@ -169,6 +169,7 @@ namespace BearGame
                 honey.IsActive = false;
                 honey.IsVisible = false;
                 PersonThanksSound.Play();
+                IsActive = false;
             }
         }
     }
