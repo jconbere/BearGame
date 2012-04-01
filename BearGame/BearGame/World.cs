@@ -186,10 +186,16 @@ namespace BearGame
                     return new Rectangle(0, 0, TileSize, TileSize);
                 case 'T':
                     return new Rectangle(TileSize, 0, TileSize, TileSize);
+                case 'B':
+                    return new Rectangle(3 * TileSize, 0, TileSize, TileSize);
                 case 'W':
-                    return new Rectangle(2*TileSize, 0, TileSize, TileSize);
+                    return new Rectangle(4 * TileSize, 0, TileSize, TileSize);
+                case 'S':
+                    return new Rectangle(5 * TileSize, 0, TileSize, TileSize);
+                case 'A':
+                    return new Rectangle(6 * TileSize, 0, TileSize, TileSize);
                 default:
-                    return new Rectangle(3*TileSize, 0, TileSize, TileSize);
+                    return new Rectangle(7 * TileSize, 0, TileSize, TileSize);
             }
         }
 
@@ -204,7 +210,7 @@ namespace BearGame
             var raster = new RasterizerState();
             raster.ScissorTestEnable = true;
 
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default, raster, null, tx);
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.AnisotropicClamp, DepthStencilState.Default, raster, null, tx);
 
             spriteBatch.GraphicsDevice.ScissorRectangle = frame;
 

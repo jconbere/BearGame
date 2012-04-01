@@ -79,6 +79,7 @@ namespace BearGame
         {
             Villager.HurtSound = new RandomSound(Content, "Audio\\person_hurt_01", "Audio\\person_hurt_02", "Audio\\person_hurt_03", "Audio\\person_hurt_04", "Audio\\person_hurt_05");
             Villager.HurtBadSound = new RandomSound(Content, "Audio\\person_hurt_bad_03", "Audio\\person_hurt_bad_04", "Audio\\person_hurt_bad_05", "Audio\\person_hurt_bad_06");
+            Villager.DeadSound = new RandomSound(Content, "Audio\\spine_crunch_01", "Audio\\spine_crunch_02", "Audio\\spine_crunch_03");
             TakeHoney.PickUpHoneySound = new RandomSound(Content, "Audio\\bear_pick_up_honey_02");
             EatHoney.EatHoneySound = new RandomSound(Content, "Audio\\bear_eat_honey_02");
             GiveHoney.PersonThanksSound = new RandomSound(Content, "Audio\\person_thanks_01", "Audio\\person_thanks_02");
@@ -88,7 +89,7 @@ namespace BearGame
             Bear.PersonAwwSound = new RandomSound(Content, "Audio\\person_aww_03", "Audio\\person_aww_04");
             Bear.FootstepSound = new RandomSound(Content, 0.5f, "Audio\\footstep_01", "Audio\\footstep_02", "Audio\\footstep_03", "Audio\\footstep_04", "Audio\\footstep_05");
             //Bear.DragSound = new RandomSound(Content, "Audio\\dragging_01", "Audio\\dragging_02", "Audio\\dragging_03");
-            Bear.DragSound = new RandomSound(Content, "Audio\\spine_crunch_02");
+            Bear.DragSound = new RandomSound(Content, 0.5f, "Audio\\thump_03");
             Bear.TrikeSound = new RandomSound(Content, "Audio\\tricycle_squeak_01", "Audio\\tricycle_squeak_02", "Audio\\tricycle_squeak_03", "Audio\\tricycle_squeak_04", "Audio\\tricycle_squeak_05");
             Entity.emotes = Content.Load<Texture2D>("Sprites\\Emotes");
 
