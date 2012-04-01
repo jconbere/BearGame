@@ -9,6 +9,7 @@ namespace BearGame
 {
     public class Villager : Actor
     {
+        Random _rand;
         static List<CellPosition> Pathfind_Nodes;
         int _health;
         public bool isHugging = false;
@@ -104,6 +105,7 @@ namespace BearGame
                               };
 
             Pathfind_Nodes = new List<CellPosition>(nodes);
+            _rand = new Random();
 
         }
 
@@ -133,7 +135,7 @@ namespace BearGame
 
                 ApproachDistance = Settings.Person_BaseApproachDistance - (Love - Settings.Person_InitialLove);
 
-                Speed = Speed - (Math.Abs(Settings.Person_InitialLove - Love) * SpeedStep);
+                Speed = Settings.Person_Speed - (Math.Abs(Settings.Person_InitialLove - Love) * SpeedStep);
                 if (Speed < 0.1f)
                 {
                     Speed = 0.1f;
@@ -168,15 +170,19 @@ namespace BearGame
 
                 if ((time.TotalGameTime.TotalSeconds - LastMoveTime) > (Speed))
                 {
-                    //Check for Hug
-                    if (Love == Settings.Person_LoveMax)
+                    //Check for 
+                    if (bearDirection.X == 0 && bearDirection.Y == 0)
                     {
-                        if (bearDirection.X == 0 && bearDirection.Y == 0)
+                        if (Love == Settings.Person_LoveMax)
                         {
                             //on bear initiate hugging
                             isHugging = true;
                         }
-
+                        else
+                        {
+                            bearDirection.X = _rand.Next(2);
+                            bearDirection.Y = _rand.Next(2);
+                        }
                     }
 
                     //Make move 1 square
