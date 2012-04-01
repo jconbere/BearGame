@@ -601,14 +601,12 @@
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
-  
-<ItemGroup>
+  <ItemGroup>
     <Compile Include="UI\UI_BearAngry.png">
       <Name>UI_BearAngry</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-
     <Compile Include="UI\UI_BearCute.png">
       <Name>UI_BearCute</Name>
       <Importer>TextureImporter</Importer>
@@ -635,6 +633,13 @@
   <ItemGroup>
     <Compile Include="Audio\spine_crunch_03.wav">
       <Name>spine_crunch_03</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Audio\beehive_buzz_01.wav">
+      <Name>beehive_buzz_01</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
