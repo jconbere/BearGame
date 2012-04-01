@@ -73,8 +73,21 @@ namespace BearGame
         }
     }
 
-    public class AchievementUnlockedDaredevil : Interaction
+    public class Daredevil : Interaction
     {
+        public override void OnBegin(Actor doer, GameTime time)
+        {
+            base.OnBegin(doer, time);
+
+            var bear = (Bear)doer;
+            var a = bear.Achievements.OfType<DaredevilAchievement>().FirstOrDefault();
+            if (a == null)
+            {
+                bear.Achievements.Add(a);
+                a.Begin();
+            }
+            IsActive = false;
+        }
     }
 
     public class RideTricycle : Interaction

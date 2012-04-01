@@ -197,7 +197,7 @@ namespace BearGame
                 }
                 else if (Inventory is Tricycle)
                 {
-                    return new AchievementUnlockedDaredevil();
+                    return new Daredevil();
                 }
                 else
                 {
