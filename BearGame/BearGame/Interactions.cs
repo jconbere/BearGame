@@ -128,6 +128,7 @@ namespace BearGame
             base.OnBegin(doer, time);
             var bear = (Bear)doer;
             bear.Inventory.c_position = doer.c_position;
+            bear.Inventory.Position = doer.c_position.ToPixelPosition();
             bear.Inventory.IsVisible = true;
             bear.Inventory = null;            
             GetOffSound.Play();

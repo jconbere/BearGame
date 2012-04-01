@@ -708,8 +708,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="SplashUI\endsplash_lose3.png">
-      <Name>endsplash_lose3</Name>
+    <Compile Include="UI\contextsheet.png">
+      <Name>contextsheet</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -772,6 +772,18 @@
     </Compile>
     <Compile Include="SplashUI\Splash_Werenotused.png">
       <Name>Splash_Werenotused</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Audio\bear_desperate_whining_03.wav">
+      <Name>bear_desperate_whining_03</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SplashUI\endsplash_lose3.png">
+      <Name>endsplash_lose3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
