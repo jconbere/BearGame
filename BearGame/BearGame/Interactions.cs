@@ -192,7 +192,14 @@ namespace BearGame
 
     public class RunOver : Interaction
     {
+        public Villager Villager { get; private set; }
+
         public static RandomSound TricycleBodyImpactSound;
+
+        public RunOver(Villager villager)
+        {
+            Villager = villager;
+        }
 
         public override void OnBegin(Actor doer, GameTime time)
         {
@@ -200,6 +207,9 @@ namespace BearGame
             TricycleBodyImpactSound.Play();
             var bear = (Bear)doer;
             bear.AddAchievement(time, new JerkAchievement());
+
+            Villager.Health -= bear.Settings.Person_HealthDecreaseForRunOver;
+
             IsActive = false;
         }
     }

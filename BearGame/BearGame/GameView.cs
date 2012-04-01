@@ -80,6 +80,10 @@ namespace BearGame
             _uibearcuteTexture = content.Load<Texture2D>("UI\\UI_BearCute");
             _uibearangryTexture = content.Load<Texture2D>("UI\\UI_BearAngry");
             _uibearnormTexture = content.Load<Texture2D>("UI\\UI_BearNorm");
+
+            //Achievement
+            DaredevilAchievement.DaredevilTexture = content.Load<Texture2D>("Achievements\\Ach_DareDevil");
+            JerkAchievement.JerkTexture = content.Load<Texture2D>("Achievements\\Ach_Jerk");
         }
 
         public void Update(GameTime time)
@@ -191,6 +195,11 @@ namespace BearGame
             _uiBatch.Begin();
 
             _uiBatch.Draw(_vignetteTexture, worldRect, Color.White);
+
+            foreach (var a in _world.Bear.Achievements)
+            {
+                a.Draw(_uiBatch);
+            }
 
             _uiBatch.End();
         }
