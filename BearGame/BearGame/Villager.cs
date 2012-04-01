@@ -201,43 +201,35 @@ namespace BearGame
                         if (!World.IsPassable(this.c_position + newPos))
                         {
                             int indexOf = Pathfind_Nodes.FindIndex(i => i.Row == newPos.Row && i.Col == newPos.Col);
-                            if (indexOf >= 0)
+                            int currentIndex = indexOf;
+                            for (int i = 0; i < 4; i++)
                             {
-                                int currentIndex = indexOf;
-                                for (int i = 1; i <= 4; i++)
+                                newPos = Pathfind_Nodes[(indexOf + i) % 8];
+                                if (World.IsPassable(this.c_position + newPos))
                                 {
-                                    newPos = Pathfind_Nodes[(indexOf + i) % 7];
-                                    if (World.IsPassable(this.c_position + newPos))
-                                    {
-                                        break;
-                                    }
+                                    break;
+                                }
 
-                                    newPos = Pathfind_Nodes[(indexOf - i) % 7];
-                                    if (World.IsPassable(this.c_position + newPos))
-                                    {
-                                        break;
-                                    }
+                                newPos = Pathfind_Nodes[(indexOf + i + 4) % 8];
+                                if (World.IsPassable(this.c_position + newPos))
+                                {
+                                    break;
                                 }
                             }
-                            else
-                            {
-                                // TODO: John, handle this case, ask Avery
-                            }
-                        }
-
-                        MoveCell(time, newPos);
-
-                        if (newPos.Row > 0)
-                        {
-                            FacingDirection = Direction.Right;
-                        }
-                        else
-                        {
-                            FacingDirection = Direction.Left;
                         }
                     }
-                }
 
+                    MoveCell(time, newPos);
+
+                    if (newPos.Row > 0)
+                    {
+                        FacingDirection = Direction.Right;
+                    }
+                    else
+                    {
+                        FacingDirection = Direction.Left;
+                    }
+                }
             }
             // base update
             UpdateSpriteIndex();
@@ -384,7 +376,7 @@ namespace BearGame
             sourceRec = new Rectangle(col * World.TileSize, row * World.TileSize, World.TileSize, World.TileSize);
             Color villagerColor = Color.White;
             
-            switch (World.AllVillagers.IndexOf(this))
+            /*switch (World.AllVillagers.IndexOf(this))
             {
                 case 0:
                     villagerColor = Color.Blue;
@@ -401,7 +393,7 @@ namespace BearGame
                 default:
                     break;
 
-            }
+            }*/
             spriteBatch_IN.Draw(SpriteTexture, position, sourceRec, villagerColor);
             
             //Draw Emotes
