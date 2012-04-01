@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BearGame
 {
@@ -61,7 +62,7 @@ namespace BearGame
 
         public static RandomSound HurtSound;
         public static RandomSound HurtBadSound;
-        
+
         public Villager(World world)
             : base(world)
         {
@@ -271,6 +272,25 @@ namespace BearGame
             {
                 spriteIndex = 96;
             }
+        }
+
+        public override void Draw(SpriteBatch spriteBatch_IN)
+        {
+            if (!IsVisible) return;
+
+            Rectangle sourceRec;
+
+            var row = spriteIndex / NumColumnsInSpriteTexture;
+            var col = spriteIndex - row * NumColumnsInSpriteTexture;
+
+            sourceRec = new Rectangle(col * World.TileSize, row * World.TileSize, World.TileSize, World.TileSize);
+            spriteBatch_IN.Draw(SpriteTexture, position, sourceRec, Color.White);
+
+            Vector2 drawPos = this.position;
+            drawPos.Y -= 50;
+
+            spriteBatch_IN.Draw(emotes, drawPos, new Rectangle(this.Love * 64, 0, 64, 64), Color.White);
+            
         }
     }
 }

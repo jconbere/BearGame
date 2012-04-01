@@ -9,12 +9,14 @@ namespace BearGame
 {
     public class Entity
     {
-        Texture2D SpriteTexture;
-        int NumColumnsInSpriteTexture;
+        protected Texture2D SpriteTexture;
+        public static Texture2D emotes;
+
+        protected int NumColumnsInSpriteTexture;
 
         protected int spriteIndex = 0;
 
-        Vector2 position;
+        protected Vector2 position;
         CellPosition _c_position;
         public CellPosition c_position
         {
@@ -74,7 +76,7 @@ namespace BearGame
         {
         }
 
-        public void Draw(SpriteBatch spriteBatch_IN)
+        public virtual void Draw(SpriteBatch spriteBatch_IN)
         {
             if (!IsVisible) return;
 
@@ -85,6 +87,7 @@ namespace BearGame
 
             sourceRec = new Rectangle(col * World.TileSize, row * World.TileSize, World.TileSize, World.TileSize);
             spriteBatch_IN.Draw(SpriteTexture, position, sourceRec, Color.White);
+
         }
 
         protected Vector2 targetDirecton(Actor baseActor, Actor targetActor){

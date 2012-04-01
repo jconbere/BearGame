@@ -72,6 +72,7 @@ namespace BearGame
             RideTricycle.GetOnSound = new RandomSound(Content, "Audio\\bear_get_on_off_tricycle_03");
             GetOffTricycle.GetOffSound = new RandomSound(Content, "Audio\\bear_get_on_off_tricycle_03");
             Bear.PersonAwwSound = new RandomSound(Content, "Audio\\person_aww_03", "Audio\\person_aww_04");
+            Entity.emotes = Content.Load<Texture2D>("Sprites\\Emotes");
 
             view.LoadContent(GraphicsDevice, Content);
 
