@@ -69,6 +69,11 @@ namespace BearGame
             spriteBatch_IN.Draw(SpriteTexture, position, sourceRec, Color.White);
         }
 
+        protected Vector2 targetDirecton(Actor baseActor, Actor targetActor)
+        {
+            return new Vector2(baseActor.c_position.Row - targetActor.c_position.Row, baseActor.c_position.Col - targetActor.c_position.Col);
+        }
+
         protected int Distance(Actor Actor1, Actor Actor2)
         {
             return Math.Max(Math.Abs(Actor1.c_position.Row - Actor2.c_position.Row), Math.Abs(Actor1.c_position.Col - Actor2.c_position.Col));

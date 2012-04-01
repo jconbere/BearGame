@@ -75,6 +75,7 @@ namespace BearGame
 
             if (!IsDead)
             {
+                /*
                 if ((Distance(World.Bear, this) >= RespawnThreshold) &&
                             (Math.Abs(World.Bear.c_position.Row - this.spawn_position.Row) > 6 ||
                             Math.Abs(World.Bear.c_position.Col - this.spawn_position.Col) > 6)) // assuming 6 visual radius
@@ -92,7 +93,9 @@ namespace BearGame
                     {
                         Act(time);
                     }
-                }
+                }*/
+                Vector2 bearDirection = targetDirecton(this, World.Bear);
+
             }
             // base update
             UpdateSpriteIndex();

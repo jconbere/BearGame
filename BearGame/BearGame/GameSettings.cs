@@ -41,14 +41,14 @@ namespace BearGame
         public int Person_HealthDefault = 3;
 
         public int Person_HealthLossDuringHug = 1;
-        public int Person_LoveLossDuringHug = 1;
+        public int Person_LoveLossDuringHug = 2;
 
         public int Person_HealthRegen = 0;
         public int Person_HoneyWantedMin = 1;
         public int Person_HoneyWantedMax = 7;
 
         public int Person_LoveMin = 0;
-        public int Person_LoveMax = 7;
+        public int Person_LoveMax = 6;
         public int Person_InitialLove = 3;
         public int Person_Speed = 1;
         
