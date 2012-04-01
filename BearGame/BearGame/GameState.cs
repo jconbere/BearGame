@@ -19,11 +19,6 @@ namespace BearGame
         {
             requestedState = -1;
         }
-        public virtual void Initialize()
-        {
-
-        }
-
         public virtual void Initialize(GameTime gameTime)
         {
 
@@ -133,11 +128,63 @@ namespace BearGame
         }
     }
 
+    class Title : GameState
+    {
+        SpriteBatch _uiBatch;
+        Texture2D splashScreen;
+
+        const double GameStateDelay = 0.2;
+        double entryGameTime = 0.0f;
+
+        public Title()
+        {
+            requestedState = -1;
+        }
+
+        public override void Initialize(GameTime gameTime)
+        {
+            entryGameTime = gameTime.TotalGameTime.TotalSeconds;
+        }
+
+        public override void LoadContent(GraphicsDevice graphics, ContentManager Content)
+        {
+            _uiBatch = new SpriteBatch(graphics);
+
+            splashScreen = Content.Load<Texture2D>("SplashUI\\introsplash");
+        }
+
+        public override void UnloadContent(ContentManager Content)
+        {
+            requestedState = -1;
+            //Content.Unload();
+        }
+        public override void Update(GameTime gameTime)
+        {
+            var keyState = Keyboard.GetState();
+
+            //If any keys pressed
+            if (keyState.GetPressedKeys().Count<Keys>() > 0)
+            {
+                if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay)
+                {
+                    requestedState = 2;
+                }
+            }
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+                // draw final splash
+                _uiBatch.Begin();
+                _uiBatch.Draw(splashScreen, new Rectangle(0, 0, 800, 600), Color.White);
+                _uiBatch.End();
+        }
+    }
+
     class Intro : GameState
     {
         SpriteBatch _uiBatch;
         SpriteFont introFont;
-        Texture2D splashScreen;
         const double GameStateDelay = 0.2;
         double entryGameTime = 0.0f;
 
@@ -149,16 +196,13 @@ namespace BearGame
             requestedState = -1;
         }
 
-        public override void Initialize()
+        public override void Initialize(GameTime gameTime)
         {
             typingTextScreens = new List<TypingTextScreen>();
             currentTextScreenIndex = 0;
-        }
 
-        public override void Initialize(GameTime gameTime)
-        {
             entryGameTime = gameTime.TotalGameTime.TotalSeconds;
-            
+
             typingTextScreens = new List<TypingTextScreen>();
             currentTextScreenIndex = 0;
         }
@@ -166,8 +210,6 @@ namespace BearGame
         public override void LoadContent(GraphicsDevice graphics, ContentManager Content)
         {
             _uiBatch = new SpriteBatch(graphics);
-
-            splashScreen = Content.Load<Texture2D>("SplashUI\\introsplash");
 
             // make me a font for the intro
             introFont = Content.Load<SpriteFont>("UI\\UIFont");
@@ -189,7 +231,7 @@ namespace BearGame
             //If any keys pressed
             if (keyState.GetPressedKeys().Count<Keys>() > 0)
             {
-                if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay || entryGameTime == 0.0)
+                if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay)
                 {
                     requestedState = 1;
                 }
@@ -213,16 +255,6 @@ namespace BearGame
                 //call the appropriate textypingscreen (from the list); pass the uiBatch!)
                 typingTextScreens.ElementAt(currentTextScreenIndex).Render(gameTime, _uiBatch);
             }
-            else
-            {
-                // draw final splash
-                _uiBatch.Begin();
-                _uiBatch.Draw(splashScreen, new Rectangle(0, 0, 800, 600), Color.White);
-                _uiBatch.End();
-            }
-
-
-
         }
     }
 
