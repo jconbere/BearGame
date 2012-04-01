@@ -49,8 +49,9 @@ namespace BearGame
         public int TricycleLove;
         public int HealthRegen;
         public float Speed = 1.0f;
-        int ActivityThreshold = 2;  // how far from the bear do we update
-        public float SpeedStep = 0.2f;
+        int ActivityThreshold;  // how far from the bear do we run away/follow
+        public float SpeedStep;
+        public int ApproachDistance;
         //const int RespawnThreshold = 10;  //how far fro the bear do we put them back in their starting place
 
         // ONLY respawn them if both the villager and the respawn location are offscreen
@@ -71,6 +72,7 @@ namespace BearGame
             this.Speed = Settings.Person_Speed;
             this.SpeedStep = Settings.Person_SpeedStep;
             this.ActivityThreshold = Settings.Person_ActivityThreshold;
+            this.ApproachDistance = Settings.Person_BaseApproachDistance;
             this.Name = (GameSetting.VillagerNames)world.AllVillagers.Count;
             this.IsActive = true;
 
@@ -120,51 +122,42 @@ namespace BearGame
 
                 Vector2 bearDirection = targetDirecton(this, World.Bear);
 
-                ActivityThreshold = Settings.Person_LoveMax - Settings.Person_InitialLove;
+                ApproachDistance = Settings.Person_BaseApproachDistance - (Love - Settings.Person_InitialLove);
+
                 Speed = Speed - (Math.Abs(Settings.Person_InitialLove - Love) * SpeedStep);
-                if (Math.Abs(bearDirection.X) >= ActivityThreshold)
+                if (Math.Abs(bearDirection.X) > ActivityThreshold)
                 {
                     bearDirection.X = 0;
                 }
-                if (Math.Abs(bearDirection.Y) >= ActivityThreshold)
+                if (Math.Abs(bearDirection.Y) > ActivityThreshold)
                 {
                     bearDirection.Y = 0;
                 }
-                //Move opposite direction of vector
-                if(bearDirection.X != 0){
-                    bearDirection.X = bearDirection.X / Math.Abs(bearDirection.X);
-                }
-                if(bearDirection.Y != 0){
-                    bearDirection.Y = bearDirection.Y / Math.Abs(bearDirection.Y);
-                }
-
-                /*switch (Love)
-                {
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                        break;
-                    case 4:
-                        bearDirection.X = bearDirection.X * -1;
-                        bearDirection.Y = bearDirection.Y * -1;
-                        break;
-                    case 5:
-                        bearDirection.X = bearDirection.X * -1;
-                        bearDirection.Y = bearDirection.Y * -1;
-                        break;
-                    case 6:
-                        bearDirection.X = bearDirection.X * -1;
-                        bearDirection.Y = bearDirection.Y * -1;
-                        break;
-
-
-                }*/
+               
                 if (Love > Settings.Person_InitialLove)
                 {
+                    if (Math.Abs(bearDirection.X) < ApproachDistance)
+                    {
+                        bearDirection.X = 0;
+                    }
+                    if (Math.Abs(bearDirection.Y) < ApproachDistance)
+                    {
+                        bearDirection.Y = 0;
+                    }
                     bearDirection.X = bearDirection.X * -1;
                     bearDirection.Y = bearDirection.Y * -1;
                 }
+
+                //Make move 1 square
+                if (bearDirection.X != 0)
+                {
+                    bearDirection.X = bearDirection.X / Math.Abs(bearDirection.X);
+                }
+                if (bearDirection.Y != 0)
+                {
+                    bearDirection.Y = bearDirection.Y / Math.Abs(bearDirection.Y);
+                }
+
                 if ((time.TotalGameTime.TotalSeconds - LastMoveTime) > (Speed))
                 {
                     MoveCell(time, new CellPosition((int)bearDirection.X, (int)bearDirection.Y));
