@@ -87,7 +87,8 @@ namespace BearGame
             
             Bear.PersonAwwSound = new RandomSound(Content, "Audio\\person_aww_03", "Audio\\person_aww_04");
             Bear.FootstepSound = new RandomSound(Content, "Audio\\footstep_01", "Audio\\footstep_02", "Audio\\footstep_03", "Audio\\footstep_04", "Audio\\footstep_05");
-            Bear.DragSound = new RandomSound(Content, "Audio\\dragging_01", "Audio\\dragging_02", "Audio\\dragging_03");
+            //Bear.DragSound = new RandomSound(Content, "Audio\\dragging_01", "Audio\\dragging_02", "Audio\\dragging_03");
+            Bear.DragSound = new RandomSound(Content, "Audio\\spine_crunch_02");
             Bear.TrikeSound = new RandomSound(Content, "Audio\\tricycle_squeak_01", "Audio\\tricycle_squeak_02", "Audio\\tricycle_squeak_03", "Audio\\tricycle_squeak_04", "Audio\\tricycle_squeak_05");
             Entity.emotes = Content.Load<Texture2D>("Sprites\\Emotes");
 

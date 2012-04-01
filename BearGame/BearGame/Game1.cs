@@ -109,7 +109,7 @@ namespace BearGame
             GraphicsDevice.Clear(Color.White);
 
             current_GameState.Draw(gameTime);
-
+           
             base.Draw(gameTime);
         }
 
