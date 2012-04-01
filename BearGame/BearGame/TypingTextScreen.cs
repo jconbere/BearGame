@@ -82,7 +82,7 @@ namespace BearGame
                 return;
 
             //add time since last frame to totalTime
-            totalTime += gameTime.ElapsedGameTime.Milliseconds;
+            totalTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             //check if intervall is reached
             if (totalTime >= intervall)

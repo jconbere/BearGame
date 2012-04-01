@@ -109,6 +109,14 @@ namespace BearGame
 
         }
 
+        protected override double TransitionInterval
+        {
+            get
+            {
+                return 1.0 / 2;
+            }
+        }
+
         public override void Update(GameTime time)
         {
             base.Update(time);
