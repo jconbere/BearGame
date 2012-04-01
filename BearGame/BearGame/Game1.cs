@@ -46,17 +46,14 @@ namespace BearGame
         /// </summary>
         protected override void Initialize()
         {
-            GameState mainState = new MainGame();
-            gameStates.Add(mainState);
-            current_GameState = mainState;         
-
             gameStates.Add(new Intro());
-
+            gameStates.Add(new MainGame());
+            gameStates.Add(new End());
             foreach (GameState state in gameStates)
             {
                 state.Initialize();
             }
-            switchGameStates(1);
+            current_GameState = gameStates.First<GameState>();
 
             base.Initialize();
         }
@@ -74,21 +71,7 @@ namespace BearGame
             backgroundMusicInstance.Play();
 
             current_GameState.LoadContent(GraphicsDevice, Content);
-            /*
-            Villager.HurtSound = new RandomSound(Content, "Audio\\person_hurt_01", "Audio\\person_hurt_02", "Audio\\person_hurt_03", "Audio\\person_hurt_04", "Audio\\person_hurt_05");
-            Villager.HurtBadSound = new RandomSound(Content, "Audio\\person_hurt_bad_03", "Audio\\person_hurt_bad_04", "Audio\\person_hurt_bad_05", "Audio\\person_hurt_bad_06");
-            TakeHoney.PickUpHoneySound = new RandomSound(Content, "Audio\\bear_pick_up_honey_02");
-            EatHoney.EatHoneySound = new RandomSound(Content, "Audio\\bear_eat_honey_02");
-            GiveHoney.PersonThanksSound = new RandomSound(Content, "Audio\\person_thanks_01", "Audio\\person_thanks_02");
-            RideTricycle.GetOnSound = new RandomSound(Content, "Audio\\bear_get_on_off_tricycle_03");
-            GetOffTricycle.GetOffSound = new RandomSound(Content, "Audio\\bear_get_on_off_tricycle_03");
-            Bear.PersonAwwSound = new RandomSound(Content, "Audio\\person_aww_03", "Audio\\person_aww_04");
-            Entity.emotes = Content.Load<Texture2D>("Sprites\\Emotes");
 
-            view.LoadContent(GraphicsDevice, Content);
-
-            var worldTiles = Content.Load<Texture2D>("Sprites\\WorldTiles");
-            world.LoadContent(GraphicsDevice, Content, 1);*/
         }
 
         /// <summary>
@@ -111,12 +94,11 @@ namespace BearGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            //world.Update(gameTime);
             current_GameState.Update(gameTime);
 
             if (current_GameState.requestedState >= 0)
             {
-                switchGameStates(current_GameState.requestedState);
+                switchGameStates(current_GameState.requestedState, gameTime);
             }
 
             base.Update(gameTime);
@@ -136,13 +118,14 @@ namespace BearGame
             base.Draw(gameTime);
         }
 
-        protected void switchGameStates(int index)
+        protected void switchGameStates(int index, GameTime gameTime)
         {
             //Unload Stuff from current state
-            current_GameState.UnloadContent();
+            current_GameState.UnloadContent(Content);
 
             //Start Up new State
             current_GameState = gameStates.ElementAt<GameState>(index);
+            current_GameState.Initialize(gameTime);
             current_GameState.LoadContent(GraphicsDevice, Content);
 
 

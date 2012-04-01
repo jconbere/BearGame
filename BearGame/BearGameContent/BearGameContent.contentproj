@@ -451,8 +451,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Intro\introsplash.png">
+    <Compile Include="SplashUI\introsplash.png">
       <Name>introsplash</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SplashUI\endsplash_win.png">
+      <Name>endsplash_win</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="SplashUI\endsplash_lose.png">
+      <Name>endsplash_lose</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
