@@ -43,14 +43,10 @@ namespace BearGame
         protected override void Initialize()
         {
             gameStates.Add(new Intro());
+            gameStates.Add(new Title());
             gameStates.Add(new MainGame());
             gameStates.Add(new End());
             gameStates.Add(new EndWin());
-            foreach (GameState state in gameStates)
-            {
-                state.Initialize();
-            }
-            current_GameState = gameStates.First<GameState>();
 
             base.Initialize();
         }
@@ -66,9 +62,6 @@ namespace BearGame
             backgroundMusicInstance.IsLooped = true;
             backgroundMusicInstance.Volume = 0.125f;
             backgroundMusicInstance.Play();
-
-            current_GameState.LoadContent(GraphicsDevice, Content);
-
         }
 
         /// <summary>
@@ -87,6 +80,11 @@ namespace BearGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            if (current_GameState == null)
+            {
+                switchGameStates(0, gameTime);
+            }
+
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
@@ -117,7 +115,10 @@ namespace BearGame
         protected void switchGameStates(int index, GameTime gameTime)
         {
             //Unload Stuff from current state
-            current_GameState.UnloadContent(Content);
+            if (current_GameState != null)
+            {
+                current_GameState.UnloadContent(Content);
+            }
 
             //Start Up new State
             current_GameState = gameStates.ElementAt<GameState>(index);
