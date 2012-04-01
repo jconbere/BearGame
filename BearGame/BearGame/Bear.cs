@@ -11,13 +11,16 @@ namespace BearGame
 {
     public class Bear : Actor
     {
+        Random _rand;
+
         public static RandomSound FootstepSound;
         public static RandomSound DragSound;
         public static RandomSound TrikeSound;
         public static RandomSound bearGruntSound;
+        public static RandomSound bearHappySound;
 
         private double lastsoundplay = 0;
-        const double sounddelay = 5;
+        const double sounddelay = 500;
         public static int currentFrame = 0;
         double frameSpeed
         {
@@ -49,6 +52,8 @@ namespace BearGame
             this.Health = Settings.Bear_HealthDefault;
             FacingDirection = Direction.Down;
             Achievements = new List<Achievement>();
+
+            _rand = new Random();
         }
 
         public List<Achievement> Achievements { get; private set; }
@@ -135,10 +140,18 @@ namespace BearGame
 
             var now = time.TotalGameTime.TotalSeconds;
 
-            if (now - lastsoundplay > sounddelay)
+            if (now - lastsoundplay > sounddelay * _rand.NextDouble())
             {
-                bearGruntSound.Play();
                 lastsoundplay = now;
+
+                if (Health / Settings.Bear_HealthMax < 0.5)
+                {
+                    bearGruntSound.Play();
+                }
+                else if (Health / Settings.Bear_HealthMax > 0.7)
+                {
+                    bearHappySound.Play();
+                }
             }
             //
             // Movement input
