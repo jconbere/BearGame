@@ -27,8 +27,19 @@ namespace BearGame
 
     public class TakeHoney : Interaction
     {
+        public Honey Honey { get; private set; }
+
         public TakeHoney(Honey honey)
         {
+            Honey = honey;
+        }
+
+        public override void OnBegin(Actor doer, GameTime time)
+        {
+            base.OnBegin(doer, time);
+            ((Bear)doer).Inventory = Honey;
+            Honey.IsVisible = false;
+            Honey.IsActive = false;
         }
     }
 
@@ -36,6 +47,19 @@ namespace BearGame
     {
         public EatHoney()
         {
+        }
+
+        public override void OnBegin(Actor doer, GameTime time)
+        {
+            base.OnBegin(doer, time);
+
+            var bear = (Bear)doer;
+
+            var honey = (Honey)bear.Inventory;
+
+            bear.Inventory = null;
+
+            bear.Health += bear.Settings.Bear_HealthGainForHoney;
         }
     }
 
@@ -86,8 +110,30 @@ namespace BearGame
 
     public class GiveHoney : Interaction
     {
+        public Villager Villager { get; private set; }
+
         public GiveHoney(Villager villager)
         {
+            Villager = villager;
+        }
+
+        public override void OnBegin(Actor doer, GameTime time)
+        {
+            base.OnBegin(doer, time);
+
+            var honey = (Honey)((Bear)doer).Inventory;
+
+            if (Villager.IsDead || !Villager.IsActive)
+            {
+                IsActive = false;
+            }
+            else
+            {
+                Villager.Love += doer.Settings.Person_LoveIncreaseForHoney;
+                Villager.Health += doer.Settings.Person_HealthIncreaseForHoney;
+                honey.IsActive = false;
+                honey.IsVisible = false;
+            }
         }
     }
 

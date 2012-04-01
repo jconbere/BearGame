@@ -22,6 +22,7 @@ namespace BearGame
         public GameSetting Settings { get { return World.Settings; } }
 
         public bool IsVisible { get; set; }
+        public bool IsActive { get; set; }
 
         public Entity(World world)
         {
