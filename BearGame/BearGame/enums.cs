@@ -60,6 +60,13 @@ namespace BearGame
         {
             return new CellPosition(a.Col - b.Col, a.Row - b.Row);
         }
+
+        public double DistanceTo(CellPosition other)
+        {
+            var dc = other.Col - Col;
+            var dr = other.Row - Row;
+            return Math.Sqrt(dc * dc + dr * dr);
+        }
     }
 
     public enum Direction

@@ -15,7 +15,23 @@ namespace BearGame
         protected int spriteIndex = 0;
 
         Vector2 position;
-        public CellPosition c_position;
+        CellPosition _c_position;
+        public CellPosition c_position
+        {
+            get
+            {
+                return _c_position;
+            }
+            set
+            {
+                if (_c_position != value)
+                {
+                    _c_position = value;
+                    position = _c_position.ToPixelPosition();
+                }
+            }
+        }
+
         public CellPosition spawn_position;
 
         public World World { get; private set; }

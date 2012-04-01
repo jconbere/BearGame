@@ -75,19 +75,24 @@ namespace BearGame
         double _lastMoveTime = 0;
         protected double LastMoveTime { get { return _lastMoveTime; } }
 
-        public virtual void MoveCell(GameTime time, CellPosition diff)
+        public void MoveCell(GameTime time, CellPosition diff)
         {
             MoveToCell(time, c_position + diff);
         }
 
-        public virtual void MoveToCell(GameTime time, CellPosition newPos)
+        public void MoveToCell(GameTime time, CellPosition newPos)
         {
             if (World.IsPassable(newPos))
             {
                 c_position = newPos;
                 Position = newPos.ToPixelPosition();
                 _lastMoveTime = time.TotalGameTime.TotalSeconds;
+                OnMove(time);
             }
+        }
+
+        protected virtual void OnMove(GameTime time)
+        {
         }
     }
 }
