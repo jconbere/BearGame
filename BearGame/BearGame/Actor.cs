@@ -16,7 +16,6 @@ namespace BearGame
             set
             {
                 _facingDirection = value;
-                UpdateSpriteIndex();
             }
         }
 
@@ -38,7 +37,6 @@ namespace BearGame
                 ActiveInteraction = null;
             }
 
-            UpdateSpriteIndex();
         }
 
         public void EndInteraction(GameTime time)
@@ -47,7 +45,6 @@ namespace BearGame
             {
                 ActiveInteraction.OnEnd(this, time);
                 ActiveInteraction = null;
-                UpdateSpriteIndex();
             }
         }
 
@@ -70,6 +67,8 @@ namespace BearGame
                     ActiveInteraction = null;
                 }
             }
+            UpdateSpriteIndex();
+
         }
 
         double _lastMoveTime = 0;

@@ -10,6 +10,7 @@ namespace BearGame
         public Honey(World world)
             : base(world)
         {
+            spriteIndex = 0;
         }
 
         protected override void UpdateSpriteIndex()

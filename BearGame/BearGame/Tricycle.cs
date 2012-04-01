@@ -10,6 +10,7 @@ namespace BearGame
         public Tricycle(World world)
             : base (world)
         {
+            spriteIndex = 3;
         }
 
         protected override void UpdateSpriteIndex()

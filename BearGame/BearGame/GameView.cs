@@ -47,7 +47,7 @@ namespace BearGame
             _healthbarTexture = content.Load<Texture2D>("UI\\healthbar");
             _skullTexture = content.Load<Texture2D>("UI\\skull");
             _happyTexture = content.Load<Texture2D>("UI\\happy");
-            _backgroundTexture = content.Load<Texture2D>("UI\\background");
+            _backgroundTexture = content.Load<Texture2D>("UI\\UI_Background");
 
             //Load Villager Health Textures
             _personhealthyTexture = content.Load<Texture2D>("UI\\facesHealthy");

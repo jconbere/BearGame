@@ -47,7 +47,7 @@ namespace BearGame
             World = world;
             IsVisible = true;
             spriteIndex = 0;
-            UpdateSpriteIndex();
+            //UpdateSpriteIndex();
         }
 
         public Vector2 Position

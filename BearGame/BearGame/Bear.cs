@@ -157,6 +157,7 @@ namespace BearGame
             {
                 Health = 0;
             }
+            UpdateSpriteIndex();
         }
 
         public Interaction GetPossibleInteration(Entity obj)
@@ -241,9 +242,18 @@ namespace BearGame
 
         protected override void  UpdateSpriteIndex()
         {
+            
             if (ActiveInteraction != null && ActiveInteraction is Grab)
             {
                 spriteIndex = 64;
+            }
+            else if (Inventory is Honey)
+            {
+                spriteIndex = 12 + (16 * (int)FacingDirection);
+            }
+            else if (Inventory is Tricycle)
+            {
+                spriteIndex = 8 + (16 * (int)FacingDirection);
             }
             else
             {
