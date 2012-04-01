@@ -67,6 +67,11 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
+    <Compile Include="UI\IntroFont.spritefont">
+      <Name>IntroFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Maps\Collisions1.txt">
@@ -601,14 +606,12 @@
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
-  
-<ItemGroup>
+  <ItemGroup>
     <Compile Include="UI\UI_BearAngry.png">
       <Name>UI_BearAngry</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-
     <Compile Include="UI\UI_BearCute.png">
       <Name>UI_BearCute</Name>
       <Importer>TextureImporter</Importer>
