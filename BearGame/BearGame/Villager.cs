@@ -9,6 +9,7 @@ namespace BearGame
 {
     public class Villager : Actor
     {
+        //static List<Vector2> Pathfind_Nodes = new List<Vector2>(new Vector2(0,0));
         int _health;
         public int Health
         {
