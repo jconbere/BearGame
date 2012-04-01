@@ -23,10 +23,10 @@ namespace BearGame
         {
             Josie,
             Frank,
-            Tania,
+            John,
             Avery,
             Dave,
-            John
+            Tania
         }
 
 
@@ -62,11 +62,11 @@ namespace BearGame
         public float Bear_HealthGainDuringHug = 30; // helath per second
         public float Bear_HealthMax = 100;
         public float Bear_HealthMin = 0;
-        public float Bear_HealthPerHoney = 5;
+        public float Bear_HealthPerHoney = 10;
         public float Bear_HealthDefault = 100;
         public float Bear_HealthDecreaseRate = 4; // healths / second
 
-        public float Bear_HealthGainForHoney = 5;
+        public float Bear_HealthGainForHoney = 10;
 
         public double Bear_MoveInterval = 1.0/3; // Seconds
 
