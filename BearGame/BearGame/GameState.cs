@@ -7,15 +7,17 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Input;
 
 namespace BearGame
 {
     class GameState
     {
+        public int requestedState{ get; protected set;} 
 
         public GameState()
         {
-
+            requestedState = -1;
         }
 
 
@@ -42,6 +44,10 @@ namespace BearGame
         {
 
         }
+        public int SwitchStates()
+        {
+            return requestedState;
+        }
     }
 
     class MainGame:GameState
@@ -52,7 +58,7 @@ namespace BearGame
 
         public MainGame()
         {
-
+            requestedState = -1;
         }
 
 
@@ -96,6 +102,59 @@ namespace BearGame
         public override void Draw(GameTime gameTime)
         {
             view.Draw();
+        }
+    }
+
+    class Intro : GameState
+    {
+        /*
+        protected Camera camera;
+        protected World world;
+        protected GameView view;
+         * */
+
+        SpriteBatch _uiBatch;
+        Texture2D splashScreen;
+
+        public Intro()
+        {
+            requestedState = -1;
+        }
+
+
+        public override void Initialize()
+        {
+        }
+
+        public override void LoadContent(GraphicsDevice graphics, ContentManager Content)
+        {
+            _uiBatch = new SpriteBatch(graphics);
+
+            splashScreen = Content.Load<Texture2D>("Intro\\introsplash");
+        }
+
+        public override void UnloadContent()
+        {
+            //Content.Unload();
+        }
+        public override void Update(GameTime gameTime)
+        {
+            var keyState = Keyboard.GetState();
+
+            //If any keys pressed
+            if (keyState.GetPressedKeys().Count<Keys>() > 0)
+            {
+                 requestedState = 0;
+            }
+
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            _uiBatch.Begin();
+            _uiBatch.Draw(splashScreen, new Rectangle(0, 0, 800, 600), Color.White);
+            _uiBatch.End();
+            
         }
     }
 }

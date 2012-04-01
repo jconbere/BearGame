@@ -50,10 +50,13 @@ namespace BearGame
             gameStates.Add(mainState);
             current_GameState = mainState;         
 
+            gameStates.Add(new Intro());
+
             foreach (GameState state in gameStates)
             {
                 state.Initialize();
             }
+            switchGameStates(1);
 
             base.Initialize();
         }
@@ -111,6 +114,11 @@ namespace BearGame
             //world.Update(gameTime);
             current_GameState.Update(gameTime);
 
+            if (current_GameState.requestedState >= 0)
+            {
+                switchGameStates(current_GameState.requestedState);
+            }
+
             base.Update(gameTime);
         }
 
@@ -135,6 +143,7 @@ namespace BearGame
 
             //Start Up new State
             current_GameState = gameStates.ElementAt<GameState>(index);
+            current_GameState.LoadContent(GraphicsDevice, Content);
 
 
         }
