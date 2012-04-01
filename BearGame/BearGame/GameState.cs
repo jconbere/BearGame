@@ -160,6 +160,8 @@ namespace BearGame
         }
         public override void Update(GameTime gameTime)
         {
+            // update the current texttypingscreen
+            // if isDone after, select next screen
 
             var keyState = Keyboard.GetState();
 
@@ -176,6 +178,7 @@ namespace BearGame
 
         public override void Draw(GameTime gameTime)
         {
+            //call the appropriate textypingscreen (from the list); pass the uiBatch!)
             _uiBatch.Begin();
             _uiBatch.Draw(splashScreen, new Rectangle(0, 0, 800, 600), Color.White);
             _uiBatch.End();
