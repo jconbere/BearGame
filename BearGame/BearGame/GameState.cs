@@ -86,6 +86,7 @@ namespace BearGame
             Achievement.AchievementSound = new RandomSound(Content, "Audio\\Achievement-mp3-sound");
 
             Bear.bearGruntSound = new RandomSound(Content, "Audio\\bear_desperate_whining_01", "Audio\\bear_desperate_whining_02", "Audio\\bear_desperate_whining_03", "Audio\\bear_desperate_whining_04", "Audio\\bear_desperate_whining_05");
+            Bear.bearHappySound = new RandomSound(Content, "Audio\\bear_happy_singing_01", "Audio\\bear_happy_singing_02", "Audio\\bear_happy_singing_03");
             Bear.PersonAwwSound = new RandomSound(Content, "Audio\\person_aww_03", "Audio\\person_aww_04");
             Bear.FootstepSound = new RandomSound(Content, 0.5f, "Audio\\footstep_01", "Audio\\footstep_02", "Audio\\footstep_03", "Audio\\footstep_04", "Audio\\footstep_05");
             //Bear.DragSound = new RandomSound(Content, "Audio\\dragging_01", "Audio\\dragging_02", "Audio\\dragging_03");
@@ -195,6 +196,7 @@ namespace BearGame
         List<SplashScreen> introSplashScreens;
         List<TypingTextScreen> typingTextScreens;
         int currentTextScreenIndex;
+        int currentSplashScreenIndex;
 
         public Intro()
         {
@@ -203,14 +205,12 @@ namespace BearGame
 
         public override void Initialize(GameTime gameTime)
         {
-            typingTextScreens = new List<TypingTextScreen>();
-            currentTextScreenIndex = 0;
-
             entryGameTime = gameTime.TotalGameTime.TotalSeconds;
 
             typingTextScreens = new List<TypingTextScreen>();
             introSplashScreens = new List<SplashScreen>();
             currentTextScreenIndex = 0;
+            currentSplashScreenIndex = 0;
         }
 
         public override void LoadContent(GraphicsDevice graphics, ContentManager Content)
@@ -221,6 +221,8 @@ namespace BearGame
             introFont = Content.Load<SpriteFont>("UI\\UIFont");
 
             //load images for the intro
+            SplashScreen tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Steam"), 2500, 5000, 5000);
+            introSplashScreens.Add(tempSplash);
 
             // testing, read from file or something later?
             TypingTextScreen temp = new TypingTextScreen("What if. . .\n\n\n\n\n", 100f, introFont);
@@ -259,7 +261,14 @@ namespace BearGame
 
             // update the current texttypingscreen
             // if isDone after, select next screen
-            if (!(currentTextScreenIndex >= typingTextScreens.Count))
+            // same with splashscreens
+            if (!(currentSplashScreenIndex >= introSplashScreens.Count))
+            {
+                introSplashScreens.ElementAt(currentSplashScreenIndex).Update(gameTime);
+                if (introSplashScreens.ElementAt(currentSplashScreenIndex).IsDone)
+                    currentSplashScreenIndex++;
+            }
+            else if(!(currentTextScreenIndex >= typingTextScreens.Count))
             {
                 typingTextScreens.ElementAt(currentTextScreenIndex).Update(gameTime);
                 if (typingTextScreens.ElementAt(currentTextScreenIndex).IsDone)
@@ -270,11 +279,17 @@ namespace BearGame
 
         public override void Draw(GameTime gameTime)
         {
-            if (currentTextScreenIndex < typingTextScreens.Count)
+            if (currentSplashScreenIndex < introSplashScreens.Count)
+            {
+                introSplashScreens.ElementAt(currentSplashScreenIndex).Render(gameTime, _uiBatch);
+            }
+            else if (currentTextScreenIndex < typingTextScreens.Count)
             {
                 //call the appropriate textypingscreen (from the list); pass the uiBatch!)
                 typingTextScreens.ElementAt(currentTextScreenIndex).Render(gameTime, _uiBatch);
             }
+            else
+                requestedState = 1;
         }
     }
 
