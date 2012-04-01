@@ -81,7 +81,7 @@ namespace BearGame
                 return;
 
             //add time since last frame to totalTime
-            totalTime += gameTime.ElapsedGameTime.Milliseconds;
+            totalTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             //if no, return;
             return;
@@ -100,15 +100,15 @@ namespace BearGame
                 isDone = true;
             }
                             // determine alpha
-            float alpha = 1.0f;
+            float alpha = 0.5f;
             if(totalTime < fadeInTime)
-                alpha = MathHelper.SmoothStep(0.0f, fadeInTime, totalTime);
-            else if(totalTime > fadeInTime + fadeOutTime)
-                alpha = MathHelper.SmoothStep(fadeInTime+displayTime+fadeOutTime, fadeInTime+displayTime, totalTime);
+                alpha = MathHelper.SmoothStep(0.0f, 1.0f, totalTime/fadeInTime);
+            else if(totalTime > fadeInTime + displayTime)
+                alpha = MathHelper.SmoothStep(1.0f, 0.0f, (totalTime - (fadeInTime + fadeOutTime)) / fadeOutTime);
 
             // print text onscreen until current index.
             spriteBatch.Begin();
-            spriteBatch.Draw(splashImage, new Rectangle(0, 0, 800, 600), new Color(1,1,1,alpha));
+            spriteBatch.Draw(splashImage, new Rectangle(0, 0, 800, 600), Color.White * alpha);
             spriteBatch.End();
 
             return;
