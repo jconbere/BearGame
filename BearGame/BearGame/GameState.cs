@@ -136,18 +136,31 @@ namespace BearGame
     class Intro : GameState
     {
         SpriteBatch _uiBatch;
+        SpriteFont introFont;
         Texture2D splashScreen;
         const double GameStateDelay = 0.2;
         double entryGameTime = 0.0f;
+
+        List<TypingTextScreen> typingTextScreens;
+        int currentTextScreenIndex;
+
         public Intro()
         {
             requestedState = -1;
         }
 
+        public override void Initialize()
+        {
+            typingTextScreens = new List<TypingTextScreen>();
+            currentTextScreenIndex = 0;
+        }
 
         public override void Initialize(GameTime gameTime)
         {
             entryGameTime = gameTime.TotalGameTime.TotalSeconds;
+            
+            typingTextScreens = new List<TypingTextScreen>();
+            currentTextScreenIndex = 0;
         }
 
         public override void LoadContent(GraphicsDevice graphics, ContentManager Content)
@@ -155,6 +168,13 @@ namespace BearGame
             _uiBatch = new SpriteBatch(graphics);
 
             splashScreen = Content.Load<Texture2D>("SplashUI\\introsplash");
+
+            // make me a font for the intro
+            introFont = Content.Load<SpriteFont>("UI\\UIFont");
+
+            // testing, read from file or something later?
+            TypingTextScreen temp = new TypingTextScreen("Follow the white rabbit...\n", 100f, introFont);
+            typingTextScreens.Add(temp);
         }
 
         public override void UnloadContent(ContentManager Content)
@@ -164,7 +184,6 @@ namespace BearGame
         }
         public override void Update(GameTime gameTime)
         {
-
             var keyState = Keyboard.GetState();
 
             //If any keys pressed
@@ -176,14 +195,34 @@ namespace BearGame
                 }
             }
 
+            // update the current texttypingscreen
+            // if isDone after, select next screen
+            if (!(currentTextScreenIndex >= typingTextScreens.Count))
+            {
+                typingTextScreens.ElementAt(currentTextScreenIndex).Update(gameTime);
+                if (typingTextScreens.ElementAt(currentTextScreenIndex).IsDone)
+                    currentTextScreenIndex++;
+            }
+
         }
 
         public override void Draw(GameTime gameTime)
         {
-            _uiBatch.Begin();
-            _uiBatch.Draw(splashScreen, new Rectangle(0, 0, 800, 600), Color.White);
-            _uiBatch.End();
-            
+            if (currentTextScreenIndex < typingTextScreens.Count)
+            {
+                //call the appropriate textypingscreen (from the list); pass the uiBatch!)
+                typingTextScreens.ElementAt(currentTextScreenIndex).Render(gameTime, _uiBatch);
+            }
+            else
+            {
+                // draw final splash
+                _uiBatch.Begin();
+                _uiBatch.Draw(splashScreen, new Rectangle(0, 0, 800, 600), Color.White);
+                _uiBatch.End();
+            }
+
+
+
         }
     }
 
