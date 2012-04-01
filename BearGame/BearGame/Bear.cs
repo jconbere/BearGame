@@ -38,7 +38,10 @@ namespace BearGame
         {
             this.Health = Settings.Bear_HealthDefault;
             FacingDirection = Direction.Down;
+            Achievements = new List<Achievement>();
         }
+
+        public List<Achievement> Achievements { get; private set; }
 
         double _lastInteractionBeginTime = 0;
 
