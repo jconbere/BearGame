@@ -9,7 +9,7 @@ namespace BearGame
 {
     public class Villager : Actor
     {
-        //static List<Vector2> Pathfind_Nodes = new List<Vector2>(new Vector2(0,0));
+        static List<CellPosition> Pathfind_Nodes;
         int _health;
         public int Health
         {
@@ -86,6 +86,18 @@ namespace BearGame
             this.ApproachDistance = Settings.Person_BaseApproachDistance;
             this.Name = (GameSetting.VillagerNames)world.AllVillagers.Count;
             this.IsActive = true;
+
+            CellPosition[] nodes = {new CellPosition(0,1),
+                              new CellPosition(1,1),
+                              new CellPosition(1,0),
+                              new CellPosition(1,-1),
+                              new CellPosition(0,-1),
+                              new CellPosition(-1,-1),
+                              new CellPosition(-1,0),
+                              new CellPosition(-1,1)                         
+                              };
+
+            Pathfind_Nodes = new List<CellPosition>(nodes);
 
         }
 
@@ -171,14 +183,39 @@ namespace BearGame
 
                 if ((time.TotalGameTime.TotalSeconds - LastMoveTime) > (Speed))
                 {
-                    MoveCell(time, new CellPosition((int)bearDirection.X, (int)bearDirection.Y));
-                    if (bearDirection.X > 0)
+                    CellPosition newPos = new CellPosition((int)bearDirection.X, (int)bearDirection.Y);
+                    if (!(newPos.Row == 0 && newPos.Col == 0))
                     {
-                        FacingDirection = Direction.Right;
-                    }
-                    else
-                    {
-                        FacingDirection = Direction.Left;
+                        if (!World.IsPassable(this.c_position + newPos))
+                        {
+                            int indexOf = Pathfind_Nodes.FindIndex(i => i.Row == newPos.Row && i.Col == newPos.Col);
+                            int currentIndex = indexOf;
+                            for (int i = 1; i <= 4; i++)
+                            {
+                                newPos = Pathfind_Nodes[(indexOf + i) % 7];
+                                if (World.IsPassable(this.c_position + newPos))
+                                {
+                                    break;
+                                }
+
+                                newPos = Pathfind_Nodes[(indexOf - i) % 7];
+                                if (World.IsPassable(this.c_position + newPos))
+                                {
+                                    break;
+                                }
+                            }
+                        }
+
+                        MoveCell(time, newPos);
+
+                        if (newPos.Row > 0)
+                        {
+                            FacingDirection = Direction.Right;
+                        }
+                        else
+                        {
+                            FacingDirection = Direction.Left;
+                        }
                     }
                 }
 
