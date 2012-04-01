@@ -38,14 +38,43 @@ namespace BearGame
 
         public bool IsHugging { get { return ActiveInteraction != null && ActiveInteraction is Grab; } }
 
-        public override void MoveCell(GameTime time, CellPosition diff)
-        {
-            base.MoveCell(time, diff);
+        double _lastImpressTime = 0;
 
+        public static RandomSound PersonAwwSound;
+
+        protected override void OnMove(GameTime time)
+        {
+            var now = time.TotalGameTime.TotalSeconds;
+
+            //
+            // Drag people
+            //
             var grab = ActiveInteraction as Grab;
             if (grab != null)
             {
                 grab.Villager.MoveToCell(time, c_position);
+            }
+
+            //
+            // Impress villages when on bike
+            //
+            var tri = Inventory as Tricycle;
+            if (tri != null && (now - _lastImpressTime) > Settings.Bear_RidingImpressInterval)
+            {
+                var impressed = false;
+                foreach (var v in World.AllVillagers)
+                {
+                    if (v.c_position.DistanceTo(c_position) <= Settings.Bear_RidingImpressPeopleDistance)
+                    {
+                        v.Love += Settings.Bear_RidingImpressLoveIncrease;
+                        impressed = true;
+                    }
+                }
+                if (impressed)
+                {
+                    PersonAwwSound.Play();
+                    _lastImpressTime = now;
+                }
             }
         }
 
@@ -56,9 +85,11 @@ namespace BearGame
             //
             // Movement input
             //
-            var keyState = Keyboard.GetState();            
+            var keyState = Keyboard.GetState();
 
-            if ((now - LastMoveTime) > Settings.Bear_MoveInterval)
+            var moveInterval = (Inventory != null && Inventory is Tricycle) ? Settings.Bear_RidingMoveInterval : Settings.Bear_MoveInterval;
+
+            if ((now - LastMoveTime) > moveInterval)
             {
                 if (keyState.IsKeyDown(Keys.Left) || keyState.IsKeyDown(Keys.A))
                 {
@@ -104,6 +135,7 @@ namespace BearGame
                     (keyState.IsKeyDown(Keys.Space)) &&
                     (PossibleInteraction != null))
                 {
+                    _lastInteractionBeginTime = now;
                     BeginInteraction(time, PossibleInteraction);
                     PossibleInteraction = null;
                 }

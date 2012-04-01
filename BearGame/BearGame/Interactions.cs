@@ -29,6 +29,8 @@ namespace BearGame
     {
         public Honey Honey { get; private set; }
 
+        public static RandomSound PickUpHoneySound;
+
         public TakeHoney(Honey honey)
         {
             Honey = honey;
@@ -40,6 +42,7 @@ namespace BearGame
             ((Bear)doer).Inventory = Honey;
             Honey.IsVisible = false;
             Honey.IsActive = false;
+            PickUpHoneySound.Play();
         }
     }
 
@@ -48,6 +51,8 @@ namespace BearGame
         public EatHoney()
         {
         }
+
+        public static RandomSound EatHoneySound;
 
         public override void OnBegin(Actor doer, GameTime time)
         {
@@ -60,6 +65,8 @@ namespace BearGame
             bear.Inventory = null;
 
             bear.Health += bear.Settings.Bear_HealthGainForHoney;
+
+            EatHoneySound.Play();
         }
     }
 
@@ -69,13 +76,39 @@ namespace BearGame
 
     public class RideTricycle : Interaction
     {
+        public static RandomSound GetOnSound;
+
+        public Tricycle Tricycle { get; set; }
+
         public RideTricycle(Tricycle tri)
         {
+            Tricycle = tri;
+        }
+
+        public override void OnBegin(Actor doer, GameTime time)
+        {
+            base.OnBegin(doer, time);
+            ((Bear)doer).Inventory = Tricycle;
+            Tricycle.IsVisible = false;
+            GetOnSound.Play();
+            IsActive = false;
         }
     }
 
     public class GetOffTricycle : Interaction
     {
+        public static RandomSound GetOffSound;
+
+        public override void OnBegin(Actor doer, GameTime time)
+        {
+            base.OnBegin(doer, time);
+            var bear = (Bear)doer;
+            bear.Inventory.c_position = doer.c_position;
+            bear.Inventory.IsVisible = true;
+            bear.Inventory = null;            
+            GetOffSound.Play();
+            IsActive = false;
+        }
     }
 
     public class Grab : Interaction
@@ -112,6 +145,8 @@ namespace BearGame
     {
         public Villager Villager { get; private set; }
 
+        public static RandomSound PersonThanksSound;
+
         public GiveHoney(Villager villager)
         {
             Villager = villager;
@@ -133,6 +168,7 @@ namespace BearGame
                 Villager.Health += doer.Settings.Person_HealthIncreaseForHoney;
                 honey.IsActive = false;
                 honey.IsVisible = false;
+                PersonThanksSound.Play();
             }
         }
     }

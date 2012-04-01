@@ -27,6 +27,8 @@ namespace BearGame
         Texture2D _personhurtbadTexture;
         Texture2D _persondeadTexture;
 
+        Texture2D _vignetteTexture;
+
         public GameView(World world)
         {
             
@@ -36,6 +38,9 @@ namespace BearGame
         public void LoadContent(GraphicsDevice device, ContentManager content)
         {
             _uiBatch = new SpriteBatch(device);
+
+            //Vignette
+            _vignetteTexture = content.Load<Texture2D>("UI\\Vignette");
 
             //Load health bar Textures
             _meterTexture = content.Load<Texture2D>("UI\\health_meter");
@@ -111,9 +116,17 @@ namespace BearGame
                 _uiBatch.DrawString(_uiFont, person.Name.ToString(), new Vector2(650, 150 + (peopleLegendTextSpacing * (_world.AllVillagers.IndexOf(person) + 1))), Color.White);
             }
 
+            var worldRect = new Rectangle(gameViewLeft, gameViewTop, ws, ws);
+
             _uiBatch.End();
 
-            _world.Draw(new Rectangle(gameViewLeft, gameViewTop, ws, ws));
+            _world.Draw(worldRect);
+
+            _uiBatch.Begin();
+
+            _uiBatch.Draw(_vignetteTexture, worldRect, Color.White);
+
+            _uiBatch.End();
         }
     }
 }

@@ -69,12 +69,11 @@ namespace BearGame
 
         public double Bear_MoveInterval = 1.0/3; // Seconds
 
-        public double Bear_InteractionInterval = 1.0 / 3;
+        public double Bear_RidingMoveInterval = 1.0 / 2; // Seconds
+        public double Bear_RidingImpressPeopleDistance = 2; // tile distance
+        public double Bear_RidingImpressInterval = 5; // Seconds
+        public int Bear_RidingImpressLoveIncrease = 1; // Loves
 
-        
-       
-        public GameSetting()
-        {
-        }
+        public double Bear_InteractionInterval = 1.0/3; // Seconds
     }
 }
