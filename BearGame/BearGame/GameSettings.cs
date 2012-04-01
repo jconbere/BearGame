@@ -21,7 +21,7 @@ namespace BearGame
     {
         public enum VillagerNames
         {
-            Josie,
+            Luke,
             Frank,
             John,
             Avery,
