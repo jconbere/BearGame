@@ -60,6 +60,8 @@ namespace BearGame
 
         public int Person_TricycleLove = 1;
         public int Person_MaxTricycleLove = 3;
+
+        public int Person_MaxHoneyLove = 3;
         
         // Bear Stuff
         public float Bear_HealthGainDuringHug = 30; // helath per second
