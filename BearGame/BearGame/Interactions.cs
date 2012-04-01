@@ -178,6 +178,7 @@ namespace BearGame
             }
         }
     }
+    
 
     public class RunOver : Interaction
     {

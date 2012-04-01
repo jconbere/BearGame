@@ -9,8 +9,9 @@ namespace BearGame
 {
     public class Villager : Actor
     {
-        //static List<Vector2> Pathfind_Nodes = new List<Vector2>(new Vector2(0,0));
+        static List<CellPosition> Pathfind_Nodes;
         int _health;
+        public bool isHugging = false;
         public int Health
         {
             get { return _health; }
@@ -87,6 +88,18 @@ namespace BearGame
             this.Name = (GameSetting.VillagerNames)world.AllVillagers.Count;
             this.IsActive = true;
 
+            CellPosition[] nodes = {new CellPosition(0,1),
+                              new CellPosition(1,1),
+                              new CellPosition(1,0),
+                              new CellPosition(1,-1),
+                              new CellPosition(0,-1),
+                              new CellPosition(-1,-1),
+                              new CellPosition(-1,0),
+                              new CellPosition(-1,1)                         
+                              };
+
+            Pathfind_Nodes = new List<CellPosition>(nodes);
+
         }
 
         public override void Update(GameTime time)
@@ -159,26 +172,62 @@ namespace BearGame
                     bearDirection.Y = bearDirection.Y * -1;
                 }
 
-                //Make move 1 square
-                if (bearDirection.X != 0)
-                {
-                    bearDirection.X = bearDirection.X / Math.Abs(bearDirection.X);
-                }
-                if (bearDirection.Y != 0)
-                {
-                    bearDirection.Y = bearDirection.Y / Math.Abs(bearDirection.Y);
-                }
-
                 if ((time.TotalGameTime.TotalSeconds - LastMoveTime) > (Speed))
                 {
-                    MoveCell(time, new CellPosition((int)bearDirection.X, (int)bearDirection.Y));
-                    if (bearDirection.X > 0)
+                    //Check for Hug
+                    if (Love == Settings.Person_LoveMax)
                     {
-                        FacingDirection = Direction.Right;
+                        if (bearDirection.X == 0 && bearDirection.Y == 0)
+                        {
+                            //on bear initiate hugging
+                            isHugging = true;
+                        }
+
                     }
-                    else
+
+                    //Make move 1 square
+                    if (bearDirection.X != 0)
                     {
-                        FacingDirection = Direction.Left;
+                        bearDirection.X = bearDirection.X / Math.Abs(bearDirection.X);
+                    }
+                    if (bearDirection.Y != 0)
+                    {
+                        bearDirection.Y = bearDirection.Y / Math.Abs(bearDirection.Y);
+                    }
+
+                    CellPosition newPos = new CellPosition((int)bearDirection.X, (int)bearDirection.Y);
+                    if (!(newPos.Row == 0 && newPos.Col == 0))
+                    {
+                        if (!World.IsPassable(this.c_position + newPos))
+                        {
+                            int indexOf = Pathfind_Nodes.FindIndex(i => i.Row == newPos.Row && i.Col == newPos.Col);
+                            int currentIndex = indexOf;
+                            for (int i = 1; i <= 4; i++)
+                            {
+                                newPos = Pathfind_Nodes[(indexOf + i) % 7];
+                                if (World.IsPassable(this.c_position + newPos))
+                                {
+                                    break;
+                                }
+
+                                newPos = Pathfind_Nodes[(indexOf - i) % 7];
+                                if (World.IsPassable(this.c_position + newPos))
+                                {
+                                    break;
+                                }
+                            }
+                        }
+
+                        MoveCell(time, newPos);
+
+                        if (newPos.Row > 0)
+                        {
+                            FacingDirection = Direction.Right;
+                        }
+                        else
+                        {
+                            FacingDirection = Direction.Left;
+                        }
                     }
                 }
 
