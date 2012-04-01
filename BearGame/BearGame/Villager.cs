@@ -49,7 +49,7 @@ namespace BearGame
             this.TricycleLove = Settings.Person_TricycleLove;
             this.HealthRegen = Settings.Person_HealthRegen;
             this.Speed = Settings.Person_Speed;
-            //this.Name = world.AllVillagers
+            this.Name = (GameSetting.VillagerNames)world.AllVillagers.Count;
 
         }
 
@@ -103,32 +103,26 @@ namespace BearGame
             int DeltaRow = 0;
             int DeltaCol = 0;
             int winningindex = 0;
-
-            int P_DeltaRow = 0;
-            int P_DeltaCol = 0;
             
             DeltaRow = this.c_position.Row - World.Bear.c_position.Row;
             DeltaCol = this.c_position.Col - World.Bear.c_position.Col;
-
-            Random rnd = new Random();
             
             // simple stupid state machine.  run in the farthest direction
 
             double[] ActionWeight = new double[5];
 
+            ActionWeight[0] = EvalWeight(this.c_position.Col, this.c_position.Row, World.Bear, 1, 0);  //down
+            ActionWeight[1] = EvalWeight(this.c_position.Col, this.c_position.Row, World.Bear, -1, 0); // up
+            ActionWeight[2] = EvalWeight(this.c_position.Col, this.c_position.Row, World.Bear, 0, 1); // right
+            ActionWeight[3] = EvalWeight(this.c_position.Col, this.c_position.Row, World.Bear, 0, -1); // left
+            ActionWeight[4] = EvalWeight(this.c_position.Col, this.c_position.Row, World.Bear, 0, 0); // stay put
             
-            ActionWeight[0] = EvalWeight(this.c_position.Row, this.c_position.Col, World.Bear,0, 0, Love);
-            ActionWeight[1] = EvalWeight(this.c_position.Row, this.c_position.Col, World.Bear, 1, 0, Love);
-            ActionWeight[2] = EvalWeight(this.c_position.Row, this.c_position.Col, World.Bear, -1, 0, Love);
-            ActionWeight[3] = EvalWeight(this.c_position.Row, this.c_position.Col, World.Bear, 0, 1, Love);
-            ActionWeight[4] = EvalWeight(this.c_position.Row, this.c_position.Col, World.Bear, 0, -1, Love);
-
-            if (Love <= 3)
+            if (Love <= 1)
             {
                 double tempval = Double.MaxValue;
                 for (int i = 0; i < 5; i++)
                 {
-                    if (ActionWeight[i] < tempval)
+                    if (ActionWeight[i] < tempval && ActionWeight[i] != -1)
                     {
                         winningindex = i;
                         tempval = ActionWeight[i];
@@ -151,26 +145,23 @@ namespace BearGame
             switch (winningindex)
             { 
                 case 0:
+                    FacingDirection = Direction.Up;
+                    MoveCell(time, new CellPosition(0, -1));
                     UpdateSpriteIndex();
                 break;
                 case 1:
                     FacingDirection = Direction.Down;
                     MoveCell(time, new CellPosition(0, 1));
                     UpdateSpriteIndex();
-                break;
+                    break;
                 case 2:
-                    FacingDirection = Direction.Up;
+                    FacingDirection = Direction.Right;
                     MoveCell(time, new CellPosition(0, -1));
                     UpdateSpriteIndex();
                     break;
                 case 3:
-                    FacingDirection = Direction.Right;
-                    MoveCell(time, new CellPosition(0, 1));
-                    UpdateSpriteIndex();
-                    break;
-                case 4:
                     FacingDirection = Direction.Left;
-                    MoveCell(time, new CellPosition(0, -1));
+                    MoveCell(time, new CellPosition(0, 1));
                     UpdateSpriteIndex();
                     break;
                 default:
@@ -178,66 +169,23 @@ namespace BearGame
                     break;
 
             }
-
-            //if (Math.Abs(DeltaCol) >= Math.Abs(DeltaRow))
-            //{
-            //    if (DeltaCol <= 0)
-            //    {
-            //        if (World.IsPassable(this.c_position.Col + 1, this.c_position.Row))
-            //        {
-            //            FacingDirection = Direction.Right;
-            //            MoveCell(time, new CellPosition(1, 0));
-            //            UpdateSpriteIndex();
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    if (World.IsPassable(this.c_position.Col - 1, this.c_position.Row))
-            //    {
-            //        FacingDirection = Direction.Left;
-            //        MoveCell(time, new CellPosition(-1, 0));
-            //        UpdateSpriteIndex();
-            //    }
-            //    else
-            //    {
-            //        if (DeltaRow <= 0)
-            //        {
-            //            if (World.IsPassable(this.c_position.Col, this.c_position.Row + 1))
-            //            {
-            //                FacingDirection = Direction.Down;
-            //                MoveCell(time, new CellPosition(0, 1));
-            //                UpdateSpriteIndex();
-            //            }
-            //        }
-            //        else
-            //        {
-            //            if (World.IsPassable(this.c_position.Col, this.c_position.Row - 1))
-            //            {
-            //                FacingDirection = Direction.Up;
-            //                MoveCell(time, new CellPosition(0, -1));
-            //                UpdateSpriteIndex();
-            //            }
-            //        }
-            //    }
-            //}
         }
 
-        private double EvalWeight(int Row, int Col, Bear bear, int DeltaRow, int DeltaCol, int Love)
+        private double EvalWeight(int Col, int Row, Bear bear, int DeltaCol, int DeltaRow)
         {
             double weight = 0;
 
-            int BearDeltaRow = Row - bear.c_position.Row;
-            int BearDeltaCol = Col - bear.c_position.Col;
+            int BearDeltaRow = Row - bear.c_position.Row + DeltaRow;
+            int BearDeltaCol = Col - bear.c_position.Col + DeltaCol;
 
             if (World.IsPassable(Row + DeltaRow, Col + DeltaCol))
             {
-                weight = ((Math.Pow(BearDeltaRow,2)+ Math.Pow(BearDeltaCol,2)));
+                weight = ((Math.Pow(BearDeltaRow,2) + Math.Pow(BearDeltaCol,2)));
                 return weight;
             }
             else
             {
-                return 0;
+                return -1;
             }
         }
         protected override void UpdateSpriteIndex()

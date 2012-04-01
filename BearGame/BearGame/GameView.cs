@@ -22,6 +22,11 @@ namespace BearGame
         Texture2D _happyTexture;
         Texture2D _healthbarTexture;
 
+        Texture2D _personhealthyTexture;
+        Texture2D _personhurtTexture;
+        Texture2D _personhurtbadTexture;
+        Texture2D _persondeadTexture;
+
         public GameView(World world)
         {
             
@@ -32,12 +37,18 @@ namespace BearGame
         {
             _uiBatch = new SpriteBatch(device);
 
-            //Load Textures
+            //Load health bar Textures
             _meterTexture = content.Load<Texture2D>("UI\\health_meter");
             _healthbarTexture = content.Load<Texture2D>("UI\\healthbar");
             _skullTexture = content.Load<Texture2D>("UI\\skull");
             _happyTexture = content.Load<Texture2D>("UI\\happy");
             _backgroundTexture = content.Load<Texture2D>("UI\\background");
+
+            //Load Villager Health Textures
+            _personhealthyTexture = content.Load<Texture2D>("UI\\personHealthy");
+            _personhurtTexture = content.Load<Texture2D>("UI\\personHurt");
+            _personhurtbadTexture = content.Load<Texture2D>("UI\\personHurtbad");
+            _persondeadTexture = content.Load<Texture2D>("UI\\personDead");
 
             //Load Fonts
             _uiFont = content.Load<SpriteFont>("UI\\UIFont");
@@ -49,6 +60,7 @@ namespace BearGame
 
         public void Draw()
         {
+            const int peopleLegendTextSpacing = 18;
             var vw = 800;
             var vh = 600;
             var ws = 400;
@@ -56,6 +68,8 @@ namespace BearGame
             
             var gameViewLeft = (vw-ws)/2;
             var gameViewTop = (vh-ws)/2;
+            
+            //Health bar Logic
             float healthPercentage = (_world.Bear.Health / _world.Settings.Bear_HealthMax);
             Color barColor = Color.Red;
             if (_world.Bear.IsHugging)
@@ -76,7 +90,25 @@ namespace BearGame
             _uiBatch.DrawString(_uiFont, "Legend", new Vector2(650, 150), Color.White);
             foreach (Villager person in _world.AllVillagers)
             {
+                Texture2D healthTexture = _personhealthyTexture;
+                switch (person.Health)
+                {
+                    case (3):
+                        healthTexture = _personhealthyTexture;
+                        break;
+                    case (2):
+                        healthTexture = _personhurtTexture;
+                        break;
+                    case (1):
+                        healthTexture = _personhurtbadTexture;
+                        break;
+                    case (0):
+                        healthTexture = _persondeadTexture;
+                        break;
 
+                }
+                _uiBatch.Draw(healthTexture, new Rectangle(630, 160 + (peopleLegendTextSpacing * (_world.AllVillagers.IndexOf(person) + 1)), 10, 10), Color.White);
+                _uiBatch.DrawString(_uiFont, person.Name.ToString(), new Vector2(650, 150 + (peopleLegendTextSpacing * (_world.AllVillagers.IndexOf(person) + 1))), Color.White);
             }
 
             _uiBatch.End();

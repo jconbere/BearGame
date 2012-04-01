@@ -29,13 +29,15 @@ namespace BearGame
             John
         }
 
+
+
         // Map Stuff
         public int Map_MaxWidth =64;
         public int Map_MaxHeight= 64;
 
         //People Stuff
-        public int Person_HealthMin = 1;
-        public int Person_HealthMax = 7;
+        public int Person_HealthMin = 0;
+        public int Person_HealthMax = 3;
         public int Person_HealthDefault = 3;
 
         public int Person_HealthLossDuringHug = 1;
