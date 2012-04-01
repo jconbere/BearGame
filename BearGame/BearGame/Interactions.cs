@@ -71,11 +71,7 @@ namespace BearGame
             Villager.Love -= Villager.Settings.Person_LoveLossDuringHug;
             Villager.Health -= Villager.Settings.Person_HealthLossDuringHug;
 
-            if (Villager.Health < 1)
-            {
-                IsActive = false;
-            }
-            else
+            if (!Villager.IsDead)
             {
                 ((Bear)doer).Health += Villager.Settings.Bear_HealthGainDuringHug;
             }
