@@ -187,6 +187,14 @@ namespace BearGame
             }
 
             //
+            // Update the achievements
+            //
+            foreach (var a in Achievements)
+            {
+                a.Update(time);
+            }
+
+            //
             // The ever-decreasing health
             //
             Health -= (float)(time.ElapsedGameTime.TotalSeconds * Settings.Bear_HealthDecreaseRate);
@@ -250,7 +258,7 @@ namespace BearGame
                 }
                 else if (Inventory is Tricycle)
                 {
-                    return new RunOver();
+                    return new RunOver((Villager)obj);
                 }
                 else
                 {
