@@ -65,7 +65,7 @@ namespace BearGame
 
         public void Draw()
         {
-            const int peopleLegendTextSpacing = 18;
+            const int peopleLegendTextSpacing = 20;
             var vw = 800;
             var vh = 600;
             var ws = 400;
@@ -112,8 +112,8 @@ namespace BearGame
                         break;
 
                 }
-                _uiBatch.Draw(healthTexture, new Rectangle(630, 160 + (peopleLegendTextSpacing * (_world.AllVillagers.IndexOf(person) + 1)), 10, 10), Color.White);
-                _uiBatch.DrawString(_uiFont, person.Name.ToString(), new Vector2(650, 150 + (peopleLegendTextSpacing * (_world.AllVillagers.IndexOf(person) + 1))), Color.White);
+                _uiBatch.Draw(healthTexture, new Rectangle(630, 160 + (peopleLegendTextSpacing * (_world.AllVillagers.IndexOf(person) + 1)), 16, 16), Color.White);
+                _uiBatch.DrawString(_uiFont, person.Name.ToString(), new Vector2(650, 155 + (peopleLegendTextSpacing * (_world.AllVillagers.IndexOf(person) + 1))), Color.White);
             }
 
             var worldRect = new Rectangle(gameViewLeft, gameViewTop, ws, ws);
