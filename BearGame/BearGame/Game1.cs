@@ -65,7 +65,7 @@ namespace BearGame
             backgroundMusicInstance = backgroundMusic.CreateInstance();
             backgroundMusicInstance.IsLooped = true;
             backgroundMusicInstance.Volume = 0.125f;
-            backgroundMusicInstance.Play();
+            //backgroundMusicInstance.Play();
 
             current_GameState.LoadContent(GraphicsDevice, Content);
 

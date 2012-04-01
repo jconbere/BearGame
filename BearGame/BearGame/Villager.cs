@@ -180,8 +180,8 @@ namespace BearGame
                         }
                         else
                         {
-                            bearDirection.X = _rand.Next(2);
-                            bearDirection.Y = _rand.Next(2);
+                            //bearDirection.X = _rand.Next(2);
+                            //bearDirection.Y = _rand.Next(2);
                         }
                     }
 

@@ -100,6 +100,11 @@ namespace BearGame
             return Math.Max(Math.Abs(Actor1.c_position.Row - Actor2.c_position.Row), Math.Abs(Actor1.c_position.Col - Actor2.c_position.Col));
         }
 
+        protected int Distance(Entity Actor1, Entity Actor2)
+        {
+            return Math.Max(Math.Abs(Actor1.c_position.Row - Actor2.c_position.Row), Math.Abs(Actor1.c_position.Col - Actor2.c_position.Col));
+        }
+
         protected virtual void UpdateSpriteIndex()
         {
         }

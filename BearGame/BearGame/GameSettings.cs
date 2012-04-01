@@ -21,7 +21,7 @@ namespace BearGame
     {
         public enum VillagerNames
         {
-            Josie,
+            Luke,
             Frank,
             John,
             Avery,
@@ -55,6 +55,8 @@ namespace BearGame
         public float Person_SpeedStep = 0.2f; //Decreases this many seconds before moving for each love from initial
         public int Person_ActivityThreshold = 2; // # of tiles person will run away/to bear
         public int Person_BaseApproachDistance = 4; //How Close a Person will get to the bear initially
+
+        public int Person_HealthDecreaseForRunOver = 2;
 
         public int Person_TricycleLove = 1;
         
