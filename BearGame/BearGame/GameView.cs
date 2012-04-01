@@ -50,10 +50,10 @@ namespace BearGame
             _backgroundTexture = content.Load<Texture2D>("UI\\background");
 
             //Load Villager Health Textures
-            _personhealthyTexture = content.Load<Texture2D>("UI\\personHealthy");
-            _personhurtTexture = content.Load<Texture2D>("UI\\personHurt");
-            _personhurtbadTexture = content.Load<Texture2D>("UI\\personHurtbad");
-            _persondeadTexture = content.Load<Texture2D>("UI\\personDead");
+            _personhealthyTexture = content.Load<Texture2D>("UI\\facesHealthy");
+            _personhurtTexture = content.Load<Texture2D>("UI\\facesMedium");
+            _personhurtbadTexture = content.Load<Texture2D>("UI\\facesBad");
+            _persondeadTexture = content.Load<Texture2D>("UI\\facesDead");
 
             //Load Fonts
             _uiFont = content.Load<SpriteFont>("UI\\UIFont");

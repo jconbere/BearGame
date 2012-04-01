@@ -125,7 +125,7 @@ namespace BearGame
             base.OnBegin(doer, time);
             Villager.IsVisible = false;
 
-            Villager.ChangeLove(doer.Settings.Person_LoveIncreaseForHoney, time);
+            Villager.ChangeLove(doer.Settings.Person_LoveLossDuringHug, time);
             Villager.Health -= Villager.Settings.Person_HealthLossDuringHug;
 
             if (!Villager.IsDead)
