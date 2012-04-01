@@ -48,9 +48,19 @@ namespace BearGame
             }
         }
 
+        Vector2 _transitionFromPosition;
+        Vector2 _transitionToPosition;
+        double _transitionStartTime = 0;
+
         public override void Update(GameTime time)
         {
             base.Update(time);
+
+            var now = time.TotalGameTime.TotalSeconds;
+
+            //
+            // Interactions update
+            //
             if (ActiveInteraction != null)
             {
                 if (ActiveInteraction.IsActive)
@@ -67,9 +77,27 @@ namespace BearGame
                     ActiveInteraction = null;
                 }
             }
-            UpdateSpriteIndex();
 
+            //
+            // Move transition
+            //
+            var transF = (float)((now - _transitionStartTime) / TransitionInterval);
+            if (0 <= transF && transF <= 1) {
+                Position = (_transitionToPosition - _transitionFromPosition) * transF + _transitionFromPosition;
+                IsTransitioning = true;
+            }
+            else {
+                Position = c_position.ToPixelPosition();
+                IsTransitioning = false;
+            }            
+
+            //
+            // Sprite index update
+            //
+            UpdateSpriteIndex();
         }
+
+        public bool IsTransitioning { get; private set; }
 
         double _lastMoveTime = 0;
         protected double LastMoveTime { get { return _lastMoveTime; } }
@@ -79,14 +107,25 @@ namespace BearGame
             MoveToCell(time, c_position + diff);
         }
 
+        protected virtual double TransitionInterval { get { return 1.0/3; } }
+
         public void MoveToCell(GameTime time, CellPosition newPos)
         {
-            if (World.IsPassable(newPos))
+            var now = time.TotalGameTime.TotalSeconds;
+
+            if (newPos != c_position)
             {
-                c_position = newPos;
-                Position = newPos.ToPixelPosition();
-                _lastMoveTime = time.TotalGameTime.TotalSeconds;
-                OnMove(time);
+                if (World.IsPassable(newPos))
+                {
+                    _transitionFromPosition = Position;
+                    _transitionToPosition = newPos.ToPixelPosition();
+                    _transitionStartTime = now;
+
+                    c_position = newPos;
+
+                    _lastMoveTime = now;
+                    OnMove(time);
+                }
             }
         }
 

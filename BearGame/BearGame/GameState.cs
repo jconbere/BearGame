@@ -182,6 +182,9 @@ namespace BearGame
         }
     }
 
+    /// <summary>
+    /// the intro sequence! (text and logos and stuff)
+    /// </summary>
     class Intro : GameState
     {
         SpriteBatch _uiBatch;
@@ -189,6 +192,7 @@ namespace BearGame
         const double GameStateDelay = 0.2;
         double entryGameTime = 0.0f;
 
+        List<SplashScreen> introSplashScreens;
         List<TypingTextScreen> typingTextScreens;
         int currentTextScreenIndex;
 
@@ -205,6 +209,7 @@ namespace BearGame
             entryGameTime = gameTime.TotalGameTime.TotalSeconds;
 
             typingTextScreens = new List<TypingTextScreen>();
+            introSplashScreens = new List<SplashScreen>();
             currentTextScreenIndex = 0;
         }
 
@@ -215,8 +220,22 @@ namespace BearGame
             // make me a font for the intro
             introFont = Content.Load<SpriteFont>("UI\\UIFont");
 
+            //load images for the intro
+
             // testing, read from file or something later?
-            TypingTextScreen temp = new TypingTextScreen("Follow the white rabbit...\n", 100f, introFont);
+            TypingTextScreen temp = new TypingTextScreen("What if. . .\n\n\n\n\n", 100f, introFont);
+            typingTextScreens.Add(temp);
+
+            temp = new TypingTextScreen("What if you were a bear\nthat needed hugs\nto survive. . .\n", 100f, introFont);
+            typingTextScreens.Add(temp);
+
+            temp = new TypingTextScreen("...But the problem is :\nYou crush the spines\nof those you embrace?\n\n", 100f, introFont);
+            typingTextScreens.Add(temp);
+
+            temp = new TypingTextScreen("If you were destined to hurt\n the ones you love...", 100f, introFont);
+            typingTextScreens.Add(temp);
+            //special case
+            temp = new TypingTextScreen("If you were destined to hurt\n the ones you love...", 100f, introFont);
             typingTextScreens.Add(temp);
         }
 

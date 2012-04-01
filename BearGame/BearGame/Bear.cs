@@ -19,7 +19,13 @@ namespace BearGame
         private double lastsoundplay = 0;
         const double sounddelay = 5;
         public static int currentFrame = 0;
-        const double frameSpeed = 1;
+        double frameSpeed
+        {
+            get
+            {
+                return TransitionInterval / 4;
+            }
+        }
         double lastAnimTime = 0;
 
         float _health;
@@ -107,7 +113,7 @@ namespace BearGame
                 {
                     if (v.c_position.DistanceTo(c_position) <= Settings.Bear_RidingImpressPeopleDistance)
                     {
-                        if (v.LoveFromTricycle < Settings.Person_MaxTricycleLove)
+                        if (v.LoveFromTricycle < Settings.Person_MaxTricycleLove && !v.IsDead)
                         {
                             v.LoveFromTricycle += Settings.Bear_RidingImpressLoveIncrease;
                             v.ChangeLove(Settings.Bear_RidingImpressLoveIncrease, time);
@@ -125,6 +131,8 @@ namespace BearGame
 
         public override void Update(GameTime time)
         {
+            base.Update(time);
+
             var now = time.TotalGameTime.TotalSeconds;
 
             if (now - lastsoundplay > sounddelay)
@@ -137,7 +145,7 @@ namespace BearGame
             //
             var keyState = Keyboard.GetState();
 
-            var moveInterval = (Inventory != null && Inventory is Tricycle) ? Settings.Bear_RidingMoveInterval : Settings.Bear_MoveInterval;
+            var moveInterval = TransitionInterval;
 
             if ((now - LastMoveTime) > moveInterval)
             {
@@ -216,6 +224,14 @@ namespace BearGame
                 Health = 0;
             }
             UpdateSpriteIndex(time);
+        }
+
+        protected override double TransitionInterval
+        {
+            get
+            {
+                return (Inventory != null && Inventory is Tricycle) ? Settings.Bear_RidingMoveInterval : Settings.Bear_MoveInterval;
+            }
         }
 
         public Interaction GetPossibleInteration(Entity obj)
@@ -318,7 +334,7 @@ namespace BearGame
                 spriteIndex = (16 * (int)FacingDirection) + currentFrame;
             }
 
-            if(gametime.TotalGameTime.TotalSeconds - lastAnimTime > frameSpeed)
+            if ((gametime.TotalGameTime.TotalSeconds - lastAnimTime > frameSpeed) && (IsTransitioning))
             {
                 lastAnimTime = gametime.TotalGameTime.TotalSeconds;
                 currentFrame++;
