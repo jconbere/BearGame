@@ -162,8 +162,9 @@ namespace BearGame
             //Draw Context
             if (_world.Bear.PossibleInteraction != null)
             {
-                _uiBatch.Draw(_uispacebarTexture, new Rectangle(210, 520, 300, 60), Color.White);
-                _uiBatch.Draw(_uicontextTexture, new Vector2(450, 520), new Rectangle(_world.Bear.PossibleInteraction.spritesheetIndex * 50, 0, 50, 50), Color.White);
+                int leftAlign = 265;
+                _uiBatch.Draw(_uispacebarTexture, new Rectangle(leftAlign, 520, _uispacebarTexture.Width, _uispacebarTexture.Height), Color.White);
+                _uiBatch.Draw(_uicontextTexture, new Vector2(leftAlign + 233, 525), new Rectangle(_world.Bear.PossibleInteraction.spritesheetIndex * 50, 0, 50, 50), Color.White);
                 
             }
 
