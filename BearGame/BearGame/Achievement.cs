@@ -10,9 +10,24 @@ namespace BearGame
     {
         public static RandomSound AchievementSound;
 
+        public bool IsShowing { get; private set; }
+
+        double _beginTime = 0;
+
         public virtual void Begin(GameTime time)
         {
-            AchievementSound.Play();
+            _beginTime = time.TotalGameTime.TotalSeconds;
+        }
+
+        public virtual void Update(GameTime time)
+        {
+            var now = time.TotalGameTime.TotalSeconds;
+
+            if (!IsShowing && ((now - _beginTime) > 1))
+            {
+                IsShowing = true;
+                AchievementSound.Play();
+            }
         }
     }
 

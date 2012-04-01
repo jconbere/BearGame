@@ -56,6 +56,8 @@ namespace BearGame
         public int Person_ActivityThreshold = 2; // # of tiles person will run away/to bear
         public int Person_BaseApproachDistance = 4; //How Close a Person will get to the bear initially
 
+        public int Person_HealthDecreaseForRunOver = 2;
+
         public int Person_TricycleLove = 1;
         
         // Bear Stuff

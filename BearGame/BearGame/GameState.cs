@@ -87,7 +87,7 @@ namespace BearGame
             GetOffTricycle.GetOffSound = new RandomSound(Content, "Audio\\bear_get_on_off_tricycle_03");
             Daredevil.DaredevilSound = new RandomSound(Content, "Audio\\thump_01", "Audio\\thump_02", "Audio\\thump_03");
             RunOver.TricycleBodyImpactSound = new RandomSound(Content, "Audio\\tricycle_body_impact_01");
-            Achievement.AchievementSound = new RandomSound(Content, "Audio\\achivement_unlocked_01");
+            Achievement.AchievementSound = new RandomSound(Content, "Audio\\Achievement-mp3-sound");
             
             Bear.PersonAwwSound = new RandomSound(Content, "Audio\\person_aww_03", "Audio\\person_aww_04");
             Bear.FootstepSound = new RandomSound(Content, 0.5f, "Audio\\footstep_01", "Audio\\footstep_02", "Audio\\footstep_03", "Audio\\footstep_04", "Audio\\footstep_05");
