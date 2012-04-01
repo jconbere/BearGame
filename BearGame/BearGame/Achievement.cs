@@ -8,8 +8,11 @@ namespace BearGame
 {
     public class Achievement
     {
+        public static RandomSound AchievementSound;
+
         public virtual void Begin(GameTime time)
         {
+            AchievementSound.Play();
         }
     }
 
