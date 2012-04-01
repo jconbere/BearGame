@@ -52,6 +52,7 @@ namespace BearGame
     {
         public EatHoney()
         {
+            spritesheetIndex = 2;
         }
 
         public static RandomSound EatHoneySound;

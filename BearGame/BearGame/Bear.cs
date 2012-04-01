@@ -10,6 +10,14 @@ namespace BearGame
 {
     public class Bear : Actor
     {
+        public static RandomSound FootstepSound;
+        public static RandomSound DragSound;
+        public static RandomSound TrikeSound;
+
+        public static int currentFrame = 0;
+        const double frameSpeed = 1;
+        double lastAnimTime = 0;
+
         float _health;
         public float Health
         {
@@ -45,7 +53,6 @@ namespace BearGame
         protected override void OnMove(GameTime time)
         {
             var now = time.TotalGameTime.TotalSeconds;
-
             //
             // Drag people
             //
@@ -53,6 +60,18 @@ namespace BearGame
             if (grab != null)
             {
                 grab.Villager.MoveToCell(time, c_position);
+                DragSound.Play();
+            }
+            else
+            {
+                if (Inventory is Tricycle)
+                {
+                    TrikeSound.Play();
+                }
+                else
+                {
+                    FootstepSound.Play();
+                }
             }
 
             //
@@ -157,7 +176,7 @@ namespace BearGame
             {
                 Health = 0;
             }
-            UpdateSpriteIndex();
+            UpdateSpriteIndex(time);
         }
 
         public Interaction GetPossibleInteration(Entity obj)
@@ -240,24 +259,32 @@ namespace BearGame
             }
         }
 
-        protected override void  UpdateSpriteIndex()
+        protected override void  UpdateSpriteIndex(GameTime gametime)
         {
-            
+               
             if (ActiveInteraction != null && ActiveInteraction is Grab)
             {
-                spriteIndex = 64;
+                spriteIndex = 64 + currentFrame;
             }
             else if (Inventory is Honey)
             {
-                spriteIndex = 12 + (16 * (int)FacingDirection);
+                spriteIndex = (12 + (16 * (int)FacingDirection)) + currentFrame;
             }
             else if (Inventory is Tricycle)
             {
-                spriteIndex = 8 + (16 * (int)FacingDirection);
+                spriteIndex = (8 + (16 * (int)FacingDirection)) + currentFrame;
             }
             else
             {
-                spriteIndex = 16 * (int)FacingDirection;
+                spriteIndex = (16 * (int)FacingDirection) + currentFrame;
+            }
+
+            if(gametime.TotalGameTime.TotalSeconds - lastAnimTime > frameSpeed)
+            {
+                lastAnimTime = gametime.TotalGameTime.TotalSeconds;
+                currentFrame++;
+                if (currentFrame >= 4)
+                { currentFrame = 0; }
             }
         }
     }

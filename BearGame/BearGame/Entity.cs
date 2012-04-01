@@ -103,5 +103,9 @@ namespace BearGame
         protected virtual void UpdateSpriteIndex()
         {
         }
+
+        protected virtual void UpdateSpriteIndex(GameTime gametime)
+        {
+        }
     }
 }

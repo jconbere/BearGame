@@ -18,10 +18,6 @@ namespace BearGame
     {
         GraphicsDeviceManager graphics;
 
-        /*Camera camera;
-        World world;
-        GameView view;*/
-
         SoundEffect backgroundMusic;
         SoundEffectInstance backgroundMusicInstance;
 
@@ -113,7 +109,6 @@ namespace BearGame
             GraphicsDevice.Clear(Color.White);
 
             current_GameState.Draw(gameTime);
-            //view.Draw();
 
             base.Draw(gameTime);
         }

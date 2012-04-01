@@ -171,6 +171,14 @@ namespace BearGame
                 if ((time.TotalGameTime.TotalSeconds - LastMoveTime) > (Speed))
                 {
                     MoveCell(time, new CellPosition((int)bearDirection.X, (int)bearDirection.Y));
+                    if (bearDirection.X > 0)
+                    {
+                        FacingDirection = Direction.Right;
+                    }
+                    else
+                    {
+                        FacingDirection = Direction.Left;
+                    }
                 }
 
             }
