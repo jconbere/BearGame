@@ -198,15 +198,32 @@ namespace BearGame
 
             spriteBatch.GraphicsDevice.ScissorRectangle = frame;
 
+            //
+            // Change the world color based on love
+            //
+            var totalLove = 0;
+            foreach (var v in AllVillagers)
+            {
+                totalLove += v.Love;
+            }
+            var darkness = (totalLove / (float)(AllVillagers.Count * Settings.Person_InitialLove)) * 0.9f + 0.1f;
+            var overlayColor = new Color(darkness, darkness, darkness);
+
+            //
+            // Draw the world tiles
+            //
             for (var c = 0; c < _tilesLayer.NumColumns; c++)
             {
                 for (var r = 0; r < _tilesLayer.NumRows; r++)
                 {
-                    spriteBatch.Draw(_tilesTexture, GetTileRectangle(c, r), GetWorldTileRectangle(_tilesLayer.GetTile(c,r)), Color.White);
+                    spriteBatch.Draw(_tilesTexture, GetTileRectangle(c, r), GetWorldTileRectangle(_tilesLayer.GetTile(c,r)), overlayColor);
                 }
             }
 
-            foreach (var a in AllActors)
+            //
+            // Draw the entities
+            //
+            foreach (var a in AllEntities)
             {
                 a.Draw(spriteBatch);
             }
