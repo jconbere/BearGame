@@ -201,20 +201,27 @@ namespace BearGame
                         if (!World.IsPassable(this.c_position + newPos))
                         {
                             int indexOf = Pathfind_Nodes.FindIndex(i => i.Row == newPos.Row && i.Col == newPos.Col);
-                            int currentIndex = indexOf;
-                            for (int i = 1; i <= 4; i++)
+                            if (indexOf >= 0)
                             {
-                                newPos = Pathfind_Nodes[(indexOf + i) % 7];
-                                if (World.IsPassable(this.c_position + newPos))
+                                int currentIndex = indexOf;
+                                for (int i = 1; i <= 4; i++)
                                 {
-                                    break;
-                                }
+                                    newPos = Pathfind_Nodes[(indexOf + i) % 7];
+                                    if (World.IsPassable(this.c_position + newPos))
+                                    {
+                                        break;
+                                    }
 
-                                newPos = Pathfind_Nodes[(indexOf - i) % 7];
-                                if (World.IsPassable(this.c_position + newPos))
-                                {
-                                    break;
+                                    newPos = Pathfind_Nodes[(indexOf - i) % 7];
+                                    if (World.IsPassable(this.c_position + newPos))
+                                    {
+                                        break;
+                                    }
                                 }
+                            }
+                            else
+                            {
+                                // TODO: John, handle this case, ask Avery
                             }
                         }
 

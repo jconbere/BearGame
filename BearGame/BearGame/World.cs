@@ -24,6 +24,8 @@ namespace BearGame
 
         Layer _actorsLayer = new Layer();
 
+        WorldLoveSystem _loveSystem;
+
         public Camera Camera { get; private set; }
         
         public Bear Bear { get; private set; }
@@ -47,6 +49,8 @@ namespace BearGame
 
             Camera = new BearGame.Camera();
 
+            _loveSystem = new WorldLoveSystem(this);
+
             Bear = new Bear(this);
 
             AllActors = new List<Actor>();
@@ -59,6 +63,11 @@ namespace BearGame
         public void LoadContent(GraphicsDevice device, ContentManager content, int worldNumber)
         {
             spriteBatch = new SpriteBatch(device);
+
+            //
+            // Happiness System
+            //
+            _loveSystem.LoadContent(content);
 
             //
             // Map tiles
@@ -154,6 +163,8 @@ namespace BearGame
 
         public void Update(GameTime time)
         {
+            _loveSystem.Update(time);
+
             foreach (var p in AllProps)
             {
                 p.Update(time);
@@ -200,13 +211,7 @@ namespace BearGame
             //
             // Change the world color based on love
             //
-            var totalLove = 0;
-            foreach (var v in AllVillagers)
-            {
-                totalLove += v.Love;
-            }
-            var maxLove = AllVillagers.Count * Settings.Person_InitialLove;
-            var darkness = (totalLove < maxLove) ? ((totalLove / (float)(maxLove)) * 0.9f + 0.1f) : 1.0f;
+            var darkness = (_loveSystem.AverageLove < Settings.Person_InitialLove) ? (_loveSystem.LovePotential * 0.9f + 0.1f) : 1.0f;
             var overlayColor = new Color(darkness, darkness, darkness);
 
             //
