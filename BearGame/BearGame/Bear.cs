@@ -10,7 +10,18 @@ namespace BearGame
 {
     public class Bear : Actor
     {
-        public float Health { get; set; }
+        float _health;
+        public float Health
+        {
+            get
+            {
+                return _health;
+            }
+            set
+            {
+                _health = Math.Min(Settings.Bear_HealthMax, Math.Max(Settings.Bear_HealthMin, value));
+            }
+        }
 
         public Prop Inventory { get; set; }
 
@@ -26,6 +37,17 @@ namespace BearGame
         public Interaction PossibleInteraction { get; private set; }
 
         public bool IsHugging { get { return ActiveInteraction != null && ActiveInteraction is Grab; } }
+
+        public override void MoveCell(GameTime time, CellPosition diff)
+        {
+            base.MoveCell(time, diff);
+
+            var grab = ActiveInteraction as Grab;
+            if (grab != null)
+            {
+                grab.Villager.MoveToCell(time, c_position);
+            }
+        }
 
         public override void Update(GameTime time)
         {
@@ -57,7 +79,7 @@ namespace BearGame
                 {
                     MoveCell(time, new CellPosition(0, 1));
                     FacingDirection = Direction.Down;
-                }                
+                }
             }
 
             //
@@ -66,13 +88,13 @@ namespace BearGame
             if (ActiveInteraction == null)
             {
                 var other = World.GetEntityInSameLocation(this);
-                if (other != null && other != this)
+                if (other != null)
                 {
-                    var inter = GetPossibleInteration(other);
-                    if (inter != null)
-                    {
-                        PossibleInteraction = inter;
-                    }
+                    PossibleInteraction = GetPossibleInteration(other);
+                }
+                else
+                {
+                    PossibleInteraction = null;
                 }
             }
             else
@@ -83,12 +105,22 @@ namespace BearGame
             //
             // Interaction input
             //
-            if (((now - _lastInteractionBeginTime) > Settings.Bear_InteractionInterval) &&
-                (keyState.IsKeyDown(Keys.Space)) &&
-                (PossibleInteraction != null)) {
-
-                BeginInteraction(time, PossibleInteraction);
-                PossibleInteraction = null;
+            if (ActiveInteraction == null)
+            {
+                if (((now - _lastInteractionBeginTime) > Settings.Bear_InteractionInterval) &&
+                    (keyState.IsKeyDown(Keys.Space)) &&
+                    (PossibleInteraction != null))
+                {
+                    BeginInteraction(time, PossibleInteraction);
+                    PossibleInteraction = null;
+                }
+            }
+            else
+            {
+                if (!(keyState.IsKeyDown(Keys.Space)))
+                {
+                    EndInteraction(time);
+                }
             }
 
             //

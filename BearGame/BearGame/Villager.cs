@@ -8,42 +8,36 @@ namespace BearGame
 {
     public class Villager : Actor
     {
-        public float Health;
-
-        float _loveValue = 0;
-        public float LoveValue
+        int _health;
+        public int Health
         {
-            get
-            {
-                return _loveValue;
-            }
+            get { return _health; }
             set
             {
-                if (value <= 0)
-                {
-                    _loveValue = 0;
-                }
-                else
-                {
-                    _loveValue = value;
-                }
+                _health = Math.Min(Settings.Person_HealthMax, Math.Max(Settings.Person_HealthMin, value));
             }
         }
-        public int Love { 
-            get { return (int)(LoveValue + 0.5f); }
-            set { LoveValue = value; }
+
+        int _love;
+        public int Love
+        {
+            get { return _love; }
+            set
+            {
+                _love = Math.Min(Settings.Person_LoveMax, Math.Max(Settings.Person_LoveMin, value));
+            }
         }
 
         public int HoneyTaken;
         public int HoneyMax;
         public int TricycleLove;
-        public float HealthRegen;
-        public float Speed;
+        public int HealthRegen;
+        public int Speed;
         const int ActivityThreshold = 7;  // how far from the bear do we update
         const int RespawnThreshold = 10;  //how far fro the bear do we put them back in their starting place
 
         // ONLY respawn them if both the villager and the respawn location are offscreen
-        public bool IsDead = false;
+        public bool IsDead { get { return Health <= Settings.Person_HealthMin; } }
 
         public GameSetting.VillagerNames Name;
         
