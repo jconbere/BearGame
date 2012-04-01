@@ -77,6 +77,11 @@ namespace BearGame
     {
         public static RandomSound DaredevilSound;
 
+        public Daredevil()
+        {
+            spritesheetIndex = 6;
+        }
+
         public override void OnBegin(Actor doer, GameTime time)
         {
             base.OnBegin(doer, time);
@@ -95,6 +100,7 @@ namespace BearGame
 
         public RideTricycle(Tricycle tri)
         {
+            spritesheetIndex = 3;
             Tricycle = tri;
         }
 
@@ -111,6 +117,11 @@ namespace BearGame
     public class GetOffTricycle : Interaction
     {
         public static RandomSound GetOffSound;
+
+        public GetOffTricycle()
+        {
+            spritesheetIndex = 4;
+        }
 
         public override void OnBegin(Actor doer, GameTime time)
         {
@@ -130,6 +141,7 @@ namespace BearGame
 
         public Grab(Villager villager)
         {
+            spritesheetIndex = 5;
             Villager = villager;
         }
 
@@ -198,6 +210,7 @@ namespace BearGame
 
         public RunOver(Villager villager)
         {
+            spritesheetIndex = 7;
             Villager = villager;
         }
 

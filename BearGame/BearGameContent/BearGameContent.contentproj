@@ -468,13 +468,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UI\contextsheet.png">
-      <Name>contextsheet</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Audio\footstep_01.wav">
       <Name>footstep_01</Name>
       <Importer>WavImporter</Importer>
@@ -697,6 +690,13 @@
     </Compile>
     <Compile Include="Achievements\Ach_Mauling_You.png">
       <Name>Ach_Mauling_You</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\contextsheet.png">
+      <Name>contextsheet</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
