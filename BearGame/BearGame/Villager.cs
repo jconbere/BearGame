@@ -27,6 +27,10 @@ namespace BearGame
                     }
                     else if (_health == Settings.Person_HealthMin)
                     {
+                        DeadSound.Play();
+                    }
+                    else if (_health == Settings.Person_HealthMin + 1)
+                    {
                         HurtBadSound.Play();
                     }
                     else
@@ -72,6 +76,7 @@ namespace BearGame
 
         public static RandomSound HurtSound;
         public static RandomSound HurtBadSound;
+        public static RandomSound DeadSound;
 
         public Villager(World world)
             : base(world)
