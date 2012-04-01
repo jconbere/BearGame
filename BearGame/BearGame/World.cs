@@ -70,8 +70,7 @@ namespace BearGame
             //
             // Load props
             //
-            var honeyTexture = content.Load<Texture2D>("Sprites\\spritesheet_bear");
-            var tricycleTexture = content.Load<Texture2D>("Sprites\\spritesheet_bear");
+            var propsTexture = content.Load<Texture2D>("Sprites\\spritesheet_items");
             _propsLayer.LoadTiles("Content\\Maps\\Props" + worldNumber + ".txt");
             for (var c = 0; c < _propsLayer.NumColumns; c++)
             {
@@ -82,14 +81,14 @@ namespace BearGame
                         case 'H':
                             {
                                 var v = new Honey(this);
-                                v.LoadContent(honeyTexture, new CellPosition(c, r), GetTilePosition(c, r));
+                                v.LoadContent(propsTexture, new CellPosition(c, r), GetTilePosition(c, r));
                                 AllProps.Add(v);
                             }
                             break;
                         case 'X':
                             {
                                 var v = new Tricycle(this);
-                                v.LoadContent(tricycleTexture, new CellPosition(c, r), GetTilePosition(c, r));
+                                v.LoadContent(propsTexture, new CellPosition(c, r), GetTilePosition(c, r));
                                 AllProps.Add(v);
                             }
                             break;

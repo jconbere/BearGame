@@ -11,5 +11,10 @@ namespace BearGame
             : base(world)
         {
         }
+
+        protected override void UpdateSpriteIndex()
+        {
+            spriteIndex = 0;
+        }
     }
 }
