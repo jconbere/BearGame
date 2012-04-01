@@ -86,6 +86,7 @@ namespace BearGame
             Achievement.AchievementSound = new RandomSound(Content, "Audio\\Achievement-mp3-sound");
 
             Bear.bearGruntSound = new RandomSound(Content, "Audio\\bear_desperate_whining_01", "Audio\\bear_desperate_whining_02", "Audio\\bear_desperate_whining_03", "Audio\\bear_desperate_whining_04", "Audio\\bear_desperate_whining_05");
+            Bear.bearHappySound = new RandomSound(Content, "Audio\\bear_happy_singing_01", "Audio\\bear_happy_singing_02", "Audio\\bear_happy_singing_03");
             Bear.PersonAwwSound = new RandomSound(Content, "Audio\\person_aww_03", "Audio\\person_aww_04");
             Bear.FootstepSound = new RandomSound(Content, 0.5f, "Audio\\footstep_01", "Audio\\footstep_02", "Audio\\footstep_03", "Audio\\footstep_04", "Audio\\footstep_05");
             //Bear.DragSound = new RandomSound(Content, "Audio\\dragging_01", "Audio\\dragging_02", "Audio\\dragging_03");

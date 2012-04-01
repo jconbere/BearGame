@@ -191,7 +191,11 @@ namespace BearGame
             }
             else
             {
-                Villager.ChangeLove(doer.Settings.Person_LoveIncreaseForHoney, time);
+                if (Villager.LoveFromHoney < doer.Settings.Person_MaxHoneyLove)
+                {
+                    Villager.LoveFromHoney += doer.Settings.Person_LoveIncreaseForHoney;
+                    Villager.ChangeLove(doer.Settings.Person_LoveIncreaseForHoney, time);
+                }
                 Villager.Health += doer.Settings.Person_HealthIncreaseForHoney;
                 honey.IsActive = false;
                 ((Bear)doer).Inventory = null;
