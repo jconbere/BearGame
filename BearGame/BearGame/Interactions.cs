@@ -9,6 +9,7 @@ namespace BearGame
     public class Interaction
     {
         public bool IsActive { get; protected set; }
+        public int spritesheetIndex { get; protected set; }
 
         public virtual void OnBegin(Actor doer, GameTime time)
         {
@@ -33,6 +34,7 @@ namespace BearGame
 
         public TakeHoney(Honey honey)
         {
+            spritesheetIndex = 1;
             Honey = honey;
         }
 
@@ -149,6 +151,7 @@ namespace BearGame
 
         public GiveHoney(Villager villager)
         {
+            spritesheetIndex = 0;
             Villager = villager;
         }
 

@@ -25,6 +25,9 @@ namespace BearGame
         SoundEffect backgroundMusic;
         SoundEffectInstance backgroundMusicInstance;
 
+        List<GameState> gameStates = new List<GameState>();
+        GameState current_GameState;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -43,11 +46,20 @@ namespace BearGame
         /// </summary>
         protected override void Initialize()
         {
+            GameState mainState = new MainGame();
+            gameStates.Add(new MainGame());
+            current_GameState = mainState;
+
             var settings = new GameSetting();
 
             camera = new Camera();
             world = new World(settings);
             view = new GameView(world);
+
+            foreach (GameState state in gameStates)
+            {
+                state.Initialize();
+            }
 
             base.Initialize();
         }
@@ -111,7 +123,7 @@ namespace BearGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Yellow);
+            GraphicsDevice.Clear(Color.White);
 
             view.Draw();
 

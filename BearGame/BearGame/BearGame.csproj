@@ -114,6 +114,7 @@
     <Compile Include="Entity.cs" />
     <Compile Include="enums.cs" />
     <Compile Include="GameSettings.cs" />
+    <Compile Include="GameState.cs" />
     <Compile Include="GameView.cs" />
     <Compile Include="Interactions.cs" />
     <Compile Include="Layer.cs" />

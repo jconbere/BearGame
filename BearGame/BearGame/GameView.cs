@@ -27,6 +27,12 @@ namespace BearGame
         Texture2D _personhurtbadTexture;
         Texture2D _persondeadTexture;
 
+        Texture2D _uiitemhoneyTexture;
+        Texture2D _uiitemtrikeTexture;
+
+        Texture2D _uicontextTexture;
+        Texture2D _uispacebarTexture;
+
         Texture2D _vignetteTexture;
 
         public GameView(World world)
@@ -57,6 +63,14 @@ namespace BearGame
 
             //Load Fonts
             _uiFont = content.Load<SpriteFont>("UI\\UIFont");
+
+            //Load UI_Items
+            _uiitemhoneyTexture = content.Load<Texture2D>("UI\\Honey");
+            _uiitemtrikeTexture = content.Load<Texture2D>("UI\\Trike");
+
+            //Load UI_Context
+            _uicontextTexture = content.Load<Texture2D>("UI\\contextsheet");
+            _uispacebarTexture = content.Load<Texture2D>("UI\\UI_SPACE");
         }
 
         public void Update(GameTime time)
@@ -84,7 +98,7 @@ namespace BearGame
             
             _uiBatch.Begin();
 
-            _uiBatch.Draw(_backgroundTexture, new Vector2(0, 0), Color.Gold);
+            _uiBatch.Draw(_backgroundTexture, new Vector2(0, 0), Color.White);
             //Draw Health Meter
             _uiBatch.Draw(_skullTexture, new Rectangle(gameViewLeft, gameViewTop - 90, _skullTexture.Width, _skullTexture.Height), Color.White);
             _uiBatch.Draw(_meterTexture, new Rectangle(gameViewLeft + _skullTexture.Width, gameViewTop - 90, (int)(_meterTexture.Width * healthPercentage), _meterTexture.Height), barColor);    
@@ -116,9 +130,34 @@ namespace BearGame
                 _uiBatch.DrawString(_uiFont, person.Name.ToString(), new Vector2(650, 155 + (peopleLegendTextSpacing * (_world.AllVillagers.IndexOf(person) + 1))), Color.White);
             }
 
+            //Draw Inventory Item
+            if (_world.Bear.Inventory != null)
+            {
+                Texture2D itemTexture = _uiitemhoneyTexture;
+                if (_world.Bear.Inventory is Honey)
+                {
+                    itemTexture = _uiitemhoneyTexture;
+                }
+                else if (_world.Bear.Inventory is Tricycle)
+                {
+                    itemTexture = _uiitemtrikeTexture;
+                }
+
+                _uiBatch.Draw(itemTexture, new Rectangle(50, 400, 120, 120), Color.White);
+            }
+
+            //Draw Context
+            if (_world.Bear.PossibleInteraction != null)
+            {
+                _uiBatch.Draw(_uispacebarTexture, new Rectangle(210, 520, 300, 60), Color.White);
+                _uiBatch.Draw(_uicontextTexture, new Vector2(450, 520), new Rectangle(_world.Bear.PossibleInteraction.spritesheetIndex * 50, 0, 50, 50), Color.White);
+                
+            }
+
             var worldRect = new Rectangle(gameViewLeft, gameViewTop, ws, ws);
 
             _uiBatch.End();
+
 
             _world.Draw(worldRect);
 
