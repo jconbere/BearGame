@@ -8,37 +8,31 @@ namespace BearGame
 {
     public class Villager : Actor
     {
-        public float Health;
-
-        float _loveValue = 0;
-        public float LoveValue
+        int _health;
+        public int Health
         {
-            get
-            {
-                return _loveValue;
-            }
+            get { return _health; }
             set
             {
-                if (value <= 0)
-                {
-                    _loveValue = 0;
-                }
-                else
-                {
-                    _loveValue = value;
-                }
+                _health = Math.Min(Settings.Person_HealthMax, Math.Max(Settings.Person_HealthMin, value));
             }
         }
-        public int Love { 
-            get { return (int)(LoveValue + 0.5f); }
-            set { LoveValue = value; }
+
+        int _love;
+        public int Love
+        {
+            get { return _love; }
+            set
+            {
+                _love = Math.Min(Settings.Person_LoveMax, Math.Max(Settings.Person_LoveMin, value));
+            }
         }
 
         public int HoneyTaken;
         public int HoneyMax;
         public int TricycleLove;
-        public float HealthRegen;
-        public float Speed;
+        public int HealthRegen;
+        public int Speed;
         const int ActivityThreshold = 7;  // how far from the bear do we update
         const int RespawnThreshold = 10;  //how far fro the bear do we put them back in their starting place
 
@@ -108,7 +102,11 @@ namespace BearGame
 
             int DeltaRow = 0;
             int DeltaCol = 0;
+            int winningindex = 0;
 
+            int P_DeltaRow = 0;
+            int P_DeltaCol = 0;
+            
             DeltaRow = this.c_position.Row - World.Bear.c_position.Row;
             DeltaCol = this.c_position.Col - World.Bear.c_position.Col;
 
@@ -119,28 +117,68 @@ namespace BearGame
             double[] ActionWeight = new double[5];
 
             
-            ActionWeight[0] = EvalWeight(this.c_position.Row, this.c_position.Col, World.Bear, 0, 0, Love);
+            ActionWeight[0] = EvalWeight(this.c_position.Row, this.c_position.Col, World.Bear,0, 0, Love);
             ActionWeight[1] = EvalWeight(this.c_position.Row, this.c_position.Col, World.Bear, 1, 0, Love);
             ActionWeight[2] = EvalWeight(this.c_position.Row, this.c_position.Col, World.Bear, -1, 0, Love);
             ActionWeight[3] = EvalWeight(this.c_position.Row, this.c_position.Col, World.Bear, 0, 1, Love);
             ActionWeight[4] = EvalWeight(this.c_position.Row, this.c_position.Col, World.Bear, 0, -1, Love);
 
-            if (Love<=3)
+            if (Love <= 3)
             {
-                //double val =0;
-                //int minindex = MaxDouble;
-                //for (int I = 0; I < 5; I++) 
-                //{
-                //    if (ActionWeight[I] < val)
-                //    {
-                //        minindex = I;
-                //    }
-                //}
-            
+                double tempval = Double.MaxValue;
+                for (int i = 0; i < 5; i++)
+                {
+                    if (ActionWeight[i] < tempval)
+                    {
+                        winningindex = i;
+                        tempval = ActionWeight[i];
+                    }
+                }
+            }
+            else 
+            {
+                double tempval=0;                
+                for (int i = 0; i < 5; i++)
+                {
+                    if (ActionWeight[i] > tempval)
+                    {
+                        winningindex = i;
+                        tempval = ActionWeight[i];
+                    }
+                }
             }
 
+            switch (winningindex)
+            { 
+                case 0:
+                    UpdateSpriteIndex();
+                break;
+                case 1:
+                    FacingDirection = Direction.Down;
+                    MoveCell(time, new CellPosition(0, 1));
+                    UpdateSpriteIndex();
+                break;
+                case 2:
+                    FacingDirection = Direction.Up;
+                    MoveCell(time, new CellPosition(0, -1));
+                    UpdateSpriteIndex();
+                    break;
+                case 3:
+                    FacingDirection = Direction.Right;
+                    MoveCell(time, new CellPosition(0, 1));
+                    UpdateSpriteIndex();
+                    break;
+                case 4:
+                    FacingDirection = Direction.Left;
+                    MoveCell(time, new CellPosition(0, -1));
+                    UpdateSpriteIndex();
+                    break;
+                default:
+                    UpdateSpriteIndex();
+                    break;
 
-            
+            }
+
             //if (Math.Abs(DeltaCol) >= Math.Abs(DeltaRow))
             //{
             //    if (DeltaCol <= 0)

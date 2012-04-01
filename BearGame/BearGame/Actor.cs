@@ -31,7 +31,24 @@ namespace BearGame
         {
             ActiveInteraction = inter;
             inter.OnBegin(this, time);
+
+            if (!inter.IsActive)
+            {
+                inter.OnEnd(this, time);
+                ActiveInteraction = null;
+            }
+
             UpdateSpriteIndex();
+        }
+
+        public void EndInteraction(GameTime time)
+        {
+            if (ActiveInteraction != null)
+            {
+                ActiveInteraction.OnEnd(this, time);
+                ActiveInteraction = null;
+                UpdateSpriteIndex();
+            }
         }
 
         public override void Update(GameTime time)
@@ -42,6 +59,11 @@ namespace BearGame
                 if (ActiveInteraction.IsActive)
                 {
                     ActiveInteraction.Update(this, time);
+
+                    if (!ActiveInteraction.IsActive)
+                    {
+                        EndInteraction(time);
+                    }
                 }
                 else
                 {
@@ -53,9 +75,13 @@ namespace BearGame
         double _lastMoveTime = 0;
         protected double LastMoveTime { get { return _lastMoveTime; } }
 
-        protected void MoveCell(GameTime time, CellPosition diff)
+        public virtual void MoveCell(GameTime time, CellPosition diff)
         {
-            var newPos = c_position + diff;
+            MoveToCell(time, c_position + diff);
+        }
+
+        public virtual void MoveToCell(GameTime time, CellPosition newPos)
+        {
             if (World.IsPassable(newPos))
             {
                 c_position = newPos;
