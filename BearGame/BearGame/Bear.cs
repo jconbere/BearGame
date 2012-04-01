@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
 
 namespace BearGame
@@ -13,7 +14,10 @@ namespace BearGame
         public static RandomSound FootstepSound;
         public static RandomSound DragSound;
         public static RandomSound TrikeSound;
+        public static RandomSound bearGruntSound;
 
+        private double lastsoundplay = 0;
+        const double sounddelay = 5;
         public static int currentFrame = 0;
         double frameSpeed
         {
@@ -131,6 +135,11 @@ namespace BearGame
 
             var now = time.TotalGameTime.TotalSeconds;
 
+            if (now - lastsoundplay > sounddelay)
+            {
+                bearGruntSound.Play();
+                lastsoundplay = now;
+            }
             //
             // Movement input
             //
