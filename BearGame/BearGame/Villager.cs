@@ -95,6 +95,7 @@ namespace BearGame
                 }
             }
             // base update
+            UpdateSpriteIndex();
         }
 
         private void Act(GameTime time)
@@ -190,7 +191,14 @@ namespace BearGame
         }
         protected override void UpdateSpriteIndex()
         {
-            spriteIndex = 16 * (int)FacingDirection;
+            if (!IsDead)
+            {
+                spriteIndex = 16 * (int)FacingDirection;
+            }
+            else
+            {
+                spriteIndex = 96;
+            }
         }
     }
 }
