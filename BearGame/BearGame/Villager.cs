@@ -9,8 +9,9 @@ namespace BearGame
 {
     public class Villager : Actor
     {
-        //static List<Vector2> Pathfind_Nodes = new List<Vector2>(new Vector2(0,0));
+        static List<CellPosition> Pathfind_Nodes;
         int _health;
+        public bool isHugging = false;
         public int Health
         {
             get { return _health; }
@@ -87,6 +88,18 @@ namespace BearGame
             this.Name = (GameSetting.VillagerNames)world.AllVillagers.Count;
             this.IsActive = true;
 
+            CellPosition[] nodes = {new CellPosition(0,1),
+                              new CellPosition(1,1),
+                              new CellPosition(1,0),
+                              new CellPosition(1,-1),
+                              new CellPosition(0,-1),
+                              new CellPosition(-1,-1),
+                              new CellPosition(-1,0),
+                              new CellPosition(-1,1)                         
+                              };
+
+            Pathfind_Nodes = new List<CellPosition>(nodes);
+
         }
 
         public override void Update(GameTime time)
@@ -111,31 +124,20 @@ namespace BearGame
 
             if (!IsDead)
             {
-                /*
-                if ((Distance(World.Bear, this) >= RespawnThreshold) &&
-                            (Math.Abs(World.Bear.c_position.Row - this.spawn_position.Row) > 6 ||
-                            Math.Abs(World.Bear.c_position.Col - this.spawn_position.Col) > 6)) // assuming 6 visual radius
-                {
-                    // force respawn
-                    if (!IsDead) this.c_position = spawn_position; // Leave bodies alone!
-                }
-
-
-                else if (Distance(World.Bear, this) <= ActivityThreshold)
-                {
-                    //do on screen stuff
-                    var now = time.TotalGameTime.TotalSeconds;
-                    if ((now - LastMoveTime) > Settings.People_MoveInterval)
-                    {
-                        Act(time);
-                    }
-                }*/
-
                 Vector2 bearDirection = targetDirecton(this, World.Bear);
 
                 ApproachDistance = Settings.Person_BaseApproachDistance - (Love - Settings.Person_InitialLove);
 
-                Speed = Speed - (Math.Abs(Settings.Person_InitialLove - Love) * SpeedStep);
+                Speed = Settings.Person_Speed - (Math.Abs(Settings.Person_InitialLove - Love) * SpeedStep);
+                if (Speed < 0.1f)
+                {
+                    Speed = 0.1f;
+                }
+                else if (Speed > 10.0f)
+                {
+                    Speed = 10.0f;
+                }
+
                 if (Math.Abs(bearDirection.X) > ActivityThreshold)
                 {
                     bearDirection.X = 0;
@@ -159,20 +161,56 @@ namespace BearGame
                     bearDirection.Y = bearDirection.Y * -1;
                 }
 
-                //Make move 1 square
-                if (bearDirection.X != 0)
-                {
-                    bearDirection.X = bearDirection.X / Math.Abs(bearDirection.X);
-                }
-                if (bearDirection.Y != 0)
-                {
-                    bearDirection.Y = bearDirection.Y / Math.Abs(bearDirection.Y);
-                }
-
                 if ((time.TotalGameTime.TotalSeconds - LastMoveTime) > (Speed))
                 {
-                    MoveCell(time, new CellPosition((int)bearDirection.X, (int)bearDirection.Y));
-                    if (bearDirection.X > 0)
+                    //Check for Hug
+                    if (Love == Settings.Person_LoveMax)
+                    {
+                        if (bearDirection.X == 0 && bearDirection.Y == 0)
+                        {
+                            //on bear initiate hugging
+                            isHugging = true;
+                        }
+
+                    }
+
+                    //Make move 1 square
+                    if (bearDirection.X != 0)
+                    {
+                        bearDirection.X = bearDirection.X / Math.Abs(bearDirection.X);
+                    }
+                    if (bearDirection.Y != 0)
+                    {
+                        bearDirection.Y = bearDirection.Y / Math.Abs(bearDirection.Y);
+                    }
+
+                    CellPosition newPos = new CellPosition((int)bearDirection.X, (int)bearDirection.Y);
+                    if (!(newPos.Row == 0 && newPos.Col == 0))
+                    {
+                        if (!World.IsPassable(this.c_position + newPos))
+                        {
+                            int indexOf = Pathfind_Nodes.FindIndex(i => i.Row == newPos.Row && i.Col == newPos.Col);
+                            int currentIndex = indexOf;
+                            for (int i = 0; i < 4; i++)
+                            {
+                                newPos = Pathfind_Nodes[(indexOf + i) % 8];
+                                if (World.IsPassable(this.c_position + newPos))
+                                {
+                                    break;
+                                }
+
+                                newPos = Pathfind_Nodes[(indexOf + i + 4) % 8];
+                                if (World.IsPassable(this.c_position + newPos))
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    MoveCell(time, newPos);
+
+                    if (newPos.Row > 0)
                     {
                         FacingDirection = Direction.Right;
                     }
@@ -181,7 +219,6 @@ namespace BearGame
                         FacingDirection = Direction.Left;
                     }
                 }
-
             }
             // base update
             UpdateSpriteIndex();
@@ -326,8 +363,28 @@ namespace BearGame
             var col = spriteIndex - row * NumColumnsInSpriteTexture;
 
             sourceRec = new Rectangle(col * World.TileSize, row * World.TileSize, World.TileSize, World.TileSize);
-            spriteBatch_IN.Draw(SpriteTexture, position, sourceRec, Color.White);
+            Color villagerColor = Color.White;
+            
+            /*switch (World.AllVillagers.IndexOf(this))
+            {
+                case 0:
+                    villagerColor = Color.Blue;
+                    break;
+                case 1:
+                    villagerColor = Color.Red;
+                    break;
+                case 2:
+                    villagerColor = Color.Green;
+                    break;
+                case 3:
+                    villagerColor = Color.Yellow;
+                    break;
+                default:
+                    break;
 
+            }*/
+            spriteBatch_IN.Draw(SpriteTexture, position, sourceRec, villagerColor);
+            
             //Draw Emotes
             if (emoteDisplayTime > 0)
             {

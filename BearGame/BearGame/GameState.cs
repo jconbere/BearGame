@@ -86,7 +86,7 @@ namespace BearGame
             GetOffTricycle.GetOffSound = new RandomSound(Content, "Audio\\bear_get_on_off_tricycle_03");
             
             Bear.PersonAwwSound = new RandomSound(Content, "Audio\\person_aww_03", "Audio\\person_aww_04");
-            Bear.FootstepSound = new RandomSound(Content, "Audio\\footstep_01", "Audio\\footstep_02", "Audio\\footstep_03", "Audio\\footstep_04", "Audio\\footstep_05");
+            Bear.FootstepSound = new RandomSound(Content, 0.5f, "Audio\\footstep_01", "Audio\\footstep_02", "Audio\\footstep_03", "Audio\\footstep_04", "Audio\\footstep_05");
             //Bear.DragSound = new RandomSound(Content, "Audio\\dragging_01", "Audio\\dragging_02", "Audio\\dragging_03");
             Bear.DragSound = new RandomSound(Content, "Audio\\spine_crunch_02");
             Bear.TrikeSound = new RandomSound(Content, "Audio\\tricycle_squeak_01", "Audio\\tricycle_squeak_02", "Audio\\tricycle_squeak_03", "Audio\\tricycle_squeak_04", "Audio\\tricycle_squeak_05");
@@ -108,6 +108,16 @@ namespace BearGame
             if (world.Bear.Health <= 0)
             {
                 requestedState = 2;
+            }
+            else
+            {
+                foreach (Villager v in world.AllVillagers)
+                {
+                    if (v.isHugging == true)
+                    {
+                        requestedState = 3;
+                    }
+                }
             }
 
         }
@@ -195,6 +205,60 @@ namespace BearGame
             _uiBatch = new SpriteBatch(graphics);
 
             splashScreen = Content.Load<Texture2D>("SplashUI\\endsplash_lose");
+        }
+
+        public override void UnloadContent(ContentManager Content)
+        {
+            requestedState = -1;
+            //Content.Unload();
+        }
+        public override void Update(GameTime gameTime)
+        {
+            var keyState = Keyboard.GetState();
+
+            //If any keys pressed
+            if (keyState.GetPressedKeys().Count<Keys>() > 0)
+            {
+                if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay || entryGameTime == 0.0)
+                {
+                    requestedState = 0;
+                }
+            }
+
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            _uiBatch.Begin();
+            _uiBatch.Draw(splashScreen, new Rectangle(0, 0, 800, 600), Color.White);
+            _uiBatch.End();
+
+        }
+    }
+
+    class EndWin : GameState
+    {
+        SpriteBatch _uiBatch;
+        Texture2D splashScreen;
+        const double GameStateDelay = 0.4;
+        double entryGameTime = 0.0f;
+
+        public EndWin()
+        {
+            requestedState = -1;
+        }
+
+
+        public override void Initialize(GameTime gameTime)
+        {
+            entryGameTime = gameTime.TotalGameTime.TotalSeconds;
+        }
+
+        public override void LoadContent(GraphicsDevice graphics, ContentManager Content)
+        {
+            _uiBatch = new SpriteBatch(graphics);
+
+            splashScreen = Content.Load<Texture2D>("SplashUI\\endsplash_win");
         }
 
         public override void UnloadContent(ContentManager Content)
