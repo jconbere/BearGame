@@ -29,6 +29,8 @@ namespace BearGame
             John
         }
 
+
+
         // Map Stuff
         public int Map_MaxWidth =64;
         public int Map_MaxHeight= 64;
