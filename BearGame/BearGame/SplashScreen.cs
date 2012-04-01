@@ -100,11 +100,11 @@ namespace BearGame
                 isDone = true;
             }
                             // determine alpha
-            float alpha = 0.5f;
+            float alpha = 1.0f;
             if(totalTime < fadeInTime)
                 alpha = MathHelper.SmoothStep(0.0f, 1.0f, totalTime/fadeInTime);
             else if(totalTime > fadeInTime + displayTime)
-                alpha = MathHelper.SmoothStep(1.0f, 0.0f, (totalTime - (fadeInTime + fadeOutTime)) / fadeOutTime);
+                alpha = MathHelper.SmoothStep(1.0f, 0.0f, (totalTime - (fadeInTime + displayTime)) / fadeOutTime);
 
             // print text onscreen until current index.
             spriteBatch.Begin();
