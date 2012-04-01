@@ -88,13 +88,13 @@ namespace BearGame
             if (ActiveInteraction == null)
             {
                 var other = World.GetEntityInSameLocation(this);
-                if (other != null && other != this)
+                if (other != null)
                 {
-                    var inter = GetPossibleInteration(other);
-                    if (inter != null)
-                    {
-                        PossibleInteraction = inter;
-                    }
+                    PossibleInteraction = GetPossibleInteration(other);
+                }
+                else
+                {
+                    PossibleInteraction = null;
                 }
             }
             else
