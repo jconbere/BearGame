@@ -51,9 +51,9 @@ namespace BearGame
         public int Person_LoveMin = 0;
         public int Person_LoveMax = 6;
         public int Person_InitialLove = 3;
-        public int Person_Speed = 1;
-        
-        public double People_MoveInterval = 1.0/4; // Seconds
+        public float Person_Speed = 1.0f; //How many seconds before moving
+        public float Person_SpeedStep = 0.2f; //Decreases this many seconds before moving for each love from initial
+        public int Person_ActivityThreshold = 2; // # of tiles person will run away/to bear
 
         public int Person_TricycleLove = 1;
         

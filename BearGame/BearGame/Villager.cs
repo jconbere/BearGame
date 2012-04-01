@@ -48,9 +48,10 @@ namespace BearGame
         public int HoneyMax;
         public int TricycleLove;
         public int HealthRegen;
-        public int Speed;
-        const int ActivityThreshold = 2;  // how far from the bear do we update
-        const int RespawnThreshold = 10;  //how far fro the bear do we put them back in their starting place
+        public float Speed = 1.0f;
+        int ActivityThreshold = 2;  // how far from the bear do we update
+        public float SpeedStep = 0.2f;
+        //const int RespawnThreshold = 10;  //how far fro the bear do we put them back in their starting place
 
         // ONLY respawn them if both the villager and the respawn location are offscreen
         public bool IsDead { get { return Health <= Settings.Person_HealthMin; } }
@@ -68,6 +69,8 @@ namespace BearGame
             this.TricycleLove = Settings.Person_TricycleLove;
             this.HealthRegen = Settings.Person_HealthRegen;
             this.Speed = Settings.Person_Speed;
+            this.SpeedStep = Settings.Person_SpeedStep;
+            this.ActivityThreshold = Settings.Person_ActivityThreshold;
             this.Name = (GameSetting.VillagerNames)world.AllVillagers.Count;
             this.IsActive = true;
 
@@ -116,7 +119,9 @@ namespace BearGame
                 }*/
 
                 Vector2 bearDirection = targetDirecton(this, World.Bear);
-                
+
+                ActivityThreshold = Settings.Person_LoveMax - Settings.Person_InitialLove;
+                Speed = Speed - (Math.Abs(Settings.Person_InitialLove - Love) * SpeedStep);
                 if (Math.Abs(bearDirection.X) >= ActivityThreshold)
                 {
                     bearDirection.X = 0;
@@ -133,12 +138,34 @@ namespace BearGame
                     bearDirection.Y = bearDirection.Y / Math.Abs(bearDirection.Y);
                 }
 
+                /*switch (Love)
+                {
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                        break;
+                    case 4:
+                        bearDirection.X = bearDirection.X * -1;
+                        bearDirection.Y = bearDirection.Y * -1;
+                        break;
+                    case 5:
+                        bearDirection.X = bearDirection.X * -1;
+                        bearDirection.Y = bearDirection.Y * -1;
+                        break;
+                    case 6:
+                        bearDirection.X = bearDirection.X * -1;
+                        bearDirection.Y = bearDirection.Y * -1;
+                        break;
+
+
+                }*/
                 if (Love > Settings.Person_InitialLove)
                 {
                     bearDirection.X = bearDirection.X * -1;
                     bearDirection.Y = bearDirection.Y * -1;
                 }
-                if ((time.TotalGameTime.TotalSeconds - LastMoveTime) > (0.5))
+                if ((time.TotalGameTime.TotalSeconds - LastMoveTime) > (Speed))
                 {
                     MoveCell(time, new CellPosition((int)bearDirection.X, (int)bearDirection.Y));
                 }
