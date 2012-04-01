@@ -144,7 +144,7 @@ namespace BearGame
             {
                 lastsoundplay = now;
 
-                if (Health / Settings.Bear_HealthMax < 0.5)
+                if (Health / Settings.Bear_HealthMax < 0.3)
                 {
                     bearGruntSound.Play();
                 }
