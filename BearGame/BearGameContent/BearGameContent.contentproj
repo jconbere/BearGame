@@ -183,16 +183,6 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="Audio\bear_cute_short_roar_02.wav">
-      <Name>bear_cute_short_roar_02</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Audio\bear_cute_short_roar_03.wav">
-      <Name>bear_cute_short_roar_03</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
     <Compile Include="Audio\bear_desperate_whining_01.wav">
       <Name>bear_desperate_whining_01</Name>
       <Importer>WavImporter</Importer>
@@ -200,11 +190,6 @@
     </Compile>
     <Compile Include="Audio\bear_desperate_whining_02.wav">
       <Name>bear_desperate_whining_02</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Audio\bear_desperate_whining_03.wav">
-      <Name>bear_desperate_whining_03</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
@@ -218,28 +203,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="Audio\bear_eat_honey_01.wav">
-      <Name>bear_eat_honey_01</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
     <Compile Include="Audio\bear_eat_honey_02.wav">
       <Name>bear_eat_honey_02</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Audio\bear_eat_honey_03.wav">
-      <Name>bear_eat_honey_03</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Audio\bear_get_on_off_tricycle_01.wav">
-      <Name>bear_get_on_off_tricycle_01</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Audio\bear_get_on_off_tricycle_02.wav">
-      <Name>bear_get_on_off_tricycle_02</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
@@ -278,18 +243,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="Audio\bear_pick_up_honey_01.wav">
-      <Name>bear_pick_up_honey_01</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
     <Compile Include="Audio\bear_pick_up_honey_02.wav">
       <Name>bear_pick_up_honey_02</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Audio\bear_pick_up_honey_03.wav">
-      <Name>bear_pick_up_honey_03</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
@@ -328,26 +283,6 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="Audio\person_afraid_05.wav">
-      <Name>person_afraid_05</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Audio\person_afraid_06.wav">
-      <Name>person_afraid_06</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Audio\person_aww_01.wav">
-      <Name>person_aww_01</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Audio\person_aww_02.wav">
-      <Name>person_aww_02</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
     <Compile Include="Audio\person_aww_03.wav">
       <Name>person_aww_03</Name>
       <Importer>WavImporter</Importer>
@@ -378,28 +313,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="Audio\person_giggle_01.wav">
-      <Name>person_giggle_01</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Audio\person_giggle_02.wav">
-      <Name>person_giggle_02</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Audio\person_giggle_03.wav">
-      <Name>person_giggle_03</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
     <Compile Include="Audio\person_giggle_04.wav">
       <Name>person_giggle_04</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Audio\person_hug_01.wav">
-      <Name>person_hug_01</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
@@ -408,28 +323,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="Audio\person_hug_03.wav">
-      <Name>person_hug_03</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Audio\person_hug_04.wav">
-      <Name>person_hug_04</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
     <Compile Include="Audio\person_huh_01.wav">
       <Name>person_huh_01</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Audio\person_huh_02.wav">
-      <Name>person_huh_02</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Audio\person_huh_03.wav">
-      <Name>person_huh_03</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
@@ -463,16 +358,6 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="Audio\person_hurt_bad_01.wav">
-      <Name>person_hurt_bad_01</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Audio\person_hurt_bad_02.wav">
-      <Name>person_hurt_bad_02</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
     <Compile Include="Audio\person_hurt_bad_03.wav">
       <Name>person_hurt_bad_03</Name>
       <Importer>WavImporter</Importer>
@@ -503,26 +388,6 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="Audio\person_love_you_03.wav">
-      <Name>person_love_you_03</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Audio\person_love_you_04.wav">
-      <Name>person_love_you_04</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Audio\person_painful_death_01.wav">
-      <Name>person_painful_death_01</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Audio\person_painful_death_02.wav">
-      <Name>person_painful_death_02</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
     <Compile Include="Audio\person_painful_death_03.wav">
       <Name>person_painful_death_03</Name>
       <Importer>WavImporter</Importer>
@@ -545,16 +410,6 @@
     </Compile>
     <Compile Include="Audio\person_thanks_02.wav">
       <Name>person_thanks_02</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Audio\person_thanks_03.wav">
-      <Name>person_thanks_03</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-    <Compile Include="Audio\person_thanks_04.wav">
-      <Name>person_thanks_04</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>

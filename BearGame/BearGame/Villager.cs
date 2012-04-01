@@ -14,7 +14,23 @@ namespace BearGame
             get { return _health; }
             set
             {
-                _health = Math.Min(Settings.Person_HealthMax, Math.Max(Settings.Person_HealthMin, value));
+                var v = Math.Min(Settings.Person_HealthMax, Math.Max(Settings.Person_HealthMin, value));
+                if (v != _health)
+                {
+                    _health = v;
+
+                    if (_health == Settings.Person_HealthDefault)
+                    {
+                    }
+                    else if (_health == Settings.Person_HealthMin)
+                    {
+                        HurtBadSound.Play();
+                    }
+                    else
+                    {
+                        HurtSound.Play();
+                    }
+                }
             }
         }
 
@@ -40,6 +56,9 @@ namespace BearGame
         public bool IsDead { get { return Health <= Settings.Person_HealthMin; } }
 
         public GameSetting.VillagerNames Name;
+
+        public static RandomSound HurtSound;
+        public static RandomSound HurtBadSound;
         
         public Villager(World world)
             : base(world)
