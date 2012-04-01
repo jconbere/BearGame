@@ -69,6 +69,7 @@ namespace BearGame
             this.HealthRegen = Settings.Person_HealthRegen;
             this.Speed = Settings.Person_Speed;
             this.Name = (GameSetting.VillagerNames)world.AllVillagers.Count;
+            this.IsActive = true;
 
         }
 
@@ -113,13 +114,9 @@ namespace BearGame
                         Act(time);
                     }
                 }*/
+
                 Vector2 bearDirection = targetDirecton(this, World.Bear);
                 
-                GameSetting.VillagerNames test = this.Name;
-                if (test == GameSetting.VillagerNames.Tania)
-                {
-                    int i = 1;
-                }
                 if (Math.Abs(bearDirection.X) >= ActivityThreshold)
                 {
                     bearDirection.X = 0;
@@ -135,8 +132,12 @@ namespace BearGame
                 if(bearDirection.Y != 0){
                     bearDirection.Y = bearDirection.Y / Math.Abs(bearDirection.Y);
                 }
-                //bearDirection.X = bearDirection.X * -1;
-                //bearDirection.Y = bearDirection.Y * -1;
+
+                if (Love > Settings.Person_InitialLove)
+                {
+                    bearDirection.X = bearDirection.X * -1;
+                    bearDirection.Y = bearDirection.Y * -1;
+                }
                 if ((time.TotalGameTime.TotalSeconds - LastMoveTime) > (0.5))
                 {
                     MoveCell(time, new CellPosition((int)bearDirection.X, (int)bearDirection.Y));
@@ -221,8 +222,10 @@ namespace BearGame
             }*/
         }
 
+        /*
         private double EvalWeight(int Col, int Row, Bear bear, int DeltaCol, int DeltaRow)
         {
+            
             double weight = 0;
 
             int BearDeltaRow = Row - bear.c_position.Row + DeltaRow;
@@ -236,8 +239,8 @@ namespace BearGame
             else
             {
                 return -1;
-            }
-        }
+            } 
+        }*/
         protected override void UpdateSpriteIndex()
         {
             if (!IsDead)
