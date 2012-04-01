@@ -103,7 +103,7 @@ namespace BearGame
                 {
                     if (v.c_position.DistanceTo(c_position) <= Settings.Bear_RidingImpressPeopleDistance)
                     {
-                        if (v.LoveFromTricycle < Settings.Person_MaxTricycleLove)
+                        if (v.LoveFromTricycle < Settings.Person_MaxTricycleLove && !v.IsDead)
                         {
                             v.LoveFromTricycle += Settings.Bear_RidingImpressLoveIncrease;
                             v.ChangeLove(Settings.Bear_RidingImpressLoveIncrease, time);
