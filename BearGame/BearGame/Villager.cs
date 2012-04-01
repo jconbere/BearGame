@@ -52,6 +52,8 @@ namespace BearGame
             }
         }
 
+        public int LoveFromTricycle { get; set; }
+
         private int prevLove;
 
         //Emote Display Times
@@ -62,7 +64,6 @@ namespace BearGame
 
         public int HoneyTaken;
         public int HoneyMax;
-        public int TricycleLove;
         public int HealthRegen;
         public float Speed = 1.0f;
         int ActivityThreshold;  // how far from the bear do we run away/follow
@@ -85,7 +86,6 @@ namespace BearGame
             this.Health = Settings.Person_HealthDefault;
             this.Love = Settings.Person_InitialLove;
             this.prevLove = this.Love;
-            this.TricycleLove = Settings.Person_TricycleLove;
             this.HealthRegen = Settings.Person_HealthRegen;
             this.Speed = Settings.Person_Speed;
             this.SpeedStep = Settings.Person_SpeedStep;

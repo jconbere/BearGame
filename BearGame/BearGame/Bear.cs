@@ -103,9 +103,12 @@ namespace BearGame
                 {
                     if (v.c_position.DistanceTo(c_position) <= Settings.Bear_RidingImpressPeopleDistance)
                     {
-                        v.ChangeLove(Settings.Bear_RidingImpressLoveIncrease, time);
-                        //v.Love += Settings.Bear_RidingImpressLoveIncrease;
-                        impressed = true;
+                        if (v.LoveFromTricycle < Settings.Person_MaxTricycleLove)
+                        {
+                            v.LoveFromTricycle += Settings.Bear_RidingImpressLoveIncrease;
+                            v.ChangeLove(Settings.Bear_RidingImpressLoveIncrease, time);
+                            impressed = true;
+                        }
                     }
                 }
                 if (impressed)
