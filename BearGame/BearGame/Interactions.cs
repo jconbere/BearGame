@@ -73,8 +73,18 @@ namespace BearGame
         }
     }
 
-    public class AchievementUnlockedDaredevil : Interaction
+    public class Daredevil : Interaction
     {
+        public static RandomSound DaredevilSound;
+
+        public override void OnBegin(Actor doer, GameTime time)
+        {
+            base.OnBegin(doer, time);
+            DaredevilSound.Play();
+            var bear = (Bear)doer;
+            bear.AddAchievement(time, new DaredevilAchievement());
+            IsActive = false;
+        }
     }
 
     public class RideTricycle : Interaction
@@ -182,6 +192,16 @@ namespace BearGame
 
     public class RunOver : Interaction
     {
+        public static RandomSound TricycleBodyImpactSound;
+
+        public override void OnBegin(Actor doer, GameTime time)
+        {
+            base.OnBegin(doer, time);
+            TricycleBodyImpactSound.Play();
+            var bear = (Bear)doer;
+            bear.AddAchievement(time, new JerkAchievement());
+            IsActive = false;
+        }
     }
 }
 

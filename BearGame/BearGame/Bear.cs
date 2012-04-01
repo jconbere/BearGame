@@ -43,6 +43,21 @@ namespace BearGame
 
         public List<Achievement> Achievements { get; private set; }
 
+        public bool AddAchievement(GameTime time, Achievement achievement)
+        {
+            var a = Achievements.FirstOrDefault(x => x.GetType() == achievement.GetType());
+            if (a == null)
+            {
+                Achievements.Add(achievement);
+                achievement.Begin(time);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         double _lastInteractionBeginTime = 0;
 
         public Interaction PossibleInteraction { get; private set; }
@@ -197,7 +212,7 @@ namespace BearGame
                 }
                 else if (Inventory is Tricycle)
                 {
-                    return new AchievementUnlockedDaredevil();
+                    return new Daredevil();
                 }
                 else
                 {
