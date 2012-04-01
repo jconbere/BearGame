@@ -64,7 +64,7 @@ namespace BearGame
         public float Bear_HealthMin = 0;
         public float Bear_HealthPerHoney = 5;
         public float Bear_HealthDefault = 100;
-        public float Bear_HealthDecreaseRate = 8; // healths / second
+        public float Bear_HealthDecreaseRate = 4; // healths / second
 
         public float Bear_HealthGainForHoney = 5;
 
