@@ -61,7 +61,11 @@ namespace BearGame
             backgroundMusic = Content.Load<SoundEffect>("Audio\\BackgroundMusic");
             backgroundMusicInstance = backgroundMusic.CreateInstance();
             backgroundMusicInstance.IsLooped = true;
+            backgroundMusicInstance.Volume = 0.5f;
             backgroundMusicInstance.Play();
+
+            Villager.HurtSound = new RandomSound(Content, "Audio\\person_hurt_01", "Audio\\person_hurt_02", "Audio\\person_hurt_03", "Audio\\person_hurt_04", "Audio\\person_hurt_05");
+            Villager.HurtBadSound = new RandomSound(Content, "Audio\\person_hurt_bad_03", "Audio\\person_hurt_bad_04", "Audio\\person_hurt_bad_05", "Audio\\person_hurt_bad_06");
 
             view.LoadContent(GraphicsDevice, Content);
 

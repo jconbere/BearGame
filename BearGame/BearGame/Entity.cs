@@ -22,12 +22,14 @@ namespace BearGame
         public GameSetting Settings { get { return World.Settings; } }
 
         public bool IsVisible { get; set; }
+        public bool IsActive { get; set; }
 
         public Entity(World world)
         {
             World = world;
             IsVisible = true;
             spriteIndex = 0;
+            UpdateSpriteIndex();
         }
 
         public Vector2 Position
