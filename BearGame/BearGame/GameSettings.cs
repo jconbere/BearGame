@@ -41,7 +41,7 @@ namespace BearGame
         public int Person_HealthDefault = 3;
 
         public int Person_HealthLossDuringHug = 1;
-        public int Person_LoveLossDuringHug = 2;
+        public int Person_LoveLossDuringHug = -2;
 
         public int Person_HealthRegen = 0;
 

@@ -50,10 +50,10 @@ namespace BearGame
             _backgroundTexture = content.Load<Texture2D>("UI\\background");
 
             //Load Villager Health Textures
-            _personhealthyTexture = content.Load<Texture2D>("UI\\personHealthy");
-            _personhurtTexture = content.Load<Texture2D>("UI\\personHurt");
-            _personhurtbadTexture = content.Load<Texture2D>("UI\\personHurtbad");
-            _persondeadTexture = content.Load<Texture2D>("UI\\personDead");
+            _personhealthyTexture = content.Load<Texture2D>("UI\\facesHealthy");
+            _personhurtTexture = content.Load<Texture2D>("UI\\facesMedium");
+            _personhurtbadTexture = content.Load<Texture2D>("UI\\facesBad");
+            _persondeadTexture = content.Load<Texture2D>("UI\\facesDead");
 
             //Load Fonts
             _uiFont = content.Load<SpriteFont>("UI\\UIFont");
@@ -65,7 +65,7 @@ namespace BearGame
 
         public void Draw()
         {
-            const int peopleLegendTextSpacing = 18;
+            const int peopleLegendTextSpacing = 20;
             var vw = 800;
             var vh = 600;
             var ws = 400;
@@ -112,8 +112,8 @@ namespace BearGame
                         break;
 
                 }
-                _uiBatch.Draw(healthTexture, new Rectangle(630, 160 + (peopleLegendTextSpacing * (_world.AllVillagers.IndexOf(person) + 1)), 10, 10), Color.White);
-                _uiBatch.DrawString(_uiFont, person.Name.ToString(), new Vector2(650, 150 + (peopleLegendTextSpacing * (_world.AllVillagers.IndexOf(person) + 1))), Color.White);
+                _uiBatch.Draw(healthTexture, new Rectangle(630, 160 + (peopleLegendTextSpacing * (_world.AllVillagers.IndexOf(person) + 1)), 16, 16), Color.White);
+                _uiBatch.DrawString(_uiFont, person.Name.ToString(), new Vector2(650, 155 + (peopleLegendTextSpacing * (_world.AllVillagers.IndexOf(person) + 1))), Color.White);
             }
 
             var worldRect = new Rectangle(gameViewLeft, gameViewTop, ws, ws);
