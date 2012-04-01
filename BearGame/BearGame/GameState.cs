@@ -220,8 +220,34 @@ namespace BearGame
             introFont = Content.Load<SpriteFont>("UI\\UIFont");
 
             //load images for the intro
-            SplashScreen tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Steam"), 2500, 5000, 5000);
+            SplashScreen tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Steam"), 2500,800, 800);
             introSplashScreens.Add(tempSplash);
+
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Criware"), 2200, 800, 800);
+            introSplashScreens.Add(tempSplash);
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Nvidia"), 1500, 700, 700);
+            introSplashScreens.Add(tempSplash);
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Havok"), 900, 600, 600);
+            introSplashScreens.Add(tempSplash);
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_UDK"), 700, 400, 400);
+            introSplashScreens.Add(tempSplash);
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Unity"), 600, 300, 300);
+            introSplashScreens.Add(tempSplash);
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_THX"), 500, 200, 200);
+            introSplashScreens.Add(tempSplash);
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Apple"), 400, 100, 100);
+            introSplashScreens.Add(tempSplash);
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Paint"), 300, 50, 50);
+            introSplashScreens.Add(tempSplash);
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_DrPepper"), 200, 50, 50);
+            introSplashScreens.Add(tempSplash);
+
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Werenotused"), 2000, 500, 500);
+            introSplashScreens.Add(tempSplash);
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Molydeux"), 2000, 500, 500);
+            introSplashScreens.Add(tempSplash);
+
+
 
             // testing, read from file or something later?
             TypingTextScreen temp = new TypingTextScreen("What if. . .\n\n\n\n\n", 100f, introFont);
@@ -230,13 +256,13 @@ namespace BearGame
             temp = new TypingTextScreen("What if you were a bear\nthat needed hugs\nto survive. . .\n", 100f, introFont);
             typingTextScreens.Add(temp);
 
-            temp = new TypingTextScreen("...But the problem is :\nYou crush the spines\nof those you embrace?\n\n", 100f, introFont);
+            temp = new TypingTextScreen("...But the problem is :\nYou crush the spines\nof those you embrace?\n         \n", 100f, introFont);
             typingTextScreens.Add(temp);
 
-            temp = new TypingTextScreen("If you were destined to hurt\n the ones you love...", 100f, introFont);
+            temp = new TypingTextScreen("If you were destined to hurt\n the ones you love...             ", 100f, introFont);
             typingTextScreens.Add(temp);
             //special case
-            temp = new TypingTextScreen("If you were destined to hurt\n the ones you love...", 100f, introFont);
+            temp = new TypingTextScreen("... Would    \n    loneliness    \n    be...", 100f, introFont);
             typingTextScreens.Add(temp);
         }
 
