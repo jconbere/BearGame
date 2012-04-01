@@ -206,7 +206,8 @@ namespace BearGame
             {
                 totalLove += v.Love;
             }
-            var darkness = (totalLove / (float)(AllVillagers.Count * Settings.Person_InitialLove)) * 0.9f + 0.1f;
+            var maxLove = AllVillagers.Count * Settings.Person_InitialLove;
+            var darkness = (totalLove < maxLove) ? ((totalLove / (float)(maxLove)) * 0.9f + 0.1f) : 1.0f;
             var overlayColor = new Color(darkness, darkness, darkness);
 
             //

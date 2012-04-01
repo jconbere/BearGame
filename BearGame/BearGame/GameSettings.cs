@@ -41,7 +41,7 @@ namespace BearGame
         public int Person_HealthDefault = 3;
 
         public int Person_HealthLossDuringHug = 1;
-        public int Person_LoveLossDuringHug = 1;
+        public int Person_LoveLossDuringHug = 2;
 
         public int Person_HealthRegen = 0;
         public int Person_HoneyWantedMin = 1;
@@ -57,12 +57,12 @@ namespace BearGame
         public int Person_TricycleLove = 1;
         
         // Bear Stuff
-        public float Bear_HealthGainDuringHug = 10; // helath per second
+        public float Bear_HealthGainDuringHug = 30; // helath per second
         public float Bear_HealthMax = 100;
         public float Bear_HealthMin = 0;
         public float Bear_HealthPerHoney = 5;
         public float Bear_HealthDefault = 100;
-        public float Bear_HealthDecreaseRate = 1; // healths / second
+        public float Bear_HealthDecreaseRate = 2; // healths / second
 
         public double Bear_MoveInterval = 1.0/3; // Seconds
 
