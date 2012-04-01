@@ -37,7 +37,7 @@ namespace BearGame
         const int RespawnThreshold = 10;  //how far fro the bear do we put them back in their starting place
 
         // ONLY respawn them if both the villager and the respawn location are offscreen
-        public bool IsDead = false;
+        public bool IsDead { get { return Health <= Settings.Person_HealthMin; } }
 
         public GameSetting.VillagerNames Name;
         
