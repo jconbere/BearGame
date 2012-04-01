@@ -18,9 +18,9 @@ namespace BearGame
     {
         GraphicsDeviceManager graphics;
 
-        Camera camera;
+        /*Camera camera;
         World world;
-        GameView view;
+        GameView view;*/
 
         SoundEffect backgroundMusic;
         SoundEffectInstance backgroundMusicInstance;
@@ -47,14 +47,8 @@ namespace BearGame
         protected override void Initialize()
         {
             GameState mainState = new MainGame();
-            gameStates.Add(new MainGame());
-            current_GameState = mainState;
-
-            var settings = new GameSetting();
-
-            camera = new Camera();
-            world = new World(settings);
-            view = new GameView(world);
+            gameStates.Add(mainState);
+            current_GameState = mainState;         
 
             foreach (GameState state in gameStates)
             {
@@ -76,6 +70,8 @@ namespace BearGame
             backgroundMusicInstance.Volume = 0.5f;
             backgroundMusicInstance.Play();
 
+            current_GameState.LoadContent(GraphicsDevice, Content);
+            /*
             Villager.HurtSound = new RandomSound(Content, "Audio\\person_hurt_01", "Audio\\person_hurt_02", "Audio\\person_hurt_03", "Audio\\person_hurt_04", "Audio\\person_hurt_05");
             Villager.HurtBadSound = new RandomSound(Content, "Audio\\person_hurt_bad_03", "Audio\\person_hurt_bad_04", "Audio\\person_hurt_bad_05", "Audio\\person_hurt_bad_06");
             TakeHoney.PickUpHoneySound = new RandomSound(Content, "Audio\\bear_pick_up_honey_02");
@@ -89,7 +85,7 @@ namespace BearGame
             view.LoadContent(GraphicsDevice, Content);
 
             var worldTiles = Content.Load<Texture2D>("Sprites\\WorldTiles");
-            world.LoadContent(GraphicsDevice, Content, 1);
+            world.LoadContent(GraphicsDevice, Content, 1);*/
         }
 
         /// <summary>
@@ -112,7 +108,8 @@ namespace BearGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            world.Update(gameTime);
+            //world.Update(gameTime);
+            current_GameState.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -125,9 +122,21 @@ namespace BearGame
         {
             GraphicsDevice.Clear(Color.White);
 
-            view.Draw();
+            current_GameState.Draw(gameTime);
+            //view.Draw();
 
             base.Draw(gameTime);
+        }
+
+        protected void switchGameStates(int index)
+        {
+            //Unload Stuff from current state
+            current_GameState.UnloadContent();
+
+            //Start Up new State
+            current_GameState = gameStates.ElementAt<GameState>(index);
+
+
         }
     }
 }
