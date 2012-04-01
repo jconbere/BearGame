@@ -24,7 +24,7 @@ namespace BearGame
 
         Layer _actorsLayer = new Layer();
 
-        WorldLoveSystem _loveSystem;
+        public WorldLoveSystem _loveSystem;
 
         public Camera Camera { get; private set; }
         

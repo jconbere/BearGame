@@ -33,6 +33,10 @@ namespace BearGame
         Texture2D _uicontextTexture;
         Texture2D _uispacebarTexture;
 
+        Texture2D _uibearcuteTexture;
+        Texture2D _uibearnormTexture;
+        Texture2D _uibearangryTexture;
+
         Texture2D _vignetteTexture;
 
         public GameView(World world)
@@ -71,6 +75,11 @@ namespace BearGame
             //Load UI_Context
             _uicontextTexture = content.Load<Texture2D>("UI\\contextsheet");
             _uispacebarTexture = content.Load<Texture2D>("UI\\UI_SPACE");
+
+            //Load UI_BearState
+            _uibearcuteTexture = content.Load<Texture2D>("UI\\UI_BearCute");
+            _uibearangryTexture = content.Load<Texture2D>("UI\\UI_BearAngry");
+            _uibearnormTexture = content.Load<Texture2D>("UI\\UI_BearNorm");
         }
 
         public void Update(GameTime time)
@@ -153,6 +162,24 @@ namespace BearGame
                 _uiBatch.Draw(_uicontextTexture, new Vector2(450, 520), new Rectangle(_world.Bear.PossibleInteraction.spritesheetIndex * 50, 0, 50, 50), Color.White);
                 
             }
+
+            //Draw Bear World State
+            float worldLove = _world._loveSystem.AverageLove;
+            Texture2D textureLove = _uibearnormTexture;
+            if (worldLove < 2.0)
+            {
+                textureLove = _uibearangryTexture;
+            }
+            else if (2.0 >= worldLove && worldLove < 3.5)
+            {
+                textureLove = _uibearnormTexture;
+            }
+            else if (worldLove >= 3.5)
+            {
+                textureLove = _uibearcuteTexture;
+            }
+
+            _uiBatch.Draw(textureLove, new Rectangle(0, 0, textureLove.Width, textureLove.Height), Color.White);
 
             var worldRect = new Rectangle(gameViewLeft, gameViewTop, ws, ws);
 
