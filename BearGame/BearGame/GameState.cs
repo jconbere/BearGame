@@ -173,7 +173,19 @@ namespace BearGame
             introFont = Content.Load<SpriteFont>("UI\\UIFont");
 
             // testing, read from file or something later?
-            TypingTextScreen temp = new TypingTextScreen("Follow the white rabbit...\n", 100f, introFont);
+            TypingTextScreen temp = new TypingTextScreen("What if. . .\n\n\n\n\n", 100f, introFont);
+            typingTextScreens.Add(temp);
+
+            temp = new TypingTextScreen("What if you were a bear\nthat needed hugs\nto survive. . .\n", 100f, introFont);
+            typingTextScreens.Add(temp);
+
+            temp = new TypingTextScreen("...But the problem is :\nYou crush the spines\nof those you embrace?\n\n", 100f, introFont);
+            typingTextScreens.Add(temp);
+
+            temp = new TypingTextScreen("If you were destined to hurt\n the ones you love...", 100f, introFont);
+            typingTextScreens.Add(temp);
+            //special case
+            temp = new TypingTextScreen("If you were destined to hurt\n the ones you love...", 100f, introFont);
             typingTextScreens.Add(temp);
         }
 
