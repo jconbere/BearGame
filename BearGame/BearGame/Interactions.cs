@@ -178,37 +178,7 @@ namespace BearGame
             }
         }
     }
-    /*
-    public class Grab : Interaction
-    {
-        public Villager Villager { get; private set; }
-
-        public Grab(Villager villager)
-        {
-            //Villager = villager;
-        }
-
-        public override void OnBegin(Actor doer, GameTime time)
-        {
-            /*
-            base.OnBegin(doer, time);
-            Villager.IsVisible = false;
-
-            Villager.ChangeLove(doer.Settings.Person_LoveLossDuringHug, time);
-            Villager.Health -= Villager.Settings.Person_HealthLossDuringHug;
-
-            if (!Villager.IsDead)
-            {
-                ((Bear)doer).Health += Villager.Settings.Bear_HealthGainDuringHug;
-            }
-        }
-
-        public override void OnEnd(Actor doer, GameTime time)
-        {
-            /*base.OnEnd(doer, time);
-            Villager.IsVisible = true;
-        }
-    }*/
+    
 
     public class RunOver : Interaction
     {

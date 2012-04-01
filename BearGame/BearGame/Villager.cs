@@ -11,6 +11,7 @@ namespace BearGame
     {
         static List<CellPosition> Pathfind_Nodes;
         int _health;
+        public bool isHugging = false;
         public int Health
         {
             get { return _health; }
@@ -171,18 +172,29 @@ namespace BearGame
                     bearDirection.Y = bearDirection.Y * -1;
                 }
 
-                //Make move 1 square
-                if (bearDirection.X != 0)
-                {
-                    bearDirection.X = bearDirection.X / Math.Abs(bearDirection.X);
-                }
-                if (bearDirection.Y != 0)
-                {
-                    bearDirection.Y = bearDirection.Y / Math.Abs(bearDirection.Y);
-                }
-
                 if ((time.TotalGameTime.TotalSeconds - LastMoveTime) > (Speed))
                 {
+                    //Check for Hug
+                    if (Love == Settings.Person_LoveMax)
+                    {
+                        if (bearDirection.X == 0 && bearDirection.Y == 0)
+                        {
+                            //on bear initiate hugging
+                            isHugging = true;
+                        }
+
+                    }
+
+                    //Make move 1 square
+                    if (bearDirection.X != 0)
+                    {
+                        bearDirection.X = bearDirection.X / Math.Abs(bearDirection.X);
+                    }
+                    if (bearDirection.Y != 0)
+                    {
+                        bearDirection.Y = bearDirection.Y / Math.Abs(bearDirection.Y);
+                    }
+
                     CellPosition newPos = new CellPosition((int)bearDirection.X, (int)bearDirection.Y);
                     if (!(newPos.Row == 0 && newPos.Col == 0))
                     {

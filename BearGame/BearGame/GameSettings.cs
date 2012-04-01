@@ -45,7 +45,7 @@ namespace BearGame
 
         public int Person_HealthRegen = 0;
 
-        public int Person_LoveIncreaseForHoney = 1;
+        public int Person_LoveIncreaseForHoney = 2;
         public int Person_HealthIncreaseForHoney = 1;
 
         public int Person_LoveMin = 0;

@@ -45,6 +45,7 @@ namespace BearGame
             gameStates.Add(new Intro());
             gameStates.Add(new MainGame());
             gameStates.Add(new End());
+            gameStates.Add(new EndWin());
             foreach (GameState state in gameStates)
             {
                 state.Initialize();
