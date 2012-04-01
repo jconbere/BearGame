@@ -63,7 +63,7 @@ namespace BearGame
 
         public SplashScreen()
         {
-            splashScreen = null;
+            splashImage = null;
             displayTime = 0;
             fadeInTime = 0;
             fadeOutTime = 0;
