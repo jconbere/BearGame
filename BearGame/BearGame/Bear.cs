@@ -15,7 +15,13 @@ namespace BearGame
         public static RandomSound TrikeSound;
 
         public static int currentFrame = 0;
-        const double frameSpeed = 1;
+        double frameSpeed
+        {
+            get
+            {
+                return TransitionInterval / 4;
+            }
+        }
         double lastAnimTime = 0;
 
         float _health;
@@ -121,6 +127,8 @@ namespace BearGame
 
         public override void Update(GameTime time)
         {
+            base.Update(time);
+
             var now = time.TotalGameTime.TotalSeconds;
 
             //
@@ -128,7 +136,7 @@ namespace BearGame
             //
             var keyState = Keyboard.GetState();
 
-            var moveInterval = (Inventory != null && Inventory is Tricycle) ? Settings.Bear_RidingMoveInterval : Settings.Bear_MoveInterval;
+            var moveInterval = TransitionInterval;
 
             if ((now - LastMoveTime) > moveInterval)
             {
@@ -207,6 +215,14 @@ namespace BearGame
                 Health = 0;
             }
             UpdateSpriteIndex(time);
+        }
+
+        protected override double TransitionInterval
+        {
+            get
+            {
+                return (Inventory != null && Inventory is Tricycle) ? Settings.Bear_RidingMoveInterval : Settings.Bear_MoveInterval;
+            }
         }
 
         public Interaction GetPossibleInteration(Entity obj)
@@ -309,7 +325,7 @@ namespace BearGame
                 spriteIndex = (16 * (int)FacingDirection) + currentFrame;
             }
 
-            if(gametime.TotalGameTime.TotalSeconds - lastAnimTime > frameSpeed)
+            if ((gametime.TotalGameTime.TotalSeconds - lastAnimTime > frameSpeed) && (IsTransitioning))
             {
                 lastAnimTime = gametime.TotalGameTime.TotalSeconds;
                 currentFrame++;

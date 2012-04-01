@@ -26,11 +26,7 @@ namespace BearGame
             }
             set
             {
-                if (_c_position != value)
-                {
-                    _c_position = value;
-                    position = _c_position.ToPixelPosition();
-                }
+                _c_position = value;
             }
         }
 

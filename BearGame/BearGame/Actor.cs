@@ -84,9 +84,11 @@ namespace BearGame
             var transF = (float)((now - _transitionStartTime) / TransitionInterval);
             if (0 <= transF && transF <= 1) {
                 Position = (_transitionToPosition - _transitionFromPosition) * transF + _transitionFromPosition;
+                IsTransitioning = true;
             }
             else {
                 Position = c_position.ToPixelPosition();
+                IsTransitioning = false;
             }            
 
             //
@@ -94,6 +96,8 @@ namespace BearGame
             //
             UpdateSpriteIndex();
         }
+
+        public bool IsTransitioning { get; private set; }
 
         double _lastMoveTime = 0;
         protected double LastMoveTime { get { return _lastMoveTime; } }
@@ -103,7 +107,7 @@ namespace BearGame
             MoveToCell(time, c_position + diff);
         }
 
-        protected virtual double TransitionInterval { get { return 1.0 / 3; } }
+        protected virtual double TransitionInterval { get { return 1.0/3; } }
 
         public void MoveToCell(GameTime time, CellPosition newPos)
         {
@@ -119,7 +123,7 @@ namespace BearGame
 
                     c_position = newPos;
 
-                    _lastMoveTime = time.TotalGameTime.TotalSeconds;
+                    _lastMoveTime = now;
                     OnMove(time);
                 }
             }
