@@ -124,26 +124,6 @@ namespace BearGame
 
             if (!IsDead)
             {
-                /*
-                if ((Distance(World.Bear, this) >= RespawnThreshold) &&
-                            (Math.Abs(World.Bear.c_position.Row - this.spawn_position.Row) > 6 ||
-                            Math.Abs(World.Bear.c_position.Col - this.spawn_position.Col) > 6)) // assuming 6 visual radius
-                {
-                    // force respawn
-                    if (!IsDead) this.c_position = spawn_position; // Leave bodies alone!
-                }
-
-
-                else if (Distance(World.Bear, this) <= ActivityThreshold)
-                {
-                    //do on screen stuff
-                    var now = time.TotalGameTime.TotalSeconds;
-                    if ((now - LastMoveTime) > Settings.People_MoveInterval)
-                    {
-                        Act(time);
-                    }
-                }*/
-
                 Vector2 bearDirection = targetDirecton(this, World.Bear);
 
                 ApproachDistance = Settings.Person_BaseApproachDistance - (Love - Settings.Person_InitialLove);
