@@ -23,7 +23,9 @@ namespace BearGame
         Texture2D _healthbarTexture;
 
         Texture2D _personhealthyTexture;
-        Texture2D _personhurtingTexture;
+        Texture2D _personhurtTexture;
+        Texture2D _personhurtbadTexture;
+        Texture2D _persondeadTexture;
 
         public GameView(World world)
         {
@@ -44,7 +46,9 @@ namespace BearGame
 
             //Load Villager Health Textures
             _personhealthyTexture = content.Load<Texture2D>("UI\\personHealthy");
-            _personhurtingTexture = content.Load<Texture2D>("UI\\personHurting");
+            _personhurtTexture = content.Load<Texture2D>("UI\\personHurt");
+            _personhurtbadTexture = content.Load<Texture2D>("UI\\personHurtbad");
+            _persondeadTexture = content.Load<Texture2D>("UI\\personDead");
 
             //Load Fonts
             _uiFont = content.Load<SpriteFont>("UI\\UIFont");
@@ -86,11 +90,20 @@ namespace BearGame
             _uiBatch.DrawString(_uiFont, "Legend", new Vector2(650, 150), Color.White);
             foreach (Villager person in _world.AllVillagers)
             {
-                Texture2D healthTexture;
-                switch (0)
+                Texture2D healthTexture = _personhealthyTexture;
+                switch (person.Health)
                 {
-                    case (0):
+                    case (3):
                         healthTexture = _personhealthyTexture;
+                        break;
+                    case (2):
+                        healthTexture = _personhurtTexture;
+                        break;
+                    case (1):
+                        healthTexture = _personhurtbadTexture;
+                        break;
+                    case (0):
+                        healthTexture = _persondeadTexture;
                         break;
 
                 }

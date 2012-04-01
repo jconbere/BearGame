@@ -143,6 +143,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UI\personHurt.png">
+      <Name>personHurt</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\personDead.png">
+      <Name>personDead</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="UI\personHealthy.png">
       <Name>personHealthy</Name>
       <Importer>TextureImporter</Importer>
@@ -150,8 +164,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UI\personHurting.png">
-      <Name>personHurting</Name>
+    <Compile Include="UI\personHurtbad.png">
+      <Name>personHurtbad</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
