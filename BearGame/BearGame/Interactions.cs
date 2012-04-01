@@ -167,9 +167,10 @@ namespace BearGame
                 Villager.Love += doer.Settings.Person_LoveIncreaseForHoney;
                 Villager.Health += doer.Settings.Person_HealthIncreaseForHoney;
                 honey.IsActive = false;
+                ((Bear)doer).Inventory = null;
                 honey.IsVisible = false;
                 PersonThanksSound.Play();
-                IsActive = false;
+                //IsActive = false;
             }
         }
     }
