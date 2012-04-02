@@ -111,7 +111,7 @@ namespace BearGame
             }
             
             _uiBatch.Begin();
-            _uiBatch.Draw(_healthbarTexture, new Rectangle(215, 0, (int)(400 * healthPercentage), 200), Color.White);
+            _uiBatch.Draw(_healthbarTexture, new Rectangle(205, 0, (int)(400 * healthPercentage), 200), Color.White);
             
             _uiBatch.Draw(_backgroundTexture, new Vector2(0, 0), Color.White);
             //Draw Health Meter
