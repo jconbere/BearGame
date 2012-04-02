@@ -119,7 +119,10 @@ namespace BearGame
             _uiBatch.Draw(_happyTexture, new Rectangle(gameViewLeft + _healthbarTexture.Width + _skullTexture.Width, gameViewTop - 90, _happyTexture.Width, _happyTexture.Height), Color.White);
             
             //Draw People Legend
-            _uiBatch.DrawString(_uiFont, "Legend", new Vector2(650, 150), Color.White);
+            //_uiBatch.DrawString(_uiFont, "Legend", new Vector2(650, 150), Color.White);
+            int yPeople = 100;
+            int xPeople = 620;
+            Color fontColor = Color.White;
             foreach (Villager person in _world.AllVillagers)
             {
                 Texture2D healthTexture = _personhealthyTexture;
@@ -127,20 +130,24 @@ namespace BearGame
                 {
                     case (3):
                         healthTexture = _personhealthyTexture;
+                        fontColor = Color.Green;
                         break;
                     case (2):
                         healthTexture = _personhurtTexture;
+                        fontColor = Color.Orange;
                         break;
                     case (1):
                         healthTexture = _personhurtbadTexture;
+                        fontColor = Color.Red;
                         break;
                     case (0):
                         healthTexture = _persondeadTexture;
+                        fontColor = Color.DarkRed;
                         break;
 
                 }
-                _uiBatch.Draw(healthTexture, new Rectangle(630, 160 + (peopleLegendTextSpacing * (_world.AllVillagers.IndexOf(person) + 1)), 16, 16), Color.White);
-                _uiBatch.DrawString(_uiFont, person.Name.ToString(), new Vector2(650, 155 + (peopleLegendTextSpacing * (_world.AllVillagers.IndexOf(person) + 1))), Color.White);
+                _uiBatch.Draw(healthTexture, new Rectangle(xPeople, yPeople + (70 * (_world.AllVillagers.IndexOf(person))), 64, 64), Color.White);
+                _uiBatch.DrawString(_uiFont, person.Name.ToString(), new Vector2(xPeople + 70, yPeople + 20 + (70 * (_world.AllVillagers.IndexOf(person)))), fontColor);
             }
 
             //Draw Inventory Item
