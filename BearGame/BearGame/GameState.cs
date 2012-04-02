@@ -134,6 +134,9 @@ namespace BearGame
                 }
             }
 
+            // get the right end game states (check for stats)
+            // DO EET!
+
         }
 
         public override void Draw(GameTime gameTime)
