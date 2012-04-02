@@ -13,6 +13,17 @@ namespace BearGame
 {
     class GameState
     {
+        public enum GameStates
+        {
+            INTRO, // 0
+            TITLE, // 1
+            MAINGAME, // 2
+            ENDNORMAL, // 3
+            ENDWIN, // 4
+            ENDPACIFISM, // 5
+            ENDKILLER // 6
+        }
+
         public int requestedState{ get; protected set;}
 
         public GameState()
@@ -109,7 +120,7 @@ namespace BearGame
             world.Update(gameTime);
             if (world.Bear.Health <= 0)
             {
-                requestedState = 2;
+                requestedState = (int)GameStates.ENDNORMAL;
             }
             else
             {
@@ -117,7 +128,8 @@ namespace BearGame
                 {
                     if (v.isHugging == true)
                     {
-                        requestedState = 3;
+                        requestedState = (int)GameStates.ENDWIN;
+;
                     }
                 }
             }
@@ -169,7 +181,7 @@ namespace BearGame
             {
                 if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay)
                 {
-                    requestedState = 2;
+                    requestedState = (int)GameStates.MAINGAME;
                 }
             }
         }
@@ -300,7 +312,13 @@ namespace BearGame
             {
                 if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay)
                 {
-                    requestedState = 1;
+                    if (currentSplashScreenIndex < introSplashScreens.Count)
+                    {
+                        currentSplashScreenIndex = introSplashScreens.Count;
+                        entryGameTime = gameTime.TotalGameTime.TotalSeconds;
+                    }
+                    else
+                        requestedState = 1;
                 }
             }
 
@@ -334,7 +352,7 @@ namespace BearGame
                 typingTextScreens.ElementAt(currentTextScreenIndex).Render(gameTime, _uiBatch);
             }
             else
-                requestedState = 1;
+                requestedState = (int)GameStates.TITLE;
         }
     }
 
@@ -377,7 +395,7 @@ namespace BearGame
             {
                 if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay || entryGameTime == 0.0)
                 {
-                    requestedState = 0;
+                    requestedState = (int)GameStates.INTRO;
                 }
             }
 
@@ -434,7 +452,115 @@ namespace BearGame
             {
                 if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay || entryGameTime == 0.0)
                 {
-                    requestedState = 0;
+                    requestedState = (int)GameStates.INTRO;
+                }
+            }
+
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            _uiBatch.Begin();
+            _uiBatch.Draw(splashScreen, new Rectangle(0, 0, 800, 600), Color.White);
+            _uiBatch.End();
+
+        }
+    }
+
+    class EndPacifism : GameState
+    {
+        SpriteBatch _uiBatch;
+        Texture2D splashScreen;
+        const double GameStateDelay = 0.4;
+        double entryGameTime = 0.0f;
+
+        public EndPacifism()
+        {
+            requestedState = -1;
+        }
+
+
+        public override void Initialize(GameTime gameTime)
+        {
+            entryGameTime = gameTime.TotalGameTime.TotalSeconds;
+        }
+
+        public override void LoadContent(GraphicsDevice graphics, ContentManager Content)
+        {
+            _uiBatch = new SpriteBatch(graphics);
+
+            splashScreen = Content.Load<Texture2D>("SplashUI\\endsplash_win");
+        }
+
+        public override void UnloadContent(ContentManager Content)
+        {
+            requestedState = -1;
+            //Content.Unload();
+        }
+        public override void Update(GameTime gameTime)
+        {
+            var keyState = Keyboard.GetState();
+
+            //If any keys pressed
+            if (keyState.GetPressedKeys().Count<Keys>() > 0)
+            {
+                if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay || entryGameTime == 0.0)
+                {
+                    requestedState = (int)GameStates.INTRO;
+                }
+            }
+
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            _uiBatch.Begin();
+            _uiBatch.Draw(splashScreen, new Rectangle(0, 0, 800, 600), Color.White);
+            _uiBatch.End();
+
+        }
+    }
+
+    class EndKiller : GameState
+    {
+        SpriteBatch _uiBatch;
+        Texture2D splashScreen;
+        const double GameStateDelay = 0.4;
+        double entryGameTime = 0.0f;
+
+        public EndKiller()
+        {
+            requestedState = -1;
+        }
+
+
+        public override void Initialize(GameTime gameTime)
+        {
+            entryGameTime = gameTime.TotalGameTime.TotalSeconds;
+        }
+
+        public override void LoadContent(GraphicsDevice graphics, ContentManager Content)
+        {
+            _uiBatch = new SpriteBatch(graphics);
+
+            splashScreen = Content.Load<Texture2D>("SplashUI\\endsplash_win");
+        }
+
+        public override void UnloadContent(ContentManager Content)
+        {
+            requestedState = -1;
+            //Content.Unload();
+        }
+        public override void Update(GameTime gameTime)
+        {
+            var keyState = Keyboard.GetState();
+
+            //If any keys pressed
+            if (keyState.GetPressedKeys().Count<Keys>() > 0)
+            {
+                if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay || entryGameTime == 0.0)
+                {
+                    requestedState = (int)GameStates.INTRO;
                 }
             }
 
