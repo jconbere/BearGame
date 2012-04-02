@@ -312,7 +312,13 @@ namespace BearGame
             {
                 if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay)
                 {
-                    requestedState = 1;
+                    if (currentSplashScreenIndex < introSplashScreens.Count)
+                    {
+                        currentSplashScreenIndex = introSplashScreens.Count;
+                        entryGameTime = gameTime.TotalGameTime.TotalSeconds;
+                    }
+                    else
+                        requestedState = 1;
                 }
             }
 
