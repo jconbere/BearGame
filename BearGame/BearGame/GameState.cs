@@ -427,7 +427,7 @@ namespace BearGame
 
 
             // testing, read from file or something later?
-            TypingTextScreen temp = new TypingTextScreen("Casting about... \nFrantic and predatory...\nYour needs have left you alone.       \nThe Lonliness is       \nUNBEARABLE", 70f, introFont);
+            TypingTextScreen temp = new TypingTextScreen("Casting about... \nFrantic and predatory...\nYour needs have left you alone.       \nThe Lonliness is       \nUNBEARABLE\n\n\n\n\n\n\n\n\n\n\n\n", 70f, introFont);
             typingTextScreens.Add(temp);
 
             //load images for the intro
