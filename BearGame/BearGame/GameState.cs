@@ -646,7 +646,7 @@ namespace BearGame
 
 
             // testing, read from file or something later?
-            TypingTextScreen temp = new TypingTextScreen("The Love.     \nThe Pain           \nWhere do you draw the line between\nyour needs and the good of others?\n                  ", 70f, introFont);
+            TypingTextScreen temp = new TypingTextScreen("The Love.     \nThe Pain.           \nWhere do you draw the line between\nyour needs and the good of others?\n                  ", 70f, introFont);
             typingTextScreens.Add(temp);
 
             //load images for the intro
