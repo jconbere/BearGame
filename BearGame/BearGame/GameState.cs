@@ -21,7 +21,8 @@ namespace BearGame
             ENDNORMAL, // 3
             ENDWIN, // 4
             ENDPACIFISM, // 5
-            ENDKILLER // 6
+            ENDKILLER, // 6
+            CREDITS //7
         }
 
         public int requestedState{ get; protected set;}
@@ -359,194 +360,48 @@ namespace BearGame
         }
     }
 
-    class End : GameState
-    {
-        SpriteBatch _uiBatch;
-        Texture2D splashScreen;
-        const double GameStateDelay = 0.4;
-        double entryGameTime = 0.0f;
-
-        public End()
-        {
-            requestedState = -1;
-        }
-
-
-        public override void Initialize(GameTime gameTime)
-        {
-            entryGameTime = gameTime.TotalGameTime.TotalSeconds;
-        }
-
-        public override void LoadContent(GraphicsDevice graphics, ContentManager Content)
-        {
-            _uiBatch = new SpriteBatch(graphics);
-
-            splashScreen = Content.Load<Texture2D>("SplashUI\\endsplash_lose");
-        }
-
-        public override void UnloadContent(ContentManager Content)
-        {
-            requestedState = -1;
-            //Content.Unload();
-        }
-        public override void Update(GameTime gameTime)
-        {
-            var keyState = Keyboard.GetState();
-
-            //If any keys pressed
-            if (keyState.GetPressedKeys().Count<Keys>() > 0)
-            {
-                if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay || entryGameTime == 0.0)
-                {
-                    requestedState = (int)GameStates.INTRO;
-                }
-            }
-
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            _uiBatch.Begin();
-            _uiBatch.Draw(splashScreen, new Rectangle(0, 0, 800, 600), Color.White);
-            _uiBatch.End();
-
-        }
-    }
-
-
-
-
-    class EndWin : GameState
-    {
-        SpriteBatch _uiBatch;
-        Texture2D splashScreen;
-        const double GameStateDelay = 0.4;
-        double entryGameTime = 0.0f;
-
-        public EndWin()
-        {
-            requestedState = -1;
-        }
-
-
-        public override void Initialize(GameTime gameTime)
-        {
-            entryGameTime = gameTime.TotalGameTime.TotalSeconds;
-        }
-
-        public override void LoadContent(GraphicsDevice graphics, ContentManager Content)
-        {
-            _uiBatch = new SpriteBatch(graphics);
-
-            splashScreen = Content.Load<Texture2D>("SplashUI\\endsplash_win");
-        }
-
-        public override void UnloadContent(ContentManager Content)
-        {
-            requestedState = -1;
-            //Content.Unload();
-        }
-        public override void Update(GameTime gameTime)
-        {
-            var keyState = Keyboard.GetState();
-
-            //If any keys pressed
-            if (keyState.GetPressedKeys().Count<Keys>() > 0)
-            {
-                if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay || entryGameTime == 0.0)
-                {
-                    requestedState = (int)GameStates.INTRO;
-                }
-            }
-
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            _uiBatch.Begin();
-            _uiBatch.Draw(splashScreen, new Rectangle(0, 0, 800, 600), Color.White);
-            _uiBatch.End();
-
-        }
-    }
-
-    class EndPacifism : GameState
-    {
-        SpriteBatch _uiBatch;
-        Texture2D splashScreen;
-        const double GameStateDelay = 0.4;
-        double entryGameTime = 0.0f;
-
-        public EndPacifism()
-        {
-            requestedState = -1;
-        }
-
-
-        public override void Initialize(GameTime gameTime)
-        {
-            entryGameTime = gameTime.TotalGameTime.TotalSeconds;
-        }
-
-        public override void LoadContent(GraphicsDevice graphics, ContentManager Content)
-        {
-            _uiBatch = new SpriteBatch(graphics);
-
-            splashScreen = Content.Load<Texture2D>("SplashUI\\endsplash_win");
-        }
-
-        public override void UnloadContent(ContentManager Content)
-        {
-            requestedState = -1;
-            //Content.Unload();
-        }
-        public override void Update(GameTime gameTime)
-        {
-            var keyState = Keyboard.GetState();
-
-            //If any keys pressed
-            if (keyState.GetPressedKeys().Count<Keys>() > 0)
-            {
-                if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay || entryGameTime == 0.0)
-                {
-                    requestedState = (int)GameStates.INTRO;
-                }
-            }
-
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            _uiBatch.Begin();
-            _uiBatch.Draw(splashScreen, new Rectangle(0, 0, 800, 600), Color.White);
-            _uiBatch.End();
-
-        }
-    }
-
     class EndKiller : GameState
     {
         SpriteBatch _uiBatch;
-        Texture2D splashScreen;
-        const double GameStateDelay = 0.4;
+        SpriteFont introFont;
+        const double GameStateDelay = 0.2;
         double entryGameTime = 0.0f;
+
+        List<SplashScreen> introSplashScreens;
+        List<TypingTextScreen> typingTextScreens;
+        int currentTextScreenIndex;
+        int currentSplashScreenIndex;
 
         public EndKiller()
         {
             requestedState = -1;
         }
 
-
         public override void Initialize(GameTime gameTime)
         {
             entryGameTime = gameTime.TotalGameTime.TotalSeconds;
+
+            typingTextScreens = new List<TypingTextScreen>();
+            introSplashScreens = new List<SplashScreen>();
+            currentTextScreenIndex = 0;
+            currentSplashScreenIndex = 0;
         }
 
         public override void LoadContent(GraphicsDevice graphics, ContentManager Content)
         {
             _uiBatch = new SpriteBatch(graphics);
 
-            splashScreen = Content.Load<Texture2D>("SplashUI\\endsplash_win");
+            // make me a font for the intro
+            introFont = Content.Load<SpriteFont>("UI\\UIFont");
+
+
+            // testing, read from file or something later?
+            TypingTextScreen temp = new TypingTextScreen("Casting about... \n frantic and predatory...\nYour needs have left you alone.       \n The Lonliness is       \nUNBEARABLE", 100f, introFont);
+            typingTextScreens.Add(temp);
+
+            //load images for the intro
+            SplashScreen tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\endsplash_lose3"), 3000, 300, 500);
+            introSplashScreens.Add(tempSplash);
         }
 
         public override void UnloadContent(ContentManager Content)
@@ -561,409 +416,428 @@ namespace BearGame
             //If any keys pressed
             if (keyState.GetPressedKeys().Count<Keys>() > 0)
             {
-                if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay || entryGameTime == 0.0)
+                if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay)
                 {
-                    requestedState = (int)GameStates.INTRO;
+                    requestedState = (int)GameStates.TITLE;
                 }
             }
 
-        }
-
-        class End_Murder : GameState
-        {
-            SpriteBatch _uiBatch;
-            SpriteFont introFont;
-            const double GameStateDelay = 0.2;
-            double entryGameTime = 0.0f;
-
-            List<SplashScreen> introSplashScreens;
-            List<TypingTextScreen> typingTextScreens;
-            int currentTextScreenIndex;
-            int currentSplashScreenIndex;
-
-            public End_Murder()
+            // update the current texttypingscreen
+            // if isDone after, select next screen
+            // same with splashscreens
+            if (!(currentSplashScreenIndex >= introSplashScreens.Count))
             {
-                requestedState = -1;
+                introSplashScreens.ElementAt(currentSplashScreenIndex).Update(gameTime);
+                if (introSplashScreens.ElementAt(currentSplashScreenIndex).IsDone)
+                    currentSplashScreenIndex++;
+            }
+            else if (!(currentTextScreenIndex >= typingTextScreens.Count))
+            {
+                typingTextScreens.ElementAt(currentTextScreenIndex).Update(gameTime);
+                if (typingTextScreens.ElementAt(currentTextScreenIndex).IsDone)
+                    currentTextScreenIndex++;
             }
 
-            public override void Initialize(GameTime gameTime)
-            {
-                entryGameTime = gameTime.TotalGameTime.TotalSeconds;
-
-                typingTextScreens = new List<TypingTextScreen>();
-                introSplashScreens = new List<SplashScreen>();
-                currentTextScreenIndex = 0;
-                currentSplashScreenIndex = 0;
-            }
-
-            public override void LoadContent(GraphicsDevice graphics, ContentManager Content)
-            {
-                _uiBatch = new SpriteBatch(graphics);
-
-                // make me a font for the intro
-                introFont = Content.Load<SpriteFont>("UI\\UIFont");
-
-
-                // testing, read from file or something later?
-                TypingTextScreen temp = new TypingTextScreen("Casting about... \n frantic and predatory...\nYour needs have left you alone.       \n The Lonliness is       \nUNBEARABLE", 100f, introFont);
-                typingTextScreens.Add(temp);
-
-                //load images for the intro
-                SplashScreen tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\endsplash_lose3"), 3000, 300, 500);
-                introSplashScreens.Add(tempSplash);
-            }
-
-            public override void UnloadContent(ContentManager Content)
-            {
-                requestedState = -1;
-                //Content.Unload();
-            }
-            public override void Update(GameTime gameTime)
-            {
-                var keyState = Keyboard.GetState();
-
-                //If any keys pressed
-                if (keyState.GetPressedKeys().Count<Keys>() > 0)
-                {
-                    if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay)
-                    {
-                        requestedState = 1;
-                    }
-                }
-
-                // update the current texttypingscreen
-                // if isDone after, select next screen
-                // same with splashscreens
-                if (!(currentSplashScreenIndex >= introSplashScreens.Count))
-                {
-                    introSplashScreens.ElementAt(currentSplashScreenIndex).Update(gameTime);
-                    if (introSplashScreens.ElementAt(currentSplashScreenIndex).IsDone)
-                        currentSplashScreenIndex++;
-                }
-                else if (!(currentTextScreenIndex >= typingTextScreens.Count))
-                {
-                    typingTextScreens.ElementAt(currentTextScreenIndex).Update(gameTime);
-                    if (typingTextScreens.ElementAt(currentTextScreenIndex).IsDone)
-                        currentTextScreenIndex++;
-                }
-
-            }
-
-            public override void Draw(GameTime gameTime)
-            {
-                if (currentSplashScreenIndex < introSplashScreens.Count)
-                {
-                    introSplashScreens.ElementAt(currentSplashScreenIndex).Render(gameTime, _uiBatch);
-                }
-                else if (currentTextScreenIndex < typingTextScreens.Count)
-                {
-                    //call the appropriate textypingscreen (from the list); pass the uiBatch!)
-                    typingTextScreens.ElementAt(currentTextScreenIndex).Render(gameTime, _uiBatch);
-                }
-                else
-                    requestedState = 1;
-            }
-        }
-
-        class End_Pacifist : GameState
-        {
-            SpriteBatch _uiBatch;
-            SpriteFont introFont;
-            const double GameStateDelay = 0.2;
-            double entryGameTime = 0.0f;
-
-            List<SplashScreen> introSplashScreens;
-            List<TypingTextScreen> typingTextScreens;
-            int currentTextScreenIndex;
-            int currentSplashScreenIndex;
-
-            public End_Pacifist()
-            {
-                requestedState = -1;
-            }
-
-            public override void Initialize(GameTime gameTime)
-            {
-                entryGameTime = gameTime.TotalGameTime.TotalSeconds;
-
-                typingTextScreens = new List<TypingTextScreen>();
-                introSplashScreens = new List<SplashScreen>();
-                currentTextScreenIndex = 0;
-                currentSplashScreenIndex = 0;
-            }
-
-            public override void LoadContent(GraphicsDevice graphics, ContentManager Content)
-            {
-                _uiBatch = new SpriteBatch(graphics);
-
-                // make me a font for the intro
-                introFont = Content.Load<SpriteFont>("UI\\UIFont");
-
-
-                // testing, read from file or something later?
-                TypingTextScreen temp = new TypingTextScreen("In taking the selfless path...   \nIn sparing those for whom you yearn...\n The Lonliness is       \nUNBEARABLE", 100f, introFont);
-                typingTextScreens.Add(temp);
-
-                //load images for the intro
-                SplashScreen tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\endsplash_lose"), 3000, 300, 500);
-                introSplashScreens.Add(tempSplash);
-            }
-
-            public override void UnloadContent(ContentManager Content)
-            {
-                requestedState = -1;
-                //Content.Unload();
-            }
-            public override void Update(GameTime gameTime)
-            {
-                var keyState = Keyboard.GetState();
-
-                //If any keys pressed
-                if (keyState.GetPressedKeys().Count<Keys>() > 0)
-                {
-                    if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay)
-                    {
-                        requestedState = 1;
-                    }
-                }
-
-                // update the current texttypingscreen
-                // if isDone after, select next screen
-                // same with splashscreens
-                if (!(currentSplashScreenIndex >= introSplashScreens.Count))
-                {
-                    introSplashScreens.ElementAt(currentSplashScreenIndex).Update(gameTime);
-                    if (introSplashScreens.ElementAt(currentSplashScreenIndex).IsDone)
-                        currentSplashScreenIndex++;
-                }
-                else if (!(currentTextScreenIndex >= typingTextScreens.Count))
-                {
-                    typingTextScreens.ElementAt(currentTextScreenIndex).Update(gameTime);
-                    if (typingTextScreens.ElementAt(currentTextScreenIndex).IsDone)
-                        currentTextScreenIndex++;
-                }
-
-            }
-
-            public override void Draw(GameTime gameTime)
-            {
-                if (currentSplashScreenIndex < introSplashScreens.Count)
-                {
-                    introSplashScreens.ElementAt(currentSplashScreenIndex).Render(gameTime, _uiBatch);
-                }
-                else if (currentTextScreenIndex < typingTextScreens.Count)
-                {
-                    //call the appropriate textypingscreen (from the list); pass the uiBatch!)
-                    typingTextScreens.ElementAt(currentTextScreenIndex).Render(gameTime, _uiBatch);
-                }
-                else
-                    requestedState = 1;
-            }
-        }
-
-        class End_Normal : GameState
-        {
-            SpriteBatch _uiBatch;
-            SpriteFont introFont;
-            const double GameStateDelay = 0.2;
-            double entryGameTime = 0.0f;
-
-            List<SplashScreen> introSplashScreens;
-            List<TypingTextScreen> typingTextScreens;
-            int currentTextScreenIndex;
-            int currentSplashScreenIndex;
-
-            public End_Normal()
-            {
-                requestedState = -1;
-            }
-
-            public override void Initialize(GameTime gameTime)
-            {
-                entryGameTime = gameTime.TotalGameTime.TotalSeconds;
-
-                typingTextScreens = new List<TypingTextScreen>();
-                introSplashScreens = new List<SplashScreen>();
-                currentTextScreenIndex = 0;
-                currentSplashScreenIndex = 0;
-            }
-
-            public override void LoadContent(GraphicsDevice graphics, ContentManager Content)
-            {
-                _uiBatch = new SpriteBatch(graphics);
-
-                // make me a font for the intro
-                introFont = Content.Load<SpriteFont>("UI\\UIFont");
-
-
-                // testing, read from file or something later?
-                TypingTextScreen temp = new TypingTextScreen("The Love.     \nThe PainThe Love.     \nWhere do you draw the line between\nyour needs and the good of others?\n                  ", 100f, introFont);
-                typingTextScreens.Add(temp);
-
-                //load images for the intro
-                SplashScreen tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\endsplash_lose2"), 3000, 300, 500);
-                introSplashScreens.Add(tempSplash);
-            }
-
-            public override void UnloadContent(ContentManager Content)
-            {
-                requestedState = -1;
-                //Content.Unload();
-            }
-            public override void Update(GameTime gameTime)
-            {
-                var keyState = Keyboard.GetState();
-
-                //If any keys pressed
-                if (keyState.GetPressedKeys().Count<Keys>() > 0)
-                {
-                    if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay)
-                    {
-                        requestedState = 1;
-                    }
-                }
-
-                // update the current texttypingscreen
-                // if isDone after, select next screen
-                // same with splashscreens
-                if (!(currentSplashScreenIndex >= introSplashScreens.Count))
-                {
-                    introSplashScreens.ElementAt(currentSplashScreenIndex).Update(gameTime);
-                    if (introSplashScreens.ElementAt(currentSplashScreenIndex).IsDone)
-                        currentSplashScreenIndex++;
-                }
-                else if (!(currentTextScreenIndex >= typingTextScreens.Count))
-                {
-                    typingTextScreens.ElementAt(currentTextScreenIndex).Update(gameTime);
-                    if (typingTextScreens.ElementAt(currentTextScreenIndex).IsDone)
-                        currentTextScreenIndex++;
-                }
-
-            }
-
-            public override void Draw(GameTime gameTime)
-            {
-                if (currentSplashScreenIndex < introSplashScreens.Count)
-                {
-                    introSplashScreens.ElementAt(currentSplashScreenIndex).Render(gameTime, _uiBatch);
-                }
-                else if (currentTextScreenIndex < typingTextScreens.Count)
-                {
-                    //call the appropriate textypingscreen (from the list); pass the uiBatch!)
-                    typingTextScreens.ElementAt(currentTextScreenIndex).Render(gameTime, _uiBatch);
-                }
-                else
-                    requestedState = 1;
-            }
-        }
-
-        class End_HappyEnd : GameState
-        {
-            SpriteBatch _uiBatch;
-            SpriteFont introFont;
-            const double GameStateDelay = 0.2;
-            double entryGameTime = 0.0f;
-
-            List<SplashScreen> introSplashScreens;
-            List<TypingTextScreen> typingTextScreens;
-            int currentTextScreenIndex;
-            int currentSplashScreenIndex;
-
-            public End_HappyEnd()
-            {
-                requestedState = -1;
-            }
-
-            public override void Initialize(GameTime gameTime)
-            {
-                entryGameTime = gameTime.TotalGameTime.TotalSeconds;
-
-                typingTextScreens = new List<TypingTextScreen>();
-                introSplashScreens = new List<SplashScreen>();
-                currentTextScreenIndex = 0;
-                currentSplashScreenIndex = 0;
-            }
-
-            public override void LoadContent(GraphicsDevice graphics, ContentManager Content)
-            {
-                _uiBatch = new SpriteBatch(graphics);
-
-                // make me a font for the intro
-                introFont = Content.Load<SpriteFont>("UI\\UIFont");
-
-
-                // testing, read from file or something later?
-                TypingTextScreen temp = new TypingTextScreen("How few are those that,\n    despite their own needs,\nfind the path to be loved by another?\n          \nto live otherwise would be...     \n\nUNBEARABLE                ", 100f, introFont);
-                typingTextScreens.Add(temp);
-
-                //load images for the intro
-                SplashScreen tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\endsplash_win"), 3000, 300, 500);
-                introSplashScreens.Add(tempSplash);
-
-                temp = new TypingTextScreen("Credits\n--------\n", 100f, introFont);
-                typingTextScreens.Add(temp);
-
-            
-            }
-
-            public override void UnloadContent(ContentManager Content)
-            {
-                requestedState = -1;
-                //Content.Unload();
-            }
-            public override void Update(GameTime gameTime)
-            {
-                var keyState = Keyboard.GetState();
-
-                //If any keys pressed
-                if (keyState.GetPressedKeys().Count<Keys>() > 0)
-                {
-                    if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay)
-                    {
-                        requestedState = 1;
-                    }
-                }
-
-                // update the current texttypingscreen
-                // if isDone after, select next screen
-                // same with splashscreens
-                if (!(currentSplashScreenIndex >= introSplashScreens.Count))
-                {
-                    introSplashScreens.ElementAt(currentSplashScreenIndex).Update(gameTime);
-                    if (introSplashScreens.ElementAt(currentSplashScreenIndex).IsDone)
-                        currentSplashScreenIndex++;
-                }
-                else if (!(currentTextScreenIndex >= typingTextScreens.Count))
-                {
-                    typingTextScreens.ElementAt(currentTextScreenIndex).Update(gameTime);
-                    if (typingTextScreens.ElementAt(currentTextScreenIndex).IsDone)
-                        currentTextScreenIndex++;
-                }
-
-            }
-
-            public override void Draw(GameTime gameTime)
-            {
-                if (currentSplashScreenIndex < introSplashScreens.Count)
-                {
-                    introSplashScreens.ElementAt(currentSplashScreenIndex).Render(gameTime, _uiBatch);
-                }
-                else if (currentTextScreenIndex < typingTextScreens.Count)
-                {
-                    //call the appropriate textypingscreen (from the list); pass the uiBatch!)
-                    typingTextScreens.ElementAt(currentTextScreenIndex).Render(gameTime, _uiBatch);
-                }
-                else
-                    requestedState = 1;
-            }
         }
 
         public override void Draw(GameTime gameTime)
         {
-            _uiBatch.Begin();
-            _uiBatch.Draw(splashScreen, new Rectangle(0, 0, 800, 600), Color.White);
-            _uiBatch.End();
+            if (currentSplashScreenIndex < introSplashScreens.Count)
+            {
+                introSplashScreens.ElementAt(currentSplashScreenIndex).Render(gameTime, _uiBatch);
+            }
+            else if (currentTextScreenIndex < typingTextScreens.Count)
+            {
+                //call the appropriate textypingscreen (from the list); pass the uiBatch!)
+                typingTextScreens.ElementAt(currentTextScreenIndex).Render(gameTime, _uiBatch);
+            }
+            else
+                requestedState = 1;
+        }
+    }
 
+    class EndPacifism : GameState
+    {
+        SpriteBatch _uiBatch;
+        SpriteFont introFont;
+        const double GameStateDelay = 0.2;
+        double entryGameTime = 0.0f;
+
+        List<SplashScreen> introSplashScreens;
+        List<TypingTextScreen> typingTextScreens;
+        int currentTextScreenIndex;
+        int currentSplashScreenIndex;
+
+        public EndPacifism()
+        {
+            requestedState = -1;
+        }
+
+        public override void Initialize(GameTime gameTime)
+        {
+            entryGameTime = gameTime.TotalGameTime.TotalSeconds;
+
+            typingTextScreens = new List<TypingTextScreen>();
+            introSplashScreens = new List<SplashScreen>();
+            currentTextScreenIndex = 0;
+            currentSplashScreenIndex = 0;
+        }
+
+        public override void LoadContent(GraphicsDevice graphics, ContentManager Content)
+        {
+            _uiBatch = new SpriteBatch(graphics);
+
+            // make me a font for the intro
+            introFont = Content.Load<SpriteFont>("UI\\UIFont");
+
+
+            // testing, read from file or something later?
+            TypingTextScreen temp = new TypingTextScreen("In taking the selfless path...   \nIn sparing those for whom you yearn...\n The Lonliness is       \nUNBEARABLE", 100f, introFont);
+            typingTextScreens.Add(temp);
+
+            //load images for the intro
+            SplashScreen tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\endsplash_lose"), 3000, 300, 500);
+            introSplashScreens.Add(tempSplash);
+        }
+
+        public override void UnloadContent(ContentManager Content)
+        {
+            requestedState = -1;
+            //Content.Unload();
+        }
+        public override void Update(GameTime gameTime)
+        {
+            var keyState = Keyboard.GetState();
+
+            //If any keys pressed
+            if (keyState.GetPressedKeys().Count<Keys>() > 0)
+            {
+                if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay)
+                {
+                    requestedState = (int)GameStates.TITLE;
+                }
+            }
+
+            // update the current texttypingscreen
+            // if isDone after, select next screen
+            // same with splashscreens
+            if (!(currentSplashScreenIndex >= introSplashScreens.Count))
+            {
+                introSplashScreens.ElementAt(currentSplashScreenIndex).Update(gameTime);
+                if (introSplashScreens.ElementAt(currentSplashScreenIndex).IsDone)
+                    currentSplashScreenIndex++;
+            }
+            else if (!(currentTextScreenIndex >= typingTextScreens.Count))
+            {
+                typingTextScreens.ElementAt(currentTextScreenIndex).Update(gameTime);
+                if (typingTextScreens.ElementAt(currentTextScreenIndex).IsDone)
+                    currentTextScreenIndex++;
+            }
+
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            if (currentSplashScreenIndex < introSplashScreens.Count)
+            {
+                introSplashScreens.ElementAt(currentSplashScreenIndex).Render(gameTime, _uiBatch);
+            }
+            else if (currentTextScreenIndex < typingTextScreens.Count)
+            {
+                //call the appropriate textypingscreen (from the list); pass the uiBatch!)
+                typingTextScreens.ElementAt(currentTextScreenIndex).Render(gameTime, _uiBatch);
+            }
+            else
+                requestedState = 1;
+        }
+    }
+
+    class End : GameState
+    {
+        SpriteBatch _uiBatch;
+        SpriteFont introFont;
+        const double GameStateDelay = 0.2;
+        double entryGameTime = 0.0f;
+
+        List<SplashScreen> introSplashScreens;
+        List<TypingTextScreen> typingTextScreens;
+        int currentTextScreenIndex;
+        int currentSplashScreenIndex;
+
+        public End()
+        {
+            requestedState = -1;
+        }
+
+        public override void Initialize(GameTime gameTime)
+        {
+            entryGameTime = gameTime.TotalGameTime.TotalSeconds;
+
+            typingTextScreens = new List<TypingTextScreen>();
+            introSplashScreens = new List<SplashScreen>();
+            currentTextScreenIndex = 0;
+            currentSplashScreenIndex = 0;
+        }
+
+        public override void LoadContent(GraphicsDevice graphics, ContentManager Content)
+        {
+            _uiBatch = new SpriteBatch(graphics);
+
+            // make me a font for the intro
+            introFont = Content.Load<SpriteFont>("UI\\UIFont");
+
+
+            // testing, read from file or something later?
+            TypingTextScreen temp = new TypingTextScreen("The Love.     \nThe PainThe Love.     \nWhere do you draw the line between\nyour needs and the good of others?\n                  ", 100f, introFont);
+            typingTextScreens.Add(temp);
+
+            //load images for the intro
+            SplashScreen tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\endsplash_lose2"), 3000, 300, 500);
+            introSplashScreens.Add(tempSplash);
+        }
+
+        public override void UnloadContent(ContentManager Content)
+        {
+            requestedState = -1;
+            //Content.Unload();
+        }
+        public override void Update(GameTime gameTime)
+        {
+            var keyState = Keyboard.GetState();
+
+            //If any keys pressed
+            if (keyState.GetPressedKeys().Count<Keys>() > 0)
+            {
+                if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay)
+                {
+                    requestedState = (int)GameStates.TITLE;
+                }
+            }
+
+            // update the current texttypingscreen
+            // if isDone after, select next screen
+            // same with splashscreens
+            if (!(currentSplashScreenIndex >= introSplashScreens.Count))
+            {
+                introSplashScreens.ElementAt(currentSplashScreenIndex).Update(gameTime);
+                if (introSplashScreens.ElementAt(currentSplashScreenIndex).IsDone)
+                    currentSplashScreenIndex++;
+            }
+            else if (!(currentTextScreenIndex >= typingTextScreens.Count))
+            {
+                typingTextScreens.ElementAt(currentTextScreenIndex).Update(gameTime);
+                if (typingTextScreens.ElementAt(currentTextScreenIndex).IsDone)
+                    currentTextScreenIndex++;
+            }
+
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            if (currentSplashScreenIndex < introSplashScreens.Count)
+            {
+                introSplashScreens.ElementAt(currentSplashScreenIndex).Render(gameTime, _uiBatch);
+            }
+            else if (currentTextScreenIndex < typingTextScreens.Count)
+            {
+                //call the appropriate textypingscreen (from the list); pass the uiBatch!)
+                typingTextScreens.ElementAt(currentTextScreenIndex).Render(gameTime, _uiBatch);
+            }
+            else
+                requestedState = 1;
+        }
+    }
+
+    class EndWin : GameState
+    {
+        SpriteBatch _uiBatch;
+        SpriteFont introFont;
+        const double GameStateDelay = 0.2;
+        double entryGameTime = 0.0f;
+
+        List<SplashScreen> introSplashScreens;
+        List<TypingTextScreen> typingTextScreens;
+        int currentTextScreenIndex;
+        int currentSplashScreenIndex;
+
+        public EndWin()
+        {
+            requestedState = -1;
+        }
+
+        public override void Initialize(GameTime gameTime)
+        {
+            entryGameTime = gameTime.TotalGameTime.TotalSeconds;
+
+            typingTextScreens = new List<TypingTextScreen>();
+            introSplashScreens = new List<SplashScreen>();
+            currentTextScreenIndex = 0;
+            currentSplashScreenIndex = 0;
+        }
+
+        public override void LoadContent(GraphicsDevice graphics, ContentManager Content)
+        {
+            _uiBatch = new SpriteBatch(graphics);
+
+            // make me a font for the intro
+            introFont = Content.Load<SpriteFont>("UI\\UIFont");
+
+
+            // testing, read from file or something later?
+            TypingTextScreen temp = new TypingTextScreen("How few are those that,\n    despite their own needs,\nfind the path to be loved by another?\n          \nto live otherwise would be...     \n\nUNBEARABLE                ", 100f, introFont);
+            typingTextScreens.Add(temp);
+
+            //load images for the intro
+            SplashScreen tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\endsplash_win"), 3000, 300, 500);
+            introSplashScreens.Add(tempSplash);
+
+            temp = new TypingTextScreen("Credits\n--------\n", 100f, introFont);
+            typingTextScreens.Add(temp);
+
+
+        }
+
+        public override void UnloadContent(ContentManager Content)
+        {
+            requestedState = -1;
+            //Content.Unload();
+        }
+        public override void Update(GameTime gameTime)
+        {
+            var keyState = Keyboard.GetState();
+
+            //If any keys pressed
+            if (keyState.GetPressedKeys().Count<Keys>() > 0)
+            {
+                if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay)
+                {
+                    requestedState = (int)GameStates.CREDITS;
+                }
+            }
+
+            // update the current texttypingscreen
+            // if isDone after, select next screen
+            // same with splashscreens
+            if (!(currentSplashScreenIndex >= introSplashScreens.Count))
+            {
+                introSplashScreens.ElementAt(currentSplashScreenIndex).Update(gameTime);
+                if (introSplashScreens.ElementAt(currentSplashScreenIndex).IsDone)
+                    currentSplashScreenIndex++;
+            }
+            else if (!(currentTextScreenIndex >= typingTextScreens.Count))
+            {
+                typingTextScreens.ElementAt(currentTextScreenIndex).Update(gameTime);
+                if (typingTextScreens.ElementAt(currentTextScreenIndex).IsDone)
+                    currentTextScreenIndex++;
+            }
+
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            if (currentSplashScreenIndex < introSplashScreens.Count)
+            {
+                introSplashScreens.ElementAt(currentSplashScreenIndex).Render(gameTime, _uiBatch);
+            }
+            else if (currentTextScreenIndex < typingTextScreens.Count)
+            {
+                //call the appropriate textypingscreen (from the list); pass the uiBatch!)
+                typingTextScreens.ElementAt(currentTextScreenIndex).Render(gameTime, _uiBatch);
+            }
+            else
+                requestedState = 1;
+        }
+    }
+
+    class Credits : GameState
+    {
+        SpriteBatch _uiBatch;
+        SpriteFont introFont;
+        const double GameStateDelay = 0.2;
+        double entryGameTime = 0.0f;
+
+        List<SplashScreen> introSplashScreens;
+        List<TypingTextScreen> typingTextScreens;
+        int currentTextScreenIndex;
+        int currentSplashScreenIndex;
+
+        public Credits()
+        {
+            requestedState = -1;
+        }
+
+        public override void Initialize(GameTime gameTime)
+        {
+            entryGameTime = gameTime.TotalGameTime.TotalSeconds;
+
+            typingTextScreens = new List<TypingTextScreen>();
+            introSplashScreens = new List<SplashScreen>();
+            currentTextScreenIndex = 0;
+            currentSplashScreenIndex = 0;
+        }
+
+        public override void LoadContent(GraphicsDevice graphics, ContentManager Content)
+        {
+            _uiBatch = new SpriteBatch(graphics);
+
+            // make me a font for the intro
+            introFont = Content.Load<SpriteFont>("UI\\UIFont");
+
+
+            // testing, read from file or something later?
+            TypingTextScreen temp = new TypingTextScreen("CREDITS WHEEEEEEEEE              ", 100f, introFont);
+            typingTextScreens.Add(temp);
+        }
+
+        public override void UnloadContent(ContentManager Content)
+        {
+            requestedState = -1;
+            //Content.Unload();
+        }
+        public override void Update(GameTime gameTime)
+        {
+            var keyState = Keyboard.GetState();
+
+            //If any keys pressed
+            if (keyState.GetPressedKeys().Count<Keys>() > 0)
+            {
+                if (gameTime.TotalGameTime.TotalSeconds - entryGameTime > GameStateDelay)
+                {
+                    requestedState = (int)GameStates.TITLE;
+                }
+            }
+
+            // update the current texttypingscreen
+            // if isDone after, select next screen
+            // same with splashscreens
+            if (!(currentSplashScreenIndex >= introSplashScreens.Count))
+            {
+                introSplashScreens.ElementAt(currentSplashScreenIndex).Update(gameTime);
+                if (introSplashScreens.ElementAt(currentSplashScreenIndex).IsDone)
+                    currentSplashScreenIndex++;
+            }
+            else if (!(currentTextScreenIndex >= typingTextScreens.Count))
+            {
+                typingTextScreens.ElementAt(currentTextScreenIndex).Update(gameTime);
+                if (typingTextScreens.ElementAt(currentTextScreenIndex).IsDone)
+                    currentTextScreenIndex++;
+            }
+
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            if (currentSplashScreenIndex < introSplashScreens.Count)
+            {
+                introSplashScreens.ElementAt(currentSplashScreenIndex).Render(gameTime, _uiBatch);
+            }
+            else if (currentTextScreenIndex < typingTextScreens.Count)
+            {
+                //call the appropriate textypingscreen (from the list); pass the uiBatch!)
+                typingTextScreens.ElementAt(currentTextScreenIndex).Render(gameTime, _uiBatch);
+            }
+            else
+                requestedState = 1;
         }
     }
 }
