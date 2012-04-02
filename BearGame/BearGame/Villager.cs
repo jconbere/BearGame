@@ -23,20 +23,24 @@ namespace BearGame
                 {
                     _health = v;
 
-                    if (_health == Settings.Person_HealthDefault)
-                    {
-                    }
-                    else if (_health == Settings.Person_HealthMin)
-                    {
-                        DeadSound.Play();
-                    }
-                    else if (_health == Settings.Person_HealthMin + 1)
+                    var volume = 0.25f;
+                    var sound = HurtSound;
+
+                    if (_health == Settings.Person_HealthDefault - 2)
                     {
                         HurtBadSound.Play();
+                        volume = 0.5f;
                     }
-                    else
+                    else if (_health == Settings.Person_HealthDefault - 3)
                     {
-                        HurtSound.Play();
+                        HurtBadSound.Play();
+                        volume = 1.0f;
+                    }
+
+                    if (_health != Settings.Person_HealthDefault)
+                    {
+                        sound.Play(volume);
+                        DeadSound.Play(volume);
                     }
                 }
             }
