@@ -26,9 +26,9 @@ namespace BearGame
             _volume = volume;
         }
 
-        public void Play()
+        public void Play(float volume = 1.0f)
         {
-            _sounds[_rand.Next(_sounds.Count)].Play();
+            _sounds[_rand.Next(_sounds.Count)].Play(volume, 0, 0);
         }
     }
 }
