@@ -53,6 +53,7 @@ namespace BearGame
         }
 
         public int LoveFromTricycle { get; set; }
+        public int LoveFromHoney { get; set; }
 
         private int prevLove;
 
