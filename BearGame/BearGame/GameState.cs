@@ -896,6 +896,11 @@ namespace BearGame
                 //load images for the intro
                 SplashScreen tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\endsplash_win"), 3000, 300, 500);
                 introSplashScreens.Add(tempSplash);
+
+                temp = new TypingTextScreen("Credits\n--------\n", 100f, introFont);
+                typingTextScreens.Add(temp);
+
+            
             }
 
             public override void UnloadContent(ContentManager Content)
