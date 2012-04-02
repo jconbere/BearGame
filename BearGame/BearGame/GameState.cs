@@ -65,7 +65,7 @@ namespace BearGame
         protected Camera camera;
         protected World world;
         protected GameView view;
-        protected int totalLove;
+        //protected int totalLove;
 
         public MainGame()
         {
@@ -121,18 +121,48 @@ namespace BearGame
             world.Update(gameTime);
             if (world.Bear.Health <= 0)
             {
-                requestedState = (int)GameStates.ENDNORMAL;
-            }
-            else
-            {
+                bool allAlive = true;
                 foreach (Villager v in world.AllVillagers)
                 {
+                    if (v.IsDead)
+                    {
+                        allAlive = false;
+                    }
+                }
+                if (allAlive)
+                {
+                    requestedState = (int)GameStates.ENDPACIFISM;
+                    return;             
+                }
+
+                requestedState = (int)GameStates.ENDNORMAL;
+                return;
+            }
+
+            foreach (Villager v in world.AllVillagers)
+            {
                     if (v.isHugging == true)
                     {
                         requestedState = (int)GameStates.ENDWIN;
                         return;
                     }
+                
+            }
+
+            bool allDead = true;
+            foreach (Villager v in world.AllVillagers)
+            {
+                if (v.IsDead == false)
+                {
+                    allDead = false;
                 }
+
+            }
+
+            if (allDead)
+            {
+                requestedState = (int)GameStates.ENDKILLER;
+                return;
             }
 
             // get the right end game states (check for stats)
