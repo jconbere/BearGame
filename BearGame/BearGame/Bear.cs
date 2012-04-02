@@ -148,11 +148,11 @@ namespace BearGame
 
                 if (Health / Settings.Bear_HealthMax < 0.3)
                 {
-                    bearGruntSound.Play();
+                    bearGruntSound.Play(0.5f);
                 }
                 else if (Health / Settings.Bear_HealthMax > 0.7)
                 {
-                    bearHappySound.Play();
+                    bearHappySound.Play(0.5f);
                 }
             }
             //
