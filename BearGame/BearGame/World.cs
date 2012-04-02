@@ -60,6 +60,15 @@ namespace BearGame
             AllProps = new List<Prop>();
         }
 
+        public void UnloadContent(ContentManager content)
+        {
+            _loveSystem.UnloadContent(content);
+            foreach (var e in AllEntities)
+            {
+                e.UnloadContent(content);
+            }
+        }
+
         public void LoadContent(GraphicsDevice device, ContentManager content, int worldNumber)
         {
             spriteBatch = new SpriteBatch(device);

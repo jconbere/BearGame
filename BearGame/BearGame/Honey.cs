@@ -27,6 +27,16 @@ namespace BearGame
 
             base.LoadContent(texture_IN, cellPosition, pixelPosition);
         }
+
+        public override void UnloadContent(Microsoft.Xna.Framework.Content.ContentManager content)
+        {
+            base.UnloadContent(content);
+            if (_buzzInstance != null)
+            {
+                _buzzInstance.Stop();
+            }
+        }
+
         public override void Update(Microsoft.Xna.Framework.GameTime time)
         {
             if (this.IsVisible)

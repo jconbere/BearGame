@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 
 namespace BearGame
 {
@@ -66,6 +67,10 @@ namespace BearGame
 
             SpriteTexture = texture_IN;
             NumColumnsInSpriteTexture = SpriteTexture.Width / World.TileSize;
+        }
+
+        public virtual void UnloadContent(ContentManager content)
+        {
         }
 
         public virtual void Update(GameTime time)
