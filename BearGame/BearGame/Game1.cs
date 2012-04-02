@@ -47,6 +47,8 @@ namespace BearGame
             gameStates.Add(new MainGame());
             gameStates.Add(new End());
             gameStates.Add(new EndWin());
+            gameStates.Add(new EndPacifism());
+            gameStates.Add(new EndKiller());
 
             base.Initialize();
         }
