@@ -436,7 +436,7 @@ namespace BearGame
 
 
             // testing, read from file or something later?
-            TypingTextScreen temp = new TypingTextScreen("Casting about... \nFrantic and predatory...\nYour needs have left you alone.       \nThe Lonliness is       \nUNBEARABLE\n\n\n\n\n\n\n\n\n\n\n\n", 70f, introFont);
+            TypingTextScreen temp = new TypingTextScreen("Casting about... \nFrantic and predatory...\nYour needs have left you alone.       \nThe Loneliness is       \nUNBEARABLE\n\n\n\n\n\n\n\n\n\n\n\n", 70f, introFont);
             typingTextScreens.Add(temp);
 
             //load images for the intro
@@ -758,9 +758,6 @@ namespace BearGame
             SplashScreen tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\endsplash_win"), 3000, 300, 500);
             introSplashScreens.Add(tempSplash);
 
-            temp = new TypingTextScreen("Credits\n--------\n", 100f, introFont);
-            typingTextScreens.Add(temp);
-
 
         }
 
@@ -852,8 +849,7 @@ namespace BearGame
 
 
             // testing, read from file or something later?
-            TypingTextScreen temp = new TypingTextScreen("CREDITS:\nAvery Alix\nFrank Krueger\nJohn Conbere\nTania Pavlisak\nDave Pavlisak\nJohn McLaughlin\n                 \nSPECIAL THANKS TO:\n------------------\n "+
-                "Luke McKay\nAdam Smith-Kipnis\nJohanna Nutter\nCollin Moore\nCasey Egan\nMisty Nickle\nPeter Molyneux\nPeter Molydeux             \n                           ", 70f, introFont);
+            TypingTextScreen temp = new TypingTextScreen("Avery Alix\nFrank Krueger\nJohn Conbere\nTania Pavlisak\nDave Pavlisak\nJohn McLaughlin\n                 \nSPECIAL THANKS TO:\n------------------\n               Luke McKay\nAdam Smith-Kipnis\nJohanna Nutter\nCollin Moore\nCasey Egan\nMisty Nickle\nPeter Molyneux\nPeter Molydeux             \n                           ", 70f, introFont);
             typingTextScreens.Add(temp);
         }
 
