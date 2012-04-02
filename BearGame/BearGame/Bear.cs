@@ -297,7 +297,15 @@ namespace BearGame
                 }
                 else if (Inventory is Honey)
                 {
-                    return new GiveHoney((Villager)obj);
+                    var v = (Villager)obj;
+                    if (!v.IsDead)
+                    {
+                        return new GiveHoney(v);
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
                 else if (Inventory is Tricycle)
                 {
