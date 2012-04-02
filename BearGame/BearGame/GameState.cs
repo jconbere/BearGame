@@ -97,11 +97,12 @@ namespace BearGame
             Achievement.AchievementSound = new RandomSound(Content, "Audio\\Achievement-mp3-sound");
 
             Bear.bearGruntSound = new RandomSound(Content, "Audio\\bear_desperate_whining_01", "Audio\\bear_desperate_whining_02", "Audio\\bear_desperate_whining_03", "Audio\\bear_desperate_whining_04", "Audio\\bear_desperate_whining_05");
+            Bear.bearHappySound = new RandomSound(Content, "Audio\\bear_happy_singing_01", "Audio\\bear_happy_singing_02", "Audio\\bear_happy_singing_03");
             Bear.PersonAwwSound = new RandomSound(Content, "Audio\\person_aww_03", "Audio\\person_aww_04");
-            Bear.FootstepSound = new RandomSound(Content, 0.5f, "Audio\\footstep_01", "Audio\\footstep_02", "Audio\\footstep_03", "Audio\\footstep_04", "Audio\\footstep_05");
+            Bear.FootstepSound = new RandomSound(Content, 0.25f, "Audio\\footstep_01", "Audio\\footstep_02", "Audio\\footstep_03", "Audio\\footstep_04", "Audio\\footstep_05");
             //Bear.DragSound = new RandomSound(Content, "Audio\\dragging_01", "Audio\\dragging_02", "Audio\\dragging_03");
-            Bear.DragSound = new RandomSound(Content, 0.5f, "Audio\\thump_03");
-            Bear.TrikeSound = new RandomSound(Content, "Audio\\tricycle_squeak_01", "Audio\\tricycle_squeak_02", "Audio\\tricycle_squeak_03", "Audio\\tricycle_squeak_04", "Audio\\tricycle_squeak_05");
+            Bear.DragSound = new RandomSound(Content, 0.25f, "Audio\\thump_03");
+            Bear.TrikeSound = new RandomSound(Content, 0.25f, "Audio\\tricycle_squeak_01", "Audio\\tricycle_squeak_02", "Audio\\tricycle_squeak_03", "Audio\\tricycle_squeak_04", "Audio\\tricycle_squeak_05");
             Entity.emotes = Content.Load<Texture2D>("Sprites\\Emotes");
 
             view.LoadContent(graphics, Content);
@@ -232,8 +233,34 @@ namespace BearGame
             introFont = Content.Load<SpriteFont>("UI\\UIFont");
 
             //load images for the intro
-            SplashScreen tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Steam"), 2500, 5000, 5000);
+            SplashScreen tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Steam"), 700,300, 300);
             introSplashScreens.Add(tempSplash);
+
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Criware"), 500, 200, 200);
+            introSplashScreens.Add(tempSplash);
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Nvidia"), 300, 200, 200);
+            introSplashScreens.Add(tempSplash);
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Havok"), 200, 100, 100);
+            introSplashScreens.Add(tempSplash);
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_UDK"), 200, 100, 100);
+            introSplashScreens.Add(tempSplash);
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Unity"), 200, 100, 100);
+            introSplashScreens.Add(tempSplash);
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_THX"), 100, 50, 50);
+            introSplashScreens.Add(tempSplash);
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Apple"), 100, 50, 50);
+            introSplashScreens.Add(tempSplash);
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Paint"), 100, 50, 50);
+            introSplashScreens.Add(tempSplash);
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_DrPepper"), 200, 50, 50);
+            introSplashScreens.Add(tempSplash);
+
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Werenotused"), 2000, 500, 500);
+            introSplashScreens.Add(tempSplash);
+            tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Molydeux"), 2000, 500, 500);
+            introSplashScreens.Add(tempSplash);
+
+
 
             // testing, read from file or something later?
             TypingTextScreen temp = new TypingTextScreen("What if. . .\n\n\n\n\n", 100f, introFont);
@@ -242,13 +269,13 @@ namespace BearGame
             temp = new TypingTextScreen("What if you were a bear\nthat needed hugs\nto survive. . .\n", 100f, introFont);
             typingTextScreens.Add(temp);
 
-            temp = new TypingTextScreen("...But the problem is :\nYou crush the spines\nof those you embrace?\n\n", 100f, introFont);
+            temp = new TypingTextScreen("...But the problem is :\nYou crush the spines\nof those you embrace?\n         \n", 100f, introFont);
             typingTextScreens.Add(temp);
 
-            temp = new TypingTextScreen("If you were destined to hurt\n the ones you love...", 100f, introFont);
+            temp = new TypingTextScreen("If you were destined to hurt\n the ones you love...             ", 100f, introFont);
             typingTextScreens.Add(temp);
             //special case
-            temp = new TypingTextScreen("If you were destined to hurt\n the ones you love...", 100f, introFont);
+            temp = new TypingTextScreen("... Would    \n    loneliness    \n ", 100f, introFont);
             typingTextScreens.Add(temp);
         }
 
