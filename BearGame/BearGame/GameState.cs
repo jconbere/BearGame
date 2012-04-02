@@ -265,7 +265,7 @@ namespace BearGame
             _uiBatch = new SpriteBatch(graphics);
 
             // make me a font for the intro
-            introFont = Content.Load<SpriteFont>("UI\\UIFont");
+            introFont = Content.Load<SpriteFont>("UI\\IntroFont");
 
             //load images for the intro
             SplashScreen tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Steam"), 700,300, 300);
@@ -298,19 +298,19 @@ namespace BearGame
 
 
             // testing, read from file or something later?
-            TypingTextScreen temp = new TypingTextScreen("What if. . .\n\n\n\n\n", 100f, introFont);
+            TypingTextScreen temp = new TypingTextScreen("What if. . .\n\n\n\n\n", 70f, introFont);
             typingTextScreens.Add(temp);
 
-            temp = new TypingTextScreen("What if you were a bear\nthat needed hugs\nto survive. . .\n               ", 100f, introFont);
+            temp = new TypingTextScreen("What if you were a bear\nthat needed hugs\nto survive. . .\n               ", 70f, introFont);
             typingTextScreens.Add(temp);
 
-            temp = new TypingTextScreen("...But the problem is :\nYou crush the spines\nof those you embrace?\n                      \n", 100f, introFont);
+            temp = new TypingTextScreen("...But the problem is :\nYou crush the spines\nof those you embrace?\n                      \n", 70f, introFont);
             typingTextScreens.Add(temp);
 
-            temp = new TypingTextScreen("If you were destined to hurt\nthe ones you love...               ", 100f, introFont);
+            temp = new TypingTextScreen("If you were destined to hurt\nthe ones you love...               ", 70f, introFont);
             typingTextScreens.Add(temp);
             //special case
-            temp = new TypingTextScreen("... Would    \n    jealousy    \n ", 100f, introFont);
+            temp = new TypingTextScreen("... Would    \n    jealousy    \n ", 70f, introFont);
             typingTextScreens.Add(temp);
             temp = new TypingTextScreen("    fear          ", 10f, introFont);
             typingTextScreens.Add(temp);
@@ -328,7 +328,7 @@ namespace BearGame
             typingTextScreens.Add(temp);
             temp = new TypingTextScreen("    love          ", 10f, introFont);
             typingTextScreens.Add(temp);
-            temp = new TypingTextScreen("    loneliness\n be...\n       ", 100f, introFont);
+            temp = new TypingTextScreen("    loneliness be...\n       ", 70f, introFont);
             typingTextScreens.Add(temp);
         }
 
@@ -427,7 +427,7 @@ namespace BearGame
 
 
             // testing, read from file or something later?
-            TypingTextScreen temp = new TypingTextScreen("Casting about... \nFrantic and predatory...\nYour needs have left you alone.       \nThe Lonliness is       \nUNBEARABLE", 100f, introFont);
+            TypingTextScreen temp = new TypingTextScreen("Casting about... \nFrantic and predatory...\nYour needs have left you alone.       \nThe Lonliness is       \nUNBEARABLE", 70f, introFont);
             typingTextScreens.Add(temp);
 
             //load images for the intro
@@ -524,7 +524,7 @@ namespace BearGame
 
 
             // testing, read from file or something later?
-            TypingTextScreen temp = new TypingTextScreen("In taking the selfless path...   \nIn sparing those for whom you yearn...\nThe Lonliness is       \nUNBEARABLE              ", 100f, introFont);
+            TypingTextScreen temp = new TypingTextScreen("In taking the selfless path...   \nIn sparing those for whom you yearn...\nThe Lonliness is       \nUNBEARABLE              ", 70f, introFont);
             typingTextScreens.Add(temp);
 
             //load images for the intro
@@ -646,7 +646,7 @@ namespace BearGame
 
 
             // testing, read from file or something later?
-            TypingTextScreen temp = new TypingTextScreen("The Love.     \nThe Pain           \nWhere do you draw the line between\nyour needs and the good of others?\n                  ", 100f, introFont);
+            TypingTextScreen temp = new TypingTextScreen("The Love.     \nThe Pain           \nWhere do you draw the line between\nyour needs and the good of others?\n                  ", 70f, introFont);
             typingTextScreens.Add(temp);
 
             //load images for the intro
@@ -742,7 +742,7 @@ namespace BearGame
 
 
             // testing, read from file or something later?
-            TypingTextScreen temp = new TypingTextScreen("How few are those that,\n    despite their own needs,\nfind the path to be loved by another?\n          \nto live otherwise would be...     \n\nUNBEARABLE                ", 100f, introFont);
+            TypingTextScreen temp = new TypingTextScreen("How few are those that,\n    despite their own needs,\nfind the path to be loved by another?\n          \nto live otherwise would be...     \n\nUNBEARABLE                ", 70f, introFont);
             typingTextScreens.Add(temp);
 
             //load images for the intro
@@ -844,7 +844,7 @@ namespace BearGame
 
             // testing, read from file or something later?
             TypingTextScreen temp = new TypingTextScreen("CREDITS:\nAvery Alix\nFrank Krueger\nJohn Conbere\nTania Pavlisak\nDave Pavlisak\nJohn McLaughlin\n                 \nSPECIAL THANKS TO:\n------------------\n "+
-                "Luke McKay\nAdam Smith-Kipnis\nJohanna Nutter\nCollin Moore\nCasey Egan\nMisty Nickle\nPeter Molyneux\nPeter Molydeux             \n                           ", 100f, introFont);
+                "Luke McKay\nAdam Smith-Kipnis\nJohanna Nutter\nCollin Moore\nCasey Egan\nMisty Nickle\nPeter Molyneux\nPeter Molydeux             \n                           ", 70f, introFont);
             typingTextScreens.Add(temp);
         }
 

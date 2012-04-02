@@ -118,7 +118,7 @@ namespace BearGame
         {
             // print text onscreen until current index.
             spriteBatch.Begin();
-            spriteBatch.DrawString(font, text.Substring(0, textIndex), new Vector2(5, spriteBatch.GraphicsDevice.Viewport.Height / 2), Color.Green);
+            spriteBatch.DrawString(font, text.Substring(0, textIndex), new Vector2(spriteBatch.GraphicsDevice.Viewport.Width/2 - font.MeasureString(text).X, spriteBatch.GraphicsDevice.Viewport.Height / 2), Color.Green);
             spriteBatch.End();
         }
 
