@@ -318,7 +318,7 @@ namespace BearGame
             typingTextScreens.Add(temp);
             temp = new TypingTextScreen("    despair       ", 10f, introFont);
             typingTextScreens.Add(temp);
-            temp = new TypingTextScreen("    resntment     ", 10f, introFont);
+            temp = new TypingTextScreen("    resentment     ", 10f, introFont);
             typingTextScreens.Add(temp);
             temp = new TypingTextScreen("    murder        ", 10f, introFont);
             typingTextScreens.Add(temp);
