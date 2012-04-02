@@ -426,7 +426,7 @@ namespace BearGame
             spriteBatch_IN.Draw(SpriteTexture, position, sourceRec, villagerColor);
             
             //Draw Emotes
-            if (emoteDisplayTime > 0)
+            if (emoteDisplayTime > 0 && !IsDead)
             {
                 Vector2 drawPos = this.position;
                 drawPos.Y -= 50;

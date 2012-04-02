@@ -37,7 +37,7 @@ namespace BearGame
         {
             get
             {
-                return AllActors.Cast<Entity>().Concat(AllProps.Cast<Entity>());
+                return AllProps.Cast<Entity>().Concat(AllActors.Cast<Entity>());
             }
         }
 
