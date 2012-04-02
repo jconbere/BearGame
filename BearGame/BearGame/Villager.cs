@@ -23,18 +23,18 @@ namespace BearGame
                 {
                     _health = v;
 
-                    var volume = 0.25f;
+                    var volume = 0.125f;
                     var sound = HurtSound;
 
                     if (_health == Settings.Person_HealthDefault - 2)
                     {
                         HurtBadSound.Play();
-                        volume = 0.5f;
+                        volume = 0.25f;
                     }
                     else if (_health == Settings.Person_HealthDefault - 3)
                     {
                         HurtBadSound.Play();
-                        volume = 1.0f;
+                        volume = 0.5f;
                     }
 
                     if (_health != Settings.Person_HealthDefault)
@@ -385,7 +385,7 @@ namespace BearGame
         {
             if (!IsDead)
             {
-                spriteIndex = 16 * (int)FacingDirection;
+                spriteIndex = 16 * (int)FacingDirection + (4 * (3 - Health));
             }
             else
             {
