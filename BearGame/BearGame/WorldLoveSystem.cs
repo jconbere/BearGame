@@ -106,7 +106,7 @@ namespace BearGame
             }
             else if (2 <= newAverageLove && newAverageLove < 2.9)
             {
-                SetAmbientSound(_whistlingWind1, 0.65f);
+                SetAmbientSound(_whistlingWind1, 0.75f);
             }
             else if (2.9 <= newAverageLove && newAverageLove < 3.1)
             {

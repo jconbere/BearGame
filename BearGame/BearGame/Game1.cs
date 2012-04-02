@@ -60,11 +60,7 @@ namespace BearGame
         /// </summary>
         protected override void LoadContent()
         {
-            backgroundMusic = Content.Load<SoundEffect>("Audio\\BackgroundMusic");
-            backgroundMusicInstance = backgroundMusic.CreateInstance();
-            backgroundMusicInstance.IsLooped = true;
-            backgroundMusicInstance.Volume = 0.125f;
-            backgroundMusicInstance.Play();
+            
         }
 
         /// <summary>
@@ -117,6 +113,18 @@ namespace BearGame
 
         protected void switchGameStates(int index, GameTime gameTime)
         {
+            if (index == 1)
+            {
+                if (backgroundMusicInstance == null)
+                {
+                    backgroundMusic = Content.Load<SoundEffect>("Audio\\BackgroundMusic");
+                    backgroundMusicInstance = backgroundMusic.CreateInstance();
+                    backgroundMusicInstance.IsLooped = true;
+                    backgroundMusicInstance.Volume = 0.125f;
+                    backgroundMusicInstance.Play();
+                }
+            }
+
             //Unload Stuff from current state
             if (current_GameState != null)
             {
