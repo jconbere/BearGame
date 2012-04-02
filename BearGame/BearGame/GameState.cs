@@ -65,7 +65,7 @@ namespace BearGame
         protected Camera camera;
         protected World world;
         protected GameView view;
-        protected int totalLove;
+        //protected int totalLove;
 
         public MainGame()
         {
@@ -122,18 +122,48 @@ namespace BearGame
             world.Update(gameTime);
             if (world.Bear.Health <= 0)
             {
-                requestedState = (int)GameStates.ENDNORMAL;
-            }
-            else
-            {
+                bool allAlive = true;
                 foreach (Villager v in world.AllVillagers)
                 {
+                    if (v.IsDead)
+                    {
+                        allAlive = false;
+                    }
+                }
+                if (allAlive)
+                {
+                    requestedState = (int)GameStates.ENDPACIFISM;
+                    return;             
+                }
+
+                requestedState = (int)GameStates.ENDNORMAL;
+                return;
+            }
+
+            foreach (Villager v in world.AllVillagers)
+            {
                     if (v.isHugging == true)
                     {
                         requestedState = (int)GameStates.ENDWIN;
-;
+                        return;
                     }
+                
+            }
+
+            bool allDead = true;
+            foreach (Villager v in world.AllVillagers)
+            {
+                if (v.IsDead == false)
+                {
+                    allDead = false;
                 }
+
+            }
+
+            if (allDead)
+            {
+                requestedState = (int)GameStates.ENDKILLER;
+                return;
             }
 
             // get the right end game states (check for stats)
@@ -324,6 +354,7 @@ namespace BearGame
                     }
                     else
                         requestedState = 1;
+                        //requestedState = 6;
                 }
             }
 
@@ -397,7 +428,7 @@ namespace BearGame
 
 
             // testing, read from file or something later?
-            TypingTextScreen temp = new TypingTextScreen("Casting about... \n frantic and predatory...\nYour needs have left you alone.       \n The Lonliness is       \nUNBEARABLE", 100f, introFont);
+            TypingTextScreen temp = new TypingTextScreen("Casting about... \nfrantic and predatory...\nYour needs have left you alone.       \nThe Lonliness is       \nUNBEARABLE", 100f, introFont);
             typingTextScreens.Add(temp);
 
             //load images for the intro
@@ -426,36 +457,37 @@ namespace BearGame
             // update the current texttypingscreen
             // if isDone after, select next screen
             // same with splashscreens
-            if (!(currentSplashScreenIndex >= introSplashScreens.Count))
-            {
-                introSplashScreens.ElementAt(currentSplashScreenIndex).Update(gameTime);
-                if (introSplashScreens.ElementAt(currentSplashScreenIndex).IsDone)
-                    currentSplashScreenIndex++;
-            }
-            else if (!(currentTextScreenIndex >= typingTextScreens.Count))
+            if (!(currentTextScreenIndex >= typingTextScreens.Count))
             {
                 typingTextScreens.ElementAt(currentTextScreenIndex).Update(gameTime);
                 if (typingTextScreens.ElementAt(currentTextScreenIndex).IsDone)
                     currentTextScreenIndex++;
+            }
+            else if (!(currentSplashScreenIndex >= introSplashScreens.Count))
+            {
+                introSplashScreens.ElementAt(currentSplashScreenIndex).Update(gameTime);
+                if (introSplashScreens.ElementAt(currentSplashScreenIndex).IsDone)
+                    currentSplashScreenIndex++;
             }
 
         }
 
         public override void Draw(GameTime gameTime)
         {
-            if (currentSplashScreenIndex < introSplashScreens.Count)
-            {
-                introSplashScreens.ElementAt(currentSplashScreenIndex).Render(gameTime, _uiBatch);
-            }
-            else if (currentTextScreenIndex < typingTextScreens.Count)
+            if (currentTextScreenIndex < typingTextScreens.Count)
             {
                 //call the appropriate textypingscreen (from the list); pass the uiBatch!)
                 typingTextScreens.ElementAt(currentTextScreenIndex).Render(gameTime, _uiBatch);
+            }
+            else if (currentSplashScreenIndex < introSplashScreens.Count)
+            {
+                introSplashScreens.ElementAt(currentSplashScreenIndex).Render(gameTime, _uiBatch);
             }
             else
                 requestedState = 1;
         }
     }
+
 
     class EndPacifism : GameState
     {
@@ -493,7 +525,7 @@ namespace BearGame
 
 
             // testing, read from file or something later?
-            TypingTextScreen temp = new TypingTextScreen("In taking the selfless path...   \nIn sparing those for whom you yearn...\n The Lonliness is       \nUNBEARABLE", 100f, introFont);
+            TypingTextScreen temp = new TypingTextScreen("In taking the selfless path...   \nIn sparing those for whom you yearn...\nThe Lonliness is       \nUNBEARABLE              ", 100f, introFont);
             typingTextScreens.Add(temp);
 
             //load images for the intro
@@ -522,32 +554,58 @@ namespace BearGame
             // update the current texttypingscreen
             // if isDone after, select next screen
             // same with splashscreens
-            if (!(currentSplashScreenIndex >= introSplashScreens.Count))
-            {
-                introSplashScreens.ElementAt(currentSplashScreenIndex).Update(gameTime);
-                if (introSplashScreens.ElementAt(currentSplashScreenIndex).IsDone)
-                    currentSplashScreenIndex++;
-            }
-            else if (!(currentTextScreenIndex >= typingTextScreens.Count))
+            
+            if (!(currentTextScreenIndex >= typingTextScreens.Count))
             {
                 typingTextScreens.ElementAt(currentTextScreenIndex).Update(gameTime);
                 if (typingTextScreens.ElementAt(currentTextScreenIndex).IsDone)
                     currentTextScreenIndex++;
             }
-
+            else if (!(currentSplashScreenIndex >= introSplashScreens.Count))
+            {
+                introSplashScreens.ElementAt(currentSplashScreenIndex).Update(gameTime);
+                if (introSplashScreens.ElementAt(currentSplashScreenIndex).IsDone)
+                    currentSplashScreenIndex++;
+            }
+    
+            //if (!(currentSplashScreenIndex >= introSplashScreens.Count))
+            //{
+            //    introSplashScreens.ElementAt(currentSplashScreenIndex).Update(gameTime);
+            //    if (introSplashScreens.ElementAt(currentSplashScreenIndex).IsDone)
+            //        currentSplashScreenIndex++;
+            //}
+            //else if (!(currentTextScreenIndex >= typingTextScreens.Count))
+            //{
+            //    typingTextScreens.ElementAt(currentTextScreenIndex).Update(gameTime);
+            //    if (typingTextScreens.ElementAt(currentTextScreenIndex).IsDone)
+            //        currentTextScreenIndex++;
+            //}
         }
 
         public override void Draw(GameTime gameTime)
         {
-            if (currentSplashScreenIndex < introSplashScreens.Count)
-            {
-                introSplashScreens.ElementAt(currentSplashScreenIndex).Render(gameTime, _uiBatch);
-            }
-            else if (currentTextScreenIndex < typingTextScreens.Count)
+
+            if (currentTextScreenIndex < typingTextScreens.Count)
             {
                 //call the appropriate textypingscreen (from the list); pass the uiBatch!)
                 typingTextScreens.ElementAt(currentTextScreenIndex).Render(gameTime, _uiBatch);
             }
+            else if (currentSplashScreenIndex < introSplashScreens.Count)
+            {
+                introSplashScreens.ElementAt(currentSplashScreenIndex).Render(gameTime, _uiBatch);
+            }
+            
+
+
+            //if (currentSplashScreenIndex < introSplashScreens.Count)
+            //{
+            //    introSplashScreens.ElementAt(currentSplashScreenIndex).Render(gameTime, _uiBatch);
+            //}
+            //else if (currentTextScreenIndex < typingTextScreens.Count)
+            //{
+            //    //call the appropriate textypingscreen (from the list); pass the uiBatch!)
+            //    typingTextScreens.ElementAt(currentTextScreenIndex).Render(gameTime, _uiBatch);
+            //}
             else
                 requestedState = 1;
         }
@@ -589,7 +647,7 @@ namespace BearGame
 
 
             // testing, read from file or something later?
-            TypingTextScreen temp = new TypingTextScreen("The Love.     \nThe PainThe Love.     \nWhere do you draw the line between\nyour needs and the good of others?\n                  ", 100f, introFont);
+            TypingTextScreen temp = new TypingTextScreen("The Love.     \nThe Pain           \nWhere do you draw the line between\nyour needs and the good of others?\n                  ", 100f, introFont);
             typingTextScreens.Add(temp);
 
             //load images for the intro
@@ -618,31 +676,31 @@ namespace BearGame
             // update the current texttypingscreen
             // if isDone after, select next screen
             // same with splashscreens
-            if (!(currentSplashScreenIndex >= introSplashScreens.Count))
-            {
-                introSplashScreens.ElementAt(currentSplashScreenIndex).Update(gameTime);
-                if (introSplashScreens.ElementAt(currentSplashScreenIndex).IsDone)
-                    currentSplashScreenIndex++;
-            }
-            else if (!(currentTextScreenIndex >= typingTextScreens.Count))
+            if (!(currentTextScreenIndex >= typingTextScreens.Count))
             {
                 typingTextScreens.ElementAt(currentTextScreenIndex).Update(gameTime);
                 if (typingTextScreens.ElementAt(currentTextScreenIndex).IsDone)
                     currentTextScreenIndex++;
+            }
+            else if (!(currentSplashScreenIndex >= introSplashScreens.Count))
+            {
+                introSplashScreens.ElementAt(currentSplashScreenIndex).Update(gameTime);
+                if (introSplashScreens.ElementAt(currentSplashScreenIndex).IsDone)
+                    currentSplashScreenIndex++;
             }
 
         }
 
         public override void Draw(GameTime gameTime)
         {
-            if (currentSplashScreenIndex < introSplashScreens.Count)
-            {
-                introSplashScreens.ElementAt(currentSplashScreenIndex).Render(gameTime, _uiBatch);
-            }
-            else if (currentTextScreenIndex < typingTextScreens.Count)
+            if (currentTextScreenIndex < typingTextScreens.Count)
             {
                 //call the appropriate textypingscreen (from the list); pass the uiBatch!)
                 typingTextScreens.ElementAt(currentTextScreenIndex).Render(gameTime, _uiBatch);
+            }
+            else if (currentSplashScreenIndex < introSplashScreens.Count)
+            {
+                introSplashScreens.ElementAt(currentSplashScreenIndex).Render(gameTime, _uiBatch);
             }
             else
                 requestedState = 1;
@@ -719,31 +777,31 @@ namespace BearGame
             // update the current texttypingscreen
             // if isDone after, select next screen
             // same with splashscreens
-            if (!(currentSplashScreenIndex >= introSplashScreens.Count))
-            {
-                introSplashScreens.ElementAt(currentSplashScreenIndex).Update(gameTime);
-                if (introSplashScreens.ElementAt(currentSplashScreenIndex).IsDone)
-                    currentSplashScreenIndex++;
-            }
-            else if (!(currentTextScreenIndex >= typingTextScreens.Count))
+            if (!(currentTextScreenIndex >= typingTextScreens.Count))
             {
                 typingTextScreens.ElementAt(currentTextScreenIndex).Update(gameTime);
                 if (typingTextScreens.ElementAt(currentTextScreenIndex).IsDone)
                     currentTextScreenIndex++;
+            }
+            else if (!(currentSplashScreenIndex >= introSplashScreens.Count))
+            {
+                introSplashScreens.ElementAt(currentSplashScreenIndex).Update(gameTime);
+                if (introSplashScreens.ElementAt(currentSplashScreenIndex).IsDone)
+                    currentSplashScreenIndex++;
             }
 
         }
 
         public override void Draw(GameTime gameTime)
         {
-            if (currentSplashScreenIndex < introSplashScreens.Count)
-            {
-                introSplashScreens.ElementAt(currentSplashScreenIndex).Render(gameTime, _uiBatch);
-            }
-            else if (currentTextScreenIndex < typingTextScreens.Count)
+            if (currentTextScreenIndex < typingTextScreens.Count)
             {
                 //call the appropriate textypingscreen (from the list); pass the uiBatch!)
                 typingTextScreens.ElementAt(currentTextScreenIndex).Render(gameTime, _uiBatch);
+            }
+            else if (currentSplashScreenIndex < introSplashScreens.Count)
+            {
+                introSplashScreens.ElementAt(currentSplashScreenIndex).Render(gameTime, _uiBatch);
             }
             else
                 requestedState = 1;
