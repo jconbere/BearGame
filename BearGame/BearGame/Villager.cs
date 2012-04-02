@@ -143,6 +143,10 @@ namespace BearGame
                 Vector2 bearDirection = targetDirecton(this, World.Bear);
 
                 ApproachDistance = Settings.Person_BaseApproachDistance - (Love - Settings.Person_InitialLove);
+                if (_love < Settings.Person_LoveMax && ApproachDistance < 2)
+                {
+                    ApproachDistance = 2;
+                }
 
                 Speed = Settings.Person_Speed - (Math.Abs(Settings.Person_InitialLove - Love) * SpeedStep);
                 if (Speed < 0.1f)
@@ -163,22 +167,23 @@ namespace BearGame
                     bearDirection.Y = 0;
                 }
                
-                if (Love > Settings.Person_InitialLove)
-                {
-                    if (Math.Abs(bearDirection.X) < ApproachDistance)
-                    {
-                        bearDirection.X = 0;
-                    }
-                    if (Math.Abs(bearDirection.Y) < ApproachDistance)
-                    {
-                        bearDirection.Y = 0;
-                    }
-                    bearDirection.X = bearDirection.X * -1;
-                    bearDirection.Y = bearDirection.Y * -1;
-                }
 
                 if ((time.TotalGameTime.TotalSeconds - LastMoveTime) > (Speed))
                 {
+                    if (Love > Settings.Person_InitialLove)
+                    {
+                        if (Math.Abs(bearDirection.X) < ApproachDistance)
+                        {
+                            bearDirection.X = 0;
+                        }
+                        if (Math.Abs(bearDirection.Y) < ApproachDistance)
+                        {
+                            bearDirection.Y = 0;
+                        }
+                        bearDirection.X = bearDirection.X * -1;
+                        bearDirection.Y = bearDirection.Y * -1;
+                    }
+
                     //Check for 
                     if (bearDirection.X == 0 && bearDirection.Y == 0)
                     {
@@ -229,15 +234,26 @@ namespace BearGame
                     }
 
                     MoveCell(time, newPos);
-
-                    if (newPos.Row > 0)
+                    
+                    if (bearDirection.Y > 0)
                     {
-                        FacingDirection = Direction.Right;
+                        FacingDirection = Direction.Down;
                     }
                     else
                     {
+                        FacingDirection = Direction.Up;
+                    }
+
+                    if (bearDirection.X > 0)
+                    {
+                        FacingDirection = Direction.Right;
+                    }
+                    else if(bearDirection.X < 0)
+                    {
                         FacingDirection = Direction.Left;
                     }
+
+                    
                 }
             }
             // base update
