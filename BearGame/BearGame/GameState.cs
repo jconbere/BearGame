@@ -130,7 +130,7 @@ namespace BearGame
                     if (v.isHugging == true)
                     {
                         requestedState = (int)GameStates.ENDWIN;
-;
+                        return;
                     }
                 }
             }
@@ -322,7 +322,7 @@ namespace BearGame
                         entryGameTime = gameTime.TotalGameTime.TotalSeconds;
                     }
                     else
-                        requestedState = 5;
+                        requestedState = 1;
                         //requestedState = 6;
                 }
             }
@@ -456,6 +456,7 @@ namespace BearGame
                 requestedState = 1;
         }
     }
+
 
     class EndPacifism : GameState
     {

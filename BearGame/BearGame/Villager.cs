@@ -40,7 +40,13 @@ namespace BearGame
                     if (_health != Settings.Person_HealthDefault)
                     {
                         sound.Play(volume);
-                        DeadSound.Play(volume);
+
+                        var crunchVol = volume + 0.5f;
+                        if (crunchVol > 1)
+                        {
+                            crunchVol = 1;
+                        }
+                        DeadSound.Play(crunchVol);
                     }
                 }
             }
