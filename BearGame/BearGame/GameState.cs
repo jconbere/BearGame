@@ -264,6 +264,8 @@ namespace BearGame
         {
             _uiBatch = new SpriteBatch(graphics);
 
+            _woosh = Content.Load<SoundEffect>("Audio\\whoosh_01");
+
             // make me a font for the intro
             introFont = Content.Load<SpriteFont>("UI\\IntroFont");
 
@@ -337,6 +339,7 @@ namespace BearGame
             requestedState = -1;
             //Content.Unload();
         }
+        SoundEffect _woosh;
         public override void Update(GameTime gameTime)
         {
             var keyState = Keyboard.GetState();
@@ -364,13 +367,19 @@ namespace BearGame
             {
                 introSplashScreens.ElementAt(currentSplashScreenIndex).Update(gameTime);
                 if (introSplashScreens.ElementAt(currentSplashScreenIndex).IsDone)
+                {
+                    _woosh.Play();
                     currentSplashScreenIndex++;
+                }
             }
             else if(!(currentTextScreenIndex >= typingTextScreens.Count))
             {
                 typingTextScreens.ElementAt(currentTextScreenIndex).Update(gameTime);
                 if (typingTextScreens.ElementAt(currentTextScreenIndex).IsDone)
+                {
+                    _woosh.Play();
                     currentTextScreenIndex++;
+                }
             }
 
         }
