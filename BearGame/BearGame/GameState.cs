@@ -301,36 +301,35 @@ namespace BearGame
             TypingTextScreen temp = new TypingTextScreen("What if. . .\n\n\n\n\n", 100f, introFont);
             typingTextScreens.Add(temp);
 
-            temp = new TypingTextScreen("What if you were a bear\nthat needed hugs\nto survive. . .\n", 100f, introFont);
+            temp = new TypingTextScreen("What if you were a bear\nthat needed hugs\nto survive. . .\n               ", 100f, introFont);
             typingTextScreens.Add(temp);
 
-            temp = new TypingTextScreen("...But the problem is :\nYou crush the spines\nof those you embrace?\n         \n", 100f, introFont);
+            temp = new TypingTextScreen("...But the problem is :\nYou crush the spines\nof those you embrace?\n                      \n", 100f, introFont);
             typingTextScreens.Add(temp);
 
-            temp = new TypingTextScreen("If you were destined to hurt\n the ones you love...             ", 100f, introFont);
+            temp = new TypingTextScreen("If you were destined to hurt\nthe ones you love...               ", 100f, introFont);
             typingTextScreens.Add(temp);
             //special case
             temp = new TypingTextScreen("... Would    \n    jealousy    \n ", 100f, introFont);
             typingTextScreens.Add(temp);
-            temp = new TypingTextScreen("fear          ", 10f, introFont);
+            temp = new TypingTextScreen("    fear          ", 10f, introFont);
             typingTextScreens.Add(temp);
-            temp = new TypingTextScreen("anger         ", 10f, introFont);
+            temp = new TypingTextScreen("    anger         ", 10f, introFont);
             typingTextScreens.Add(temp);
-            temp = new TypingTextScreen("despair       ", 10f, introFont);
+            temp = new TypingTextScreen("    despair       ", 10f, introFont);
             typingTextScreens.Add(temp);
-            temp = new TypingTextScreen("resntment     ", 10f, introFont);
+            temp = new TypingTextScreen("    resntment     ", 10f, introFont);
             typingTextScreens.Add(temp);
-            temp = new TypingTextScreen("murder        ", 10f, introFont);
+            temp = new TypingTextScreen("    murder        ", 10f, introFont);
             typingTextScreens.Add(temp);
-            temp = new TypingTextScreen("forgiveness   ", 10f, introFont);
+            temp = new TypingTextScreen("    forgiveness   ", 10f, introFont);
             typingTextScreens.Add(temp);
-            temp = new TypingTextScreen("hope          ", 10f, introFont);
+            temp = new TypingTextScreen("    hope          ", 10f, introFont);
             typingTextScreens.Add(temp);
-            temp = new TypingTextScreen("love          ", 10f, introFont);
+            temp = new TypingTextScreen("    love          ", 10f, introFont);
             typingTextScreens.Add(temp);
-            temp = new TypingTextScreen("loneliness\n be...\n       ", 100f, introFont);
+            temp = new TypingTextScreen("    loneliness\n be...\n       ", 100f, introFont);
             typingTextScreens.Add(temp);
-
         }
 
         public override void UnloadContent(ContentManager Content)
@@ -844,7 +843,8 @@ namespace BearGame
 
 
             // testing, read from file or something later?
-            TypingTextScreen temp = new TypingTextScreen("CREDITS WHEEEEEEEEE              ", 100f, introFont);
+            TypingTextScreen temp = new TypingTextScreen("CREDITS:\nAvery Alix\nFrank Krueger\nJohn Conbere\nTania Pavlisak\nDave Pavlisak\nJohn McLaughlin\n                 \nSPECIAL THANKS TO:\n------------------\n "+
+                "Luke McKay\nAdam Smith-Kipnis\nJohanna Nutter\nCollin Moore\nCasey Egan\nMisty Nickle\nPeter Molyneux\nPeter Molydeux             \n                           ", 100f, introFont);
             typingTextScreens.Add(temp);
         }
 
