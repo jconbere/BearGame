@@ -53,10 +53,11 @@ namespace BearGame
             _vignetteTexture = content.Load<Texture2D>("UI\\Vignette");
 
             //Load health bar Textures
-            _meterTexture = content.Load<Texture2D>("UI\\health_meter");
+            //_meterTexture = content.Load<Texture2D>("UI\\healthmeter");
             _healthbarTexture = content.Load<Texture2D>("UI\\healthbar");
-            _skullTexture = content.Load<Texture2D>("UI\\skull");
-            _happyTexture = content.Load<Texture2D>("UI\\happy");
+            //_skullTexture = content.Load<Texture2D>("UI\\skull");
+            //_happyTexture = content.Load<Texture2D>("UI\\happy");
+            
             _backgroundTexture = content.Load<Texture2D>("UI\\UI_Background");
 
             //Load Villager Health Textures
@@ -92,7 +93,7 @@ namespace BearGame
 
         public void Draw()
         {
-            const int peopleLegendTextSpacing = 20;
+            //const int peopleLegendTextSpacing = 20;
             var vw = 800;
             var vh = 600;
             var ws = 400;
@@ -110,14 +111,15 @@ namespace BearGame
             }
             
             _uiBatch.Begin();
-
+            _uiBatch.Draw(_healthbarTexture, new Rectangle(215, 0, (int)(400 * healthPercentage), 200), Color.White);
+            
             _uiBatch.Draw(_backgroundTexture, new Vector2(0, 0), Color.White);
             //Draw Health Meter
-            _uiBatch.Draw(_skullTexture, new Rectangle(gameViewLeft, gameViewTop - 90, _skullTexture.Width, _skullTexture.Height), Color.White);
+            /*_uiBatch.Draw(_skullTexture, new Rectangle(gameViewLeft, gameViewTop - 90, _skullTexture.Width, _skullTexture.Height), Color.White);
             _uiBatch.Draw(_meterTexture, new Rectangle(gameViewLeft + _skullTexture.Width, gameViewTop - 90, (int)(_meterTexture.Width * healthPercentage), _meterTexture.Height), barColor);    
             _uiBatch.Draw(_healthbarTexture, new Rectangle(gameViewLeft + _skullTexture.Width, gameViewTop - 90, _healthbarTexture.Width, _healthbarTexture.Height), Color.White);
             _uiBatch.Draw(_happyTexture, new Rectangle(gameViewLeft + _healthbarTexture.Width + _skullTexture.Width, gameViewTop - 90, _happyTexture.Width, _happyTexture.Height), Color.White);
-            
+            */
             //Draw People Legend
             //_uiBatch.DrawString(_uiFont, "Legend", new Vector2(650, 150), Color.White);
             int yPeople = 100;
