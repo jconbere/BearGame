@@ -844,7 +844,8 @@ namespace BearGame
 
 
             // testing, read from file or something later?
-            TypingTextScreen temp = new TypingTextScreen("CREDITS WHEEEEEEEEE              ", 100f, introFont);
+            TypingTextScreen temp = new TypingTextScreen("CREDITS:\nAvery Alix\nFrank Krueger\nJohn Conbere\nTania Pavlisak\nDave Pavlisak\nJohn McLaughlin\n                 \nSPECIAL THANKS TO:\n------------------\n "+
+                "Luke McKay\nAdam Smith-Kipnis\nJohanna Nutter\nCollin Moore\nCasey Egan\nMisty Nickle\nPeter Molyneux\nPeter Molydeux             \n                           ", 100f, introFont);
             typingTextScreens.Add(temp);
         }
 
