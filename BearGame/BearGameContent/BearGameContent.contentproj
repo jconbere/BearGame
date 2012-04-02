@@ -128,20 +128,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UI\healthbar.png">
-      <Name>healthbar</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="UI\health_meter.png">
-      <Name>health_meter</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Sprites\spritesheet_items.png">
       <Name>spritesheet_items</Name>
       <Importer>TextureImporter</Importer>
@@ -784,6 +770,13 @@
   <ItemGroup>
     <Compile Include="SplashUI\endsplash_lose3.png">
       <Name>endsplash_lose3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\healthbar.png">
+      <Name>healthbar</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

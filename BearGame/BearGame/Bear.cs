@@ -20,8 +20,8 @@ namespace BearGame
         public static RandomSound bearHappySound;
 
         private double nextsoundplay = 1;
-        const double sounddelayVariance = 4;
-        const double sounddelayMin = 1;
+        const double sounddelayVariance = 5;
+        const double sounddelayMin = 2;
 
         public static int currentFrame = 0;
         double frameSpeed
