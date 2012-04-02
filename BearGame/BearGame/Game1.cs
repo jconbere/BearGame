@@ -122,6 +122,8 @@ namespace BearGame
                     backgroundMusicInstance.IsLooped = true;
                     backgroundMusicInstance.Volume = 0.125f;
                     backgroundMusicInstance.Play();
+
+                    Content.Load<SoundEffect>("Audio\\bear_scary_long_roar_03").Play(0.33f, 0, 0);
                 }
             }
 
