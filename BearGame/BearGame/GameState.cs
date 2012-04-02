@@ -275,8 +275,27 @@ namespace BearGame
             temp = new TypingTextScreen("If you were destined to hurt\n the ones you love...             ", 100f, introFont);
             typingTextScreens.Add(temp);
             //special case
-            temp = new TypingTextScreen("... Would    \n    loneliness    \n ", 100f, introFont);
+            temp = new TypingTextScreen("... Would    \n    jealousy    \n ", 100f, introFont);
             typingTextScreens.Add(temp);
+            temp = new TypingTextScreen("fear          ", 10f, introFont);
+            typingTextScreens.Add(temp);
+            temp = new TypingTextScreen("anger         ", 10f, introFont);
+            typingTextScreens.Add(temp);
+            temp = new TypingTextScreen("despair       ", 10f, introFont);
+            typingTextScreens.Add(temp);
+            temp = new TypingTextScreen("resntment     ", 10f, introFont);
+            typingTextScreens.Add(temp);
+            temp = new TypingTextScreen("murder        ", 10f, introFont);
+            typingTextScreens.Add(temp);
+            temp = new TypingTextScreen("forgiveness   ", 10f, introFont);
+            typingTextScreens.Add(temp);
+            temp = new TypingTextScreen("hope          ", 10f, introFont);
+            typingTextScreens.Add(temp);
+            temp = new TypingTextScreen("love          ", 10f, introFont);
+            typingTextScreens.Add(temp);
+            temp = new TypingTextScreen("loneliness\n be...\n       ", 100f, introFont);
+            typingTextScreens.Add(temp);
+
         }
 
         public override void UnloadContent(ContentManager Content)

@@ -19,8 +19,10 @@ namespace BearGame
         public static RandomSound bearGruntSound;
         public static RandomSound bearHappySound;
 
-        private double lastsoundplay = 0;
-        const double sounddelay = 500;
+        private double nextsoundplay = 1;
+        const double sounddelayVariance = 4;
+        const double sounddelayMin = 1;
+
         public static int currentFrame = 0;
         double frameSpeed
         {
@@ -140,9 +142,9 @@ namespace BearGame
 
             var now = time.TotalGameTime.TotalSeconds;
 
-            if (now - lastsoundplay > sounddelay * _rand.NextDouble())
+            if (now > nextsoundplay)
             {
-                lastsoundplay = now;
+                nextsoundplay = now + (sounddelayVariance * _rand.NextDouble() + sounddelayMin);
 
                 if (Health / Settings.Bear_HealthMax < 0.3)
                 {
