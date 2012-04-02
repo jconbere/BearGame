@@ -122,7 +122,7 @@ namespace BearGame
             */
             //Draw People Legend
             //_uiBatch.DrawString(_uiFont, "Legend", new Vector2(650, 150), Color.White);
-            int yPeople = 100;
+            int yPeople = 130;
             int xPeople = 620;
             Color fontColor = Color.White;
             foreach (Villager person in _world.AllVillagers)
