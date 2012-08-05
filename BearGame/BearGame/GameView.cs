@@ -67,7 +67,10 @@ namespace BearGame
             _persondeadTexture = content.Load<Texture2D>("UI\\facesDead");
 
             //Load Fonts
+#if IOS
+#else
             _uiFont = content.Load<SpriteFont>("UI\\UIFont");
+#endif
 
             //Load UI_Items
             _uiitemhoneyTexture = content.Load<Texture2D>("UI\\Honey");
@@ -149,7 +152,9 @@ namespace BearGame
 
                 }
                 _uiBatch.Draw(healthTexture, new Rectangle(xPeople, yPeople + (70 * (_world.AllVillagers.IndexOf(person))), 64, 64), Color.White);
-                _uiBatch.DrawString(_uiFont, person.Name.ToString(), new Vector2(xPeople + 70, yPeople + 20 + (70 * (_world.AllVillagers.IndexOf(person)))), fontColor);
+				if (_uiFont != null) {
+	                _uiBatch.DrawString(_uiFont, person.Name.ToString(), new Vector2(xPeople + 70, yPeople + 20 + (70 * (_world.AllVillagers.IndexOf(person)))), fontColor);
+				}
             }
 
             //Draw Inventory Item

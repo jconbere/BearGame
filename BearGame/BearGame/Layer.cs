@@ -20,7 +20,8 @@ namespace BearGame
 
         public void LoadTiles(string path)
         {
-            using (var reader = File.OpenText(path))
+			var cleanPath = path.Replace ('\\', System.IO.Path.DirectorySeparatorChar);
+            using (var reader = File.OpenText(cleanPath))
             {
                 _rows = new List<string>();
                 for (var line = reader.ReadLine(); line != null; line = reader.ReadLine())

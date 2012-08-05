@@ -95,7 +95,11 @@ namespace BearGame
             Daredevil.DaredevilSound = new RandomSound(Content, "Audio\\thump_01", "Audio\\thump_02", "Audio\\thump_03");
             RunOver.TricycleBodyImpactSound = new RandomSound(Content, "Audio\\tricycle_body_impact_01");
             Honey._beehiveBuzz = Content.Load<SoundEffect>("Audio\\beehive_buzz_01");
+
+#if IOS
+#else
             Achievement.AchievementSound = new RandomSound(Content, "Audio\\Achievement-mp3-sound");
+#endif
 
             Bear.bearGruntSound = new RandomSound(Content, "Audio\\bear_desperate_whining_01", "Audio\\bear_desperate_whining_02", "Audio\\bear_desperate_whining_03", "Audio\\bear_desperate_whining_04", "Audio\\bear_desperate_whining_05");
             Bear.bearHappySound = new RandomSound(Content, "Audio\\bear_happy_singing_01", "Audio\\bear_happy_singing_02", "Audio\\bear_happy_singing_03");
@@ -267,7 +271,10 @@ namespace BearGame
             _woosh = Content.Load<SoundEffect>("Audio\\whoosh_01");
 
             // make me a font for the intro
+#if IOS
+#else
             introFont = Content.Load<SpriteFont>("UI\\IntroFont");
+#endif
 
             //load images for the intro
             SplashScreen tempSplash = new SplashScreen(Content.Load<Texture2D>("SplashUI\\Splash_Steam"), 700,300, 300);
@@ -522,7 +529,10 @@ namespace BearGame
             _uiBatch = new SpriteBatch(graphics);
 
             // make me a font for the intro
+#if IOS
+#else
             introFont = Content.Load<SpriteFont>("UI\\UIFont");
+#endif
 
 
             // testing, read from file or something later?
@@ -637,7 +647,10 @@ namespace BearGame
             _uiBatch = new SpriteBatch(graphics);
 
             // make me a font for the intro
+#if IOS
+#else
             introFont = Content.Load<SpriteFont>("UI\\UIFont");
+#endif
 
 
             // testing, read from file or something later?
@@ -817,7 +830,10 @@ namespace BearGame
             _uiBatch = new SpriteBatch(graphics);
 
             // make me a font for the intro
+#if IOS
+#else
             introFont = Content.Load<SpriteFont>("UI\\UIFont");
+#endif
 
 
             // testing, read from file or something later?

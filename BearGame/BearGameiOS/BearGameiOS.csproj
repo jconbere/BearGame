@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D492EFB1-B36B-43F8-AB99-BB01AD8EE709}</ProjectGuid>
+    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>BearGame.iOS</RootNamespace>
+    <AssemblyName>BearGameiOS</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG;IOS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchProfiling>true</MtouchProfiling>
+    <MtouchLink>None</MtouchLink>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchLink>None</MtouchLink>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchProfiling>true</MtouchProfiling>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Ad-Hoc</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <BuildIpa>true</BuildIpa>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\AppStore</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="monotouch" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="..\BearGame\Game.ico">
+      <Link>BearGame\Game.ico</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="..\BearGame\Achievement.cs">
+      <Link>BearGame\Achievement.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\Actor.cs">
+      <Link>BearGame\Actor.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\Bear.cs">
+      <Link>BearGame\Bear.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\Camera.cs">
+      <Link>BearGame\Camera.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\CollisionLayer.cs">
+      <Link>BearGame\CollisionLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\Entity.cs">
+      <Link>BearGame\Entity.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\Game1.cs">
+      <Link>BearGame\Game1.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\GameSettings.cs">
+      <Link>BearGame\GameSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\GameState.cs">
+      <Link>BearGame\GameState.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\GameView.cs">
+      <Link>BearGame\GameView.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\Honey.cs">
+      <Link>BearGame\Honey.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\Interactions.cs">
+      <Link>BearGame\Interactions.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\Layer.cs">
+      <Link>BearGame\Layer.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\Program.cs">
+      <Link>BearGame\Program.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\Prop.cs">
+      <Link>BearGame\Prop.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\RandomSound.cs">
+      <Link>BearGame\RandomSound.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\SettingsManager.cs">
+      <Link>BearGame\SettingsManager.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\SplashScreen.cs">
+      <Link>BearGame\SplashScreen.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\Tricycle.cs">
+      <Link>BearGame\Tricycle.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\TypingTextScreen.cs">
+      <Link>BearGame\TypingTextScreen.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\Villager.cs">
+      <Link>BearGame\Villager.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\World.cs">
+      <Link>BearGame\World.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\WorldLoveSystem.cs">
+      <Link>BearGame\WorldLoveSystem.cs</Link>
+    </Compile>
+    <Compile Include="..\BearGame\enums.cs">
+      <Link>BearGame\enums.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Downloads\mono-MonoGame-56afa04\MonoGame.Framework\MonoGame.Framework.iOS.csproj">
+      <Project>{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}</Project>
+      <Name>MonoGame.Framework.iOS</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\" />
+    <Folder Include="BearGame\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\BearGame\GameThumbnail.png">
+      <Link>BearGame\GameThumbnail.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\whoosh_01.wav">
+      <Link>Content\Audio\whoosh_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Achievements\Ach_DareDevil.png">
+      <Link>Content\Achievements\Ach_DareDevil.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Achievements\Ach_Jerk.png">
+      <Link>Content\Achievements\Ach_Jerk.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Achievements\Ach_Mauling_You.png">
+      <Link>Content\Achievements\Ach_Mauling_You.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\SplashUI\Splash_Apple.png">
+      <Link>Content\SplashUI\Splash_Apple.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\SplashUI\Splash_Criware.png">
+      <Link>Content\SplashUI\Splash_Criware.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\SplashUI\Splash_DrPepper.png">
+      <Link>Content\SplashUI\Splash_DrPepper.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\SplashUI\Splash_Havok.png">
+      <Link>Content\SplashUI\Splash_Havok.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\SplashUI\Splash_Molydeux.png">
+      <Link>Content\SplashUI\Splash_Molydeux.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\SplashUI\Splash_Nvidia.png">
+      <Link>Content\SplashUI\Splash_Nvidia.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\SplashUI\Splash_Paint.png">
+      <Link>Content\SplashUI\Splash_Paint.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\SplashUI\Splash_Steam.png">
+      <Link>Content\SplashUI\Splash_Steam.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\SplashUI\Splash_THX.png">
+      <Link>Content\SplashUI\Splash_THX.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\SplashUI\Splash_UDK.png">
+      <Link>Content\SplashUI\Splash_UDK.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\SplashUI\Splash_Unity.png">
+      <Link>Content\SplashUI\Splash_Unity.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\SplashUI\Splash_Werenotused.png">
+      <Link>Content\SplashUI\Splash_Werenotused.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\SplashUI\endsplash_lose.png">
+      <Link>Content\SplashUI\endsplash_lose.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\SplashUI\endsplash_lose2.png">
+      <Link>Content\SplashUI\endsplash_lose2.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\SplashUI\endsplash_lose3.png">
+      <Link>Content\SplashUI\endsplash_lose3.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\SplashUI\endsplash_win.png">
+      <Link>Content\SplashUI\endsplash_win.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\SplashUI\introsplash.png">
+      <Link>Content\SplashUI\introsplash.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Sprites\Emotes.png">
+      <Link>Content\Sprites\Emotes.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Sprites\UI_face_injure2.png">
+      <Link>Content\Sprites\UI_face_injure2.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Sprites\WorldTiles.png">
+      <Link>Content\Sprites\WorldTiles.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Sprites\bridge.png">
+      <Link>Content\Sprites\bridge.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Sprites\facesBad.png">
+      <Link>Content\Sprites\facesBad.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Sprites\facesDead.png">
+      <Link>Content\Sprites\facesDead.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Sprites\facesHealthy.png">
+      <Link>Content\Sprites\facesHealthy.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Sprites\facesMedium.png">
+      <Link>Content\Sprites\facesMedium.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Sprites\firstsprite.png">
+      <Link>Content\Sprites\firstsprite.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Sprites\pine_trees.png">
+      <Link>Content\Sprites\pine_trees.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Sprites\spritesheet_bear.png">
+      <Link>Content\Sprites\spritesheet_bear.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Sprites\spritesheet_items.png">
+      <Link>Content\Sprites\spritesheet_items.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Sprites\spritesheet_people.png">
+      <Link>Content\Sprites\spritesheet_people.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Sprites\tilesWorld.png">
+      <Link>Content\Sprites\tilesWorld.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Sprites\tree.png">
+      <Link>Content\Sprites\tree.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Sprites\water.png">
+      <Link>Content\Sprites\water.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\UI\Honey.png">
+      <Link>Content\UI\Honey.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\UI\UI_Background.png">
+      <Link>Content\UI\UI_Background.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\UI\UI_BearAngry.png">
+      <Link>Content\UI\UI_BearAngry.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\UI\UI_BearCute.png">
+      <Link>Content\UI\UI_BearCute.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\UI\UI_BearNorm.png">
+      <Link>Content\UI\UI_BearNorm.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\UI\UI_NOmusicNote.png">
+      <Link>Content\UI\UI_NOmusicNote.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\UI\UI_SPACE.png">
+      <Link>Content\UI\UI_SPACE.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\UI\UI_musicNote.png">
+      <Link>Content\UI\UI_musicNote.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\UI\Vignette.png">
+      <Link>Content\UI\Vignette.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\UI\contextsheet.png">
+      <Link>Content\UI\contextsheet.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\UI\facesBad.png">
+      <Link>Content\UI\facesBad.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\UI\facesDead.png">
+      <Link>Content\UI\facesDead.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\UI\facesHealthy.png">
+      <Link>Content\UI\facesHealthy.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\UI\facesMedium.png">
+      <Link>Content\UI\facesMedium.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\UI\happy.png">
+      <Link>Content\UI\happy.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\UI\healthbar.png">
+      <Link>Content\UI\healthbar.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\UI\skull.png">
+      <Link>Content\UI\skull.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\UI\trike.png">
+      <Link>Content\UI\trike.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\UI\tutu_UI.png">
+      <Link>Content\UI\tutu_UI.png</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\Achievement-mp3-sound.wma">
+      <Link>Content\Audio\Achievement-mp3-sound.wma</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\BackgroundMusic.mp3">
+      <Link>Content\Audio\BackgroundMusic.mp3</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\achivement_unlocked_01.wav">
+      <Link>Content\Audio\achivement_unlocked_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bang_01.wav">
+      <Link>Content\Audio\bang_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bang_02.wav">
+      <Link>Content\Audio\bang_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bang_03.wav">
+      <Link>Content\Audio\bang_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bang_04.wav">
+      <Link>Content\Audio\bang_04.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bang_05.wav">
+      <Link>Content\Audio\bang_05.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_cute_short_roar_01.wav">
+      <Link>Content\Audio\bear_cute_short_roar_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_cute_short_roar_02.wav">
+      <Link>Content\Audio\bear_cute_short_roar_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_cute_short_roar_03.wav">
+      <Link>Content\Audio\bear_cute_short_roar_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_desperate_whining_01.wav">
+      <Link>Content\Audio\bear_desperate_whining_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_desperate_whining_02.wav">
+      <Link>Content\Audio\bear_desperate_whining_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_desperate_whining_03.wav">
+      <Link>Content\Audio\bear_desperate_whining_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_desperate_whining_04.wav">
+      <Link>Content\Audio\bear_desperate_whining_04.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_desperate_whining_05.wav">
+      <Link>Content\Audio\bear_desperate_whining_05.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_eat_honey_01.wav">
+      <Link>Content\Audio\bear_eat_honey_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_eat_honey_02.wav">
+      <Link>Content\Audio\bear_eat_honey_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_eat_honey_03.wav">
+      <Link>Content\Audio\bear_eat_honey_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_get_on_off_tricycle_01.wav">
+      <Link>Content\Audio\bear_get_on_off_tricycle_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_get_on_off_tricycle_02.wav">
+      <Link>Content\Audio\bear_get_on_off_tricycle_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_get_on_off_tricycle_03.wav">
+      <Link>Content\Audio\bear_get_on_off_tricycle_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_happy_grumble_01.wav">
+      <Link>Content\Audio\bear_happy_grumble_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_happy_grumble_02.wav">
+      <Link>Content\Audio\bear_happy_grumble_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_happy_grumble_03.wav">
+      <Link>Content\Audio\bear_happy_grumble_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_happy_singing_01.wav">
+      <Link>Content\Audio\bear_happy_singing_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_happy_singing_02.wav">
+      <Link>Content\Audio\bear_happy_singing_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_happy_singing_03.wav">
+      <Link>Content\Audio\bear_happy_singing_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_pick_up_honey_01.wav">
+      <Link>Content\Audio\bear_pick_up_honey_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_pick_up_honey_02.wav">
+      <Link>Content\Audio\bear_pick_up_honey_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_pick_up_honey_03.wav">
+      <Link>Content\Audio\bear_pick_up_honey_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_scary_long_roar_01.wav">
+      <Link>Content\Audio\bear_scary_long_roar_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_scary_long_roar_02.wav">
+      <Link>Content\Audio\bear_scary_long_roar_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bear_scary_long_roar_03.wav">
+      <Link>Content\Audio\bear_scary_long_roar_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\beehive_buzz_01.wav">
+      <Link>Content\Audio\beehive_buzz_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bird_chirp_01.wav">
+      <Link>Content\Audio\bird_chirp_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bird_chirp_02.wav">
+      <Link>Content\Audio\bird_chirp_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bird_chirp_03.wav">
+      <Link>Content\Audio\bird_chirp_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bird_chirp_04.wav">
+      <Link>Content\Audio\bird_chirp_04.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\bird_chirp_05.wav">
+      <Link>Content\Audio\bird_chirp_05.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\dragging_01.wav">
+      <Link>Content\Audio\dragging_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\dragging_02.wav">
+      <Link>Content\Audio\dragging_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\dragging_03.wav">
+      <Link>Content\Audio\dragging_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\footstep_01.wav">
+      <Link>Content\Audio\footstep_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\footstep_02.wav">
+      <Link>Content\Audio\footstep_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\footstep_03.wav">
+      <Link>Content\Audio\footstep_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\footstep_04.wav">
+      <Link>Content\Audio\footstep_04.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\footstep_05.wav">
+      <Link>Content\Audio\footstep_05.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\kick_drum_01.wav">
+      <Link>Content\Audio\kick_drum_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_afraid_01.wav">
+      <Link>Content\Audio\person_afraid_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_afraid_02.wav">
+      <Link>Content\Audio\person_afraid_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_afraid_03.wav">
+      <Link>Content\Audio\person_afraid_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_afraid_04.wav">
+      <Link>Content\Audio\person_afraid_04.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_afraid_05.wav">
+      <Link>Content\Audio\person_afraid_05.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_afraid_06.wav">
+      <Link>Content\Audio\person_afraid_06.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_aww_01.wav">
+      <Link>Content\Audio\person_aww_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_aww_02.wav">
+      <Link>Content\Audio\person_aww_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_aww_03.wav">
+      <Link>Content\Audio\person_aww_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_aww_04.wav">
+      <Link>Content\Audio\person_aww_04.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_desperate_fear_01.wav">
+      <Link>Content\Audio\person_desperate_fear_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_desperate_fear_02.wav">
+      <Link>Content\Audio\person_desperate_fear_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_desperate_fear_03.wav">
+      <Link>Content\Audio\person_desperate_fear_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_desperate_fear_04.wav">
+      <Link>Content\Audio\person_desperate_fear_04.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_giggle_01.wav">
+      <Link>Content\Audio\person_giggle_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_giggle_02.wav">
+      <Link>Content\Audio\person_giggle_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_giggle_03.wav">
+      <Link>Content\Audio\person_giggle_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_giggle_04.wav">
+      <Link>Content\Audio\person_giggle_04.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_hug_01.wav">
+      <Link>Content\Audio\person_hug_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_hug_02.wav">
+      <Link>Content\Audio\person_hug_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_hug_03.wav">
+      <Link>Content\Audio\person_hug_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_hug_04.wav">
+      <Link>Content\Audio\person_hug_04.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_huh_01.wav">
+      <Link>Content\Audio\person_huh_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_huh_02.wav">
+      <Link>Content\Audio\person_huh_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_huh_03.wav">
+      <Link>Content\Audio\person_huh_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_huh_04.wav">
+      <Link>Content\Audio\person_huh_04.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_hurt_01.wav">
+      <Link>Content\Audio\person_hurt_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_hurt_02.wav">
+      <Link>Content\Audio\person_hurt_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_hurt_03.wav">
+      <Link>Content\Audio\person_hurt_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_hurt_04.wav">
+      <Link>Content\Audio\person_hurt_04.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_hurt_05.wav">
+      <Link>Content\Audio\person_hurt_05.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_hurt_bad_01.wav">
+      <Link>Content\Audio\person_hurt_bad_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_hurt_bad_02.wav">
+      <Link>Content\Audio\person_hurt_bad_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_hurt_bad_03.wav">
+      <Link>Content\Audio\person_hurt_bad_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_hurt_bad_04.wav">
+      <Link>Content\Audio\person_hurt_bad_04.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_hurt_bad_05.wav">
+      <Link>Content\Audio\person_hurt_bad_05.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_hurt_bad_06.wav">
+      <Link>Content\Audio\person_hurt_bad_06.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_love_you_01.wav">
+      <Link>Content\Audio\person_love_you_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_love_you_02.wav">
+      <Link>Content\Audio\person_love_you_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_love_you_03.wav">
+      <Link>Content\Audio\person_love_you_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_love_you_04.wav">
+      <Link>Content\Audio\person_love_you_04.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_painful_death_01.wav">
+      <Link>Content\Audio\person_painful_death_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_painful_death_02.wav">
+      <Link>Content\Audio\person_painful_death_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_painful_death_03.wav">
+      <Link>Content\Audio\person_painful_death_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_painful_death_04.wav">
+      <Link>Content\Audio\person_painful_death_04.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_painful_death_05.wav">
+      <Link>Content\Audio\person_painful_death_05.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_thanks_01.wav">
+      <Link>Content\Audio\person_thanks_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_thanks_02.wav">
+      <Link>Content\Audio\person_thanks_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_thanks_03.wav">
+      <Link>Content\Audio\person_thanks_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\person_thanks_04.wav">
+      <Link>Content\Audio\person_thanks_04.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\spine_crunch_01.wav">
+      <Link>Content\Audio\spine_crunch_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\spine_crunch_02.wav">
+      <Link>Content\Audio\spine_crunch_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\spine_crunch_03.wav">
+      <Link>Content\Audio\spine_crunch_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\thump_01.wav">
+      <Link>Content\Audio\thump_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\thump_02.wav">
+      <Link>Content\Audio\thump_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\thump_03.wav">
+      <Link>Content\Audio\thump_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\tricycle_body_impact_01.wav">
+      <Link>Content\Audio\tricycle_body_impact_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\tricycle_squeak_01.wav">
+      <Link>Content\Audio\tricycle_squeak_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\tricycle_squeak_02.wav">
+      <Link>Content\Audio\tricycle_squeak_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\tricycle_squeak_03.wav">
+      <Link>Content\Audio\tricycle_squeak_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\tricycle_squeak_04.wav">
+      <Link>Content\Audio\tricycle_squeak_04.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\tricycle_squeak_05.wav">
+      <Link>Content\Audio\tricycle_squeak_05.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\whistling_wind_01.wav">
+      <Link>Content\Audio\whistling_wind_01.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\whistling_wind_02.wav">
+      <Link>Content\Audio\whistling_wind_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\whistling_wind_03.wav">
+      <Link>Content\Audio\whistling_wind_03.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\whistling_wind_04.wav">
+      <Link>Content\Audio\whistling_wind_04.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\whistling_wind_05.wav">
+      <Link>Content\Audio\whistling_wind_05.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Audio\whoosh_02.wav">
+      <Link>Content\Audio\whoosh_02.wav</Link>
+    </Content>
+    <Content Include="..\BearGameContent\UI\IntroFont.spritefont">
+      <Link>Content\UI\IntroFont.spritefont</Link>
+    </Content>
+    <Content Include="..\BearGameContent\UI\UIFont.spritefont">
+      <Link>Content\UI\UIFont.spritefont</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Maps\Actors1.txt">
+      <Link>Content\Maps\Actors1.txt</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Maps\Collisions1.txt">
+      <Link>Content\Maps\Collisions1.txt</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Maps\Props1.txt">
+      <Link>Content\Maps\Props1.txt</Link>
+    </Content>
+    <Content Include="..\BearGameContent\Maps\Tiles1.txt">
+      <Link>Content\Maps\Tiles1.txt</Link>
+    </Content>
+  </ItemGroup>
+</Project>

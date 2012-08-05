@@ -1,7 +1,7 @@
-*.user
+*.user 
+*.userprefs
 *.suo
-BearGame/BearGame/bin/
-BearGame/BearGame/obj/
-BearGame/BearGameContent/bin/
-BearGame/BearGameContent/obj/
+.DS_Store
+bin
+obj
 *.cachefile

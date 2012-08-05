@@ -43,7 +43,9 @@ namespace BearGame
                 {
                     _showTime = now;
                     IsVisible = true;
-                    AchievementSound.Play();
+					if (AchievementSound != null) {
+	                    AchievementSound.Play();
+					}
                 }
             }
         }
